@@ -1,0 +1,14 @@
+outputDir: ./_docs
+title: Github API - Test Config
+
+apis:
+  - id: graphql
+    name: Github GraphQL API
+    url: https://docs.github.com/public/schema.docs.graphql
+
+  - id: oapi30
+    name: Github Open API
+    url: https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/github.com/api.github.com/1.1.4/openapi.yaml
+customPagesFolder: ./fixtures/custom-pages
+customPages:
+  - ./Readme.md

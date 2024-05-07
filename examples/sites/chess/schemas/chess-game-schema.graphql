@@ -1,0 +1,367 @@
+"""
+A date represented as a string. For example: "2019-01-01T12:00:00Z".
+"""
+scalar Date
+
+"""
+Player types.
+"""
+enum PlayerType {
+  """
+  A human player. How about aliens?
+  """
+  HUMAN
+  """
+  A computer player.
+  """
+  COMPUTER
+}
+
+"""
+Player ranks.
+"""
+enum PlayerRank {
+  """
+  A beginner player.
+  """
+  BEGINNER
+  """
+  An intermediate player.
+  """
+  INTERMEDIATE
+  """
+  An advanced player.
+  """
+  ADVANCED
+}
+
+"""
+A color used for chess pieces.
+"""
+enum ChessPieceColor {
+  """
+  A white chess piece.
+  """
+  WHITE
+  """
+  Invalid color to test enum deprecation
+  """
+  OLD_WHITE @deprecated(reason: "Use WHITE instead.")
+  """
+  A black chess piece.
+  """
+  BLACK
+  """
+  Invalid color to test enum deprecation
+  """
+  OLD_BLACK @deprecated(reason: "Use BLACK instead.")
+}
+
+"""
+Types of chess pieces.
+"""
+enum ChessPieceType {
+  """
+  A pawn is the weakest piece in the game.
+  """
+  PAWN
+  """
+  A knight is a piece that can jump over other pieces.
+  """
+  KNIGHT
+  """
+  A bishop is a piece that moves diagonally.
+  """
+  BISHOP
+  """
+  A rook is a piece that moves horizontally or vertically.
+  """
+  ROOK
+  """
+  A queen is the most powerful piece in the game.
+  """
+  QUEEN
+  """
+  A king is the most important piece in the game.
+  """
+  KING
+}
+
+"""
+A chess piece.
+"""
+type ChessPiece {
+  """
+  The type of the chess piece.
+  """
+  type: ChessPieceType!
+  """
+  The color of the chess piece.
+  """
+  color: ChessPieceColor!
+}
+
+"""
+A chess board.
+"""
+type ChessBoard {
+  """
+  The squares of the chess board. The first square is the top-left corner.
+  """
+  squares: [[ChessPiece]!]!
+}
+
+"""
+A player.
+"""
+interface IPlayer {
+  """
+  The name of the player.
+  """
+  name: String!
+  """
+  The type of the player.
+  """
+  type: PlayerType!
+  """
+  The rank of the player.
+  """
+  rank: PlayerRank!
+}
+
+"""
+A computer player.
+"""
+interface IComputer {
+  """
+  The CPU of the computer.
+  """
+  cpu: String!
+}
+
+"""
+A human player.
+"""
+interface IHuman {
+  """
+  The eye color of the human.
+  """
+  eyeColor: String!
+}
+
+"""
+A human player.
+"""
+type Human implements IPlayer & IHuman {
+  """
+  The name of the human.
+  """
+  name: String!
+  """
+  The type of the player.
+  """
+  type: PlayerType!
+  """
+  The rank of the player.
+  """
+  rank: PlayerRank!
+  """
+  The eye color of the human.
+  """
+  eyeColor: String!
+}
+
+"""
+A computer player.
+"""
+type Computer implements IPlayer & IComputer {
+  """
+  The name of the computer.
+  """
+  name: String!
+  """
+  The type of the player.
+  """
+  type: PlayerType!
+  """
+  The rank of the player.
+  """
+  rank: PlayerRank!
+  """
+  The CPU of the computer.
+  """
+  cpu: String!
+}
+
+"""
+An Android player.
+"""
+type Android implements IPlayer & IComputer & IHuman {
+  """
+  The name of the Android.
+  """
+  name: String!
+  """
+  The type of the player.
+  """
+  type: PlayerType!
+  """
+  The rank of the player.
+  """
+  rank: PlayerRank!
+  """
+  The CPU of the computer.
+  """
+  cpu: String!
+  """
+  The eye color of the human.
+  """
+  eyeColor: String!
+  """
+  The number of eyes of the Android.
+  """
+  eyeCount: Int!
+}
+
+"""
+A player.
+"""
+union Player = Human | Computer
+
+"""
+A chess game.
+"""
+type Game {
+  """
+  The ID of the game.
+  """
+  id: ID!
+  """
+  The date and time when the game started.
+  """
+  startedAt: Date!
+  """
+  The date and time when the game ended.
+  """
+  endedAt: Date
+  """
+  The name of the white player.
+  """
+  white: String @deprecated(reason: "Use whitePlayer instead.")
+  """
+  The white player.
+  """
+  whitePlayer: Player!
+  """
+  The name of the black player.
+  """
+  black: String @deprecated(reason: "Use blackPlayer instead.")
+  """
+  The black player.
+  """
+  blackPlayer: Player!
+  """
+  The current state of the chess board.
+  """
+  board: ChessBoard!
+  """
+  The number of moves in the game.
+  """
+  movesCount: Int!
+  """
+  Get the last N moves of the game. Returns all moves if no argument is provided.
+  """
+  moves(last: Int = 5): [String!]!
+  """
+  The winner of the game.
+  """
+  winner: ChessPieceColor
+  """
+  The prize of the game.
+  """
+  prize: Float
+}
+
+"""
+Input for querying games.
+"""
+input GamesQueryInput {
+  """
+  Filter games by the player name.
+  """
+  startedAfter: Date
+  """
+  Filter games by the player name.
+  """
+  endedBefore: Date
+  """
+  Filter games by the player name.
+  """
+  winnerColor: ChessPieceColor
+  """
+  Filter games by the player name.
+  """
+  winner: String @deprecated(reason: "Use winnerPlayer instead.")
+  """
+  Filter games by the player name.
+  """
+  winnerPlayer: Player
+  """
+  Filter games by the player name.
+  """
+  maxMoves: Int
+}
+
+type Query {
+  """
+  Get a list of games. Returns an empty list if no games match the query. Returns all games if no query is provided.
+  """
+  games(input: GamesQueryInput): [Game!]!
+
+  """
+  Get a game by ID.
+  """
+  game(id: ID!): Game
+
+  """
+  Get the current game.
+  """
+  currentGame: Game
+}
+
+type Mutation {
+  """
+  Create a game with the given players.
+  Returns the new game.
+  """
+  createGame(
+    """
+    The name of the white player.
+    """
+    whitePlayer: String!
+    """
+    The name of the black player.
+    """
+    blackPlayer: String!
+  ): Game @deprecated(reason: "Use newGame instead.")
+  """
+  Create a game with the given players.
+
+  These rules apply:
+  - The white player must be a *human* or an Android or a computer.
+  - The black player must be a *human* or an Android or a computer.
+  - The white player cannot be the same as the black player.
+  - The Game will start with the initial board state.
+
+  Chess rules can be found [here](https://en.wikipedia.org/wiki/Rules_of_chess).
+  Returns the new game.
+  """
+  newGame(whitePlayerId: ID!, blackPlayerId: ID!): Game
+
+  """
+  Move a piece from one square to another.
+  Returns the new board state.
+  Returns an error if the move is invalid.
+  """
+  move(from: String!, to: String!): ChessBoard
+}

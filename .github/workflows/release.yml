@@ -1,0 +1,118 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: write # to be able to publish a GitHub release
+  issues: write # to be able to comment on released issues
+  pull-requests: write # to be able to comment on released pull requests
+  id-token: write # to enable use of OIDC for npm provenance
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
+        run: pnpm commitlint --last --verbose
+
+      - name: Code Check - format, lint
+        run: pnpm check
+
+
+
+
+
+      - name: Create Release PR
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.FXDX_GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Build CLI
+        if: ${{ steps.release.outputs.release_created }}
+        run: pnpm build-cli
+
+      - name: Unit Tests
+        if: ${{ steps.release.outputs.release_created }}
+        run: pnpm turbo test
+
+      - name: E2E Tests
+        if: ${{ steps.release.outputs.release_created }}
+        run: pnpm turbo e2e
+
+
+
+      # - name: Publish to NPM
+      #   if: ${{ steps.release.outputs.release_created }}
+      #   run: cd dist/cli && npm publish --provenance --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+      - name: Set Release Version
+        if: ${{ steps.release.outputs.release_created }}
+        id: set_release_version
+        run : |
+          echo "version=${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}" >> "$GITHUB_OUTPUT"
+
+      - name: Release Info
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          version: ${{ steps.set_release_version.outputs.version }}
+        run: |
+          echo "Release version: $version"
+
+
+
+
+
+      - name: Docker - Set up QEMU
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/setup-qemu-action@v3
+
+      - name: Docker - Set up Docker Buildx
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker - Login to Docker Hub
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker - Build and push
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            flexydox/flexydox:latest
+            flexydox/flexydox:${{steps.set_release_version.outputs.version}}
+

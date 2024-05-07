@@ -1,0 +1,53 @@
+---
+const collapsible = Astro.props.collapsible;
+const hidden = Astro.props.hidden;
+const isOpen = Astro.props.isOpen;
+const className = Astro.props.class;
+
+const isOpenClass = isOpen ? 'is-open' : null;
+const hiddenClass = hidden ? 'hidden' : null;
+---
+
+<style is:global>
+  .nav-section {
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .nav-item + .nav-section-wrapper {
+    margin-left: var(--size-m);
+  }
+
+  .nav-section-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease-out;
+  }
+
+  .nav-section-wrapper.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .nav-section-wrapper > .nav-section {
+    overflow: hidden;
+  }
+</style>
+
+{
+  collapsible && (
+    <div class:list={['nav-section-wrapper', isOpenClass]}>
+      <div class:list={['nav-section', className, hiddenClass]}>
+        <slot />
+      </div>
+    </div>
+  )
+}
+
+{
+  !collapsible && (
+    <div class:list={['nav-section', className, hiddenClass]}>
+      <slot />
+    </div>
+  )
+}

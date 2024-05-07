@@ -1,0 +1,35 @@
+---
+import { OperationReturn } from '@flexydox/doc-schema';
+import { Icon } from 'astro-icon/components';
+import TypeRef from './type-ref.astro';
+
+const opReturn: OperationReturn = Astro.props.opReturn;
+---
+
+<style>
+  .op-return {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--size-m);
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    gap: var(--size-s);
+  }
+  .status.success {
+    color: var(--c-text-success);
+  }
+  .status.error {
+    color: var(--c-text-error);
+  }
+</style>
+
+<section class="op-return">
+  <span class:list={['status', opReturn.status]}>
+    <Icon name={opReturn.status} />
+
+    <span class="status-details">{opReturn.statusCode} {opReturn.mediaType}</span>
+  </span>
+  <TypeRef showPopOver typeRef={opReturn.typeRef} />
+</section>

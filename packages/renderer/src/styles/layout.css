@@ -1,0 +1,189 @@
+@import 'open-props/style';
+
+:root {
+  --stack-margin-xxs: var(--size-xxs);
+  --stack-margin-xs: var(--size-xs);
+  --stack-margin-s: var(--size-s);
+  --stack-margin: var(--size-m);
+  --stack-margin-l: var(--size-l);
+  --stack-margin-xl: var(--size-xl);
+  --stack-margin-xxl: var(--size-xxl);
+  --main-nav-width: 450px;
+  --page-height: 100svh;
+  --header-height: 50px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.l-page {
+  height: var(--page-height);
+  display: grid;
+  grid-template-columns: var(--main-nav-width) 1fr;
+  grid-template-rows: auto 1fr;
+
+  grid-template-areas:
+    'main-nav     head       head '
+    'main-nav   content    content';
+  --padding-vertical: var(--size-2);
+  --padding-horizontal: var(--size-6);
+}
+
+.l-page-header {
+  grid-area: head;
+  background-color: var(--c-bg-primary);
+  padding: var(--padding-vertical) var(--padding-horizontal);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--c-bg-secondary);
+  justify-items: stretch;
+  .header-title h3 {
+    font-size: var(--font-size-4);
+    color: var(--c-brand);
+  }
+}
+
+.l-page-main-nav {
+  grid-area: main-nav;
+  height: calc(var(--page-height) - var(--padding-vertical) * 2);
+  overflow-y: scroll;
+  padding: 0;
+  background-color: var(--c-bg-primary);
+  border-right: 1px solid var(--c-bg-secondary);
+  overflow-y: auto;
+  position: relative;
+  .l-page-nav-header {
+    top: 0;
+    position: sticky;
+    padding: var(--padding-vertical) 0;
+    min-height: var(--header-height);
+    display: grid;
+    justify-items: center;
+    background-color: var(--c-bg-primary);
+  }
+  .main-nav {
+    padding: var(--padding-vertical) 0;
+  }
+}
+
+.l-page-main-content {
+  grid-area: content;
+  padding: var(--padding-vertical) var(--padding-horizontal);
+  background-color: var(--c-bg-primary);
+  overflow-y: auto;
+  display: grid;
+  justify-items: center;
+  .l-page-content-wrapper {
+    max-width: 800px;
+    width: 100%;
+  }
+}
+
+.l-page-side-content {
+  grid-area: side-content;
+  padding: var(--padding-vertical) var(--padding-horizontal);
+}
+
+.l-panel {
+  margin-bottom: var(--size-8);
+  .l-panel-title {
+    margin-bottom: var(--size-1);
+  }
+}
+
+.l-panel.is-level-page > .l-panel-title {
+  font-size: var(--font-size-6);
+  margin-bottom: var(--size-3);
+}
+
+.stack > * + * {
+  margin-block-start: var(--stack-margin);
+  display: block;
+}
+
+.stack-xxs > * + * {
+  margin-block-start: var(--stack-margin-xxs);
+  display: block;
+}
+
+.stack-xs > * + * {
+  margin-block-start: var(--stack-margin-xs);
+  display: block;
+}
+.stack-s > * + * {
+  margin-block-start: var(--stack-margin-s);
+  display: block;
+}
+.stack-0 > * + * {
+  margin-block-start: 0;
+  display: block;
+}
+.stack-l > * + * {
+  margin-block-start: var(--stack-margin-l);
+  display: block;
+}
+.stack-xl > * + * {
+  margin-block-start: var(--stack-margin-xl);
+  display: block;
+}
+
+.stack-xxl > * + * {
+  margin-block-start: var(--stack-margin-xxl);
+  display: block;
+}
+
+.vertical-separator {
+  border-top: 1px solid var(--c-bg-secondary);
+  padding-top: var(--size-s);
+}
+#nav-toggle-button-section {
+  display: none;
+}
+@media (--small-viewport) {
+  #nav-toggle-button-section {
+    display: block;
+  }
+
+  .l-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+    grid-template-areas:
+      ' head '
+      'content';
+  }
+  .l-page-main-nav {
+    position: absolute;
+    left: 0;
+    top: var(--header-height);
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.5s ease-in-out;
+    max-width: var(--main-nav-width);
+    z-index: 1;
+  }
+  .l-page-main-nav.is-open {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .l-page-main-content {
+    grid-area: content;
+    padding: 0 var(--padding-horizontal);
+    background-color: var(--c-bg-primary);
+    overflow-y: auto;
+    display: grid;
+    justify-items: center;
+
+    .l-page-content-wrapper {
+      max-width: 800px;
+      width: calc(100svw - var(--padding-horizontal) * 2);
+    }
+  }
+}

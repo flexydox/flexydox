@@ -1,0 +1,26 @@
+outputFolder: _docs/e2e
+title: Chess Game API Example 
+logo:
+  url: ./logo.svg
+  width: 100
+  height: 100
+apis:
+  - id: graphql
+    name: Chess Game GraphQL API
+    url: ./schemas/chess-game-schema.graphql
+    inferGroups: false
+
+  - id: openapi
+    name: Chess Game OpenAPI 3.0
+    url: ./schemas/chess-game-30.json
+    inferGroups: false
+
+customPagesFolder: ./custom-pages/
+examplesFolder: ./examples
+groups:
+  - name: Player
+    regex: /player|move/i
+  - name: Game
+    regex: /game/i
+  - name: Admin
+    regex: /admin/i

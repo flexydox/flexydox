@@ -1,0 +1,22 @@
+---
+import { Icon } from 'astro-icon/components';
+const isRequired = Astro.props.isRequired;
+---
+
+<style>
+  .required {
+    cursor: help;
+    vertical-align: middle;
+  }
+  .required svg {
+    stroke: var(--c-text-error);
+    color: var(--c-text-error);
+  }
+</style>
+{
+  isRequired && (
+    <span class="required" title="Required attribute">
+      <Icon name="required" />
+    </span>
+  )
+}

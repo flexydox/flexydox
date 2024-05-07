@@ -1,0 +1,54 @@
+---
+import { Code } from 'astro:components';
+import { DocOperation } from '@flexydox/doc-schema';
+import { OperationExample } from '@flexydox/doc-schema';
+
+const example: OperationExample = Astro.props.example;
+const operation: DocOperation = Astro.props.operation;
+const namespaces = Astro.locals.namespaces;
+const ns = namespaces.find((n) => n.id === operation.namespaceId);
+
+let bodyCode = example.code;
+const lang = example.lang;
+
+const headers = example.headers ?? {};
+const httpHeaders = Object.keys(headers)
+  .map((key) => {
+    return `${key}: ${headers[key]}`;
+  })
+  .join('\n');
+if (lang === 'http') {
+  bodyCode = bodyCode.replace('\n', '\n' + httpHeaders + '\n');
+}
+---
+
+<style>
+  .example {
+    background-color: var(--c-bg-secondary);
+    box-shadow: var(--shadow-3);
+    padding: var(--size-l);
+    h5 {
+      font-size: var(--font-size-3);
+      margin-bottom: var(--size-s);
+    }
+    summary {
+      color: var(--c-text-secondary);
+      font-size: var(--font-size-1);
+    }
+    .code-wrapper {
+      user-select: all;
+      cursor: pointer;
+    }
+    pre {
+      padding: var(--size-m);
+    }
+  }
+</style>
+
+<section class="example">
+  <h5>{example.title}</h5>
+  {example.description && <summary>{example.description}</summary>}
+  <section class="code-wrapper">
+    <Code code={bodyCode} lang={lang} />
+  </section>
+</section>

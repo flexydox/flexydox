@@ -1,0 +1,30 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const iconName = Astro.props.iconName;
+---
+
+<style>
+  .collapsible-icon {
+    &.collapse {
+      .icon-expand {
+        display: none;
+      }
+      .icon-collapse {
+        display: block;
+      }
+    }
+    &.expand {
+      .icon-expand {
+        display: block;
+      }
+      .icon-collapse {
+        display: none;
+      }
+    }
+  }
+</style>
+<div class:list={['collapsible-icon', iconName]}>
+  <Icon class="icon-expand" name="expand" />
+  <Icon class="icon-collapse" name="collapse" />
+</div>

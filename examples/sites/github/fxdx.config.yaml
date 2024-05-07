@@ -1,0 +1,63 @@
+outputFolder: /docs
+base: /github
+title: Github API - Test Config
+apis:
+  - id: graphql
+    name: Github GraphQL API
+    url: ./schemas/github-schema.graphql
+  - id: oapi30
+    name: Github Open API
+    url: ./schemas/github.yaml
+
+customPagesFolder: ./custom-pages
+
+examplesFolder: ./usage-examples
+groups:
+  - name: apps
+    regex: app
+  - name: users
+    regex: user
+  - name: codes-of-conduct
+    regex: code-of-conduct
+  - name: emojis
+    regex: emoji
+  - name: dependabot
+    regex: dependabot
+  - name: gists
+    regex: gist
+  - name: gitignore
+    regex: gitignore
+  - name: issues
+    regex: issue
+  - name: licenses
+    regex: license
+  - name: markdown
+    regex: markdown
+  - name: orgs
+    regex: org
+  - name: actions
+    regex: action
+  - name: projects
+    regex: project
+  - name: codespaces
+    regex: codespaces
+  - name: interactions
+    regex: interaction
+  - name: migrations
+    regex: migration
+  - name: packages
+    regex: package
+  - name: repos
+    regex: repo
+  - name: billing
+    regex: billing
+  - name: teams
+    regex: team
+  - name: reactions
+    regex: reaction
+  - name: rate-limit
+    regex: rate-limit
+
+
+    
+

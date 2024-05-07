@@ -1,0 +1,55 @@
+---
+import { DocOperation } from '@flexydox/doc-schema';
+import cx from 'classnames';
+import DeprecationInfo from './deprecation-info.astro';
+import Description from './description.astro';
+import Groups from './groups.astro';
+import ListItems from './list-items.astro';
+import OperationExample from './operation-example.astro';
+import OperationHeader from './operation-header.astro';
+import OperationReturn from './operation-return.astro';
+import TypeField from './type-field.astro';
+import TypeRef from './type-ref.astro';
+import TypeValue from './type-value.astro';
+
+const operation: DocOperation = Astro.props.operation;
+const {
+  id,
+  name,
+  description,
+  groups,
+  operationType,
+  deprecationReason,
+  returns,
+  arguments: opArguments,
+  operationKind
+} = operation;
+---
+
+<div id={id} class="type stack-l">
+  <OperationHeader deprecated={deprecationReason} kind={operationKind} type={operationType} groups={groups}
+    >{name}</OperationHeader
+  >
+
+  {deprecationReason && <DeprecationInfo reason={deprecationReason} />}
+
+  <Description>{description}</Description>
+
+  <section>
+    <ListItems title="Arguments" class="arguments" items={opArguments}>
+      {opArguments?.map((field) => <TypeField showPopOver field={field} />)}
+    </ListItems>
+  </section>
+
+  <section>
+    <ListItems title="Returns" class="returns" items={returns}>
+      {returns?.map((opReturn) => <OperationReturn opReturn={opReturn} />)}
+    </ListItems>
+  </section>
+
+  <section>
+    <ListItems title="Examples" class="examples" items={operation.examples}>
+      {operation.examples.map((example) => <OperationExample operation={operation} example={example} />)}
+    </ListItems>
+  </section>
+</div>

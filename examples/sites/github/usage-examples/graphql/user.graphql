@@ -1,0 +1,13 @@
+---
+title: New game
+description: Creates a chess game with minimal input provided
+headers:
+  X-CustomHeader: custom-header-value
+---
+mutation newGame {
+  newGame(input: { whitePlayerId: "1", blackPlayerId: "2"}) {
+    id
+    startedAt
+    movesCount
+  }
+}

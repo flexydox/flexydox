@@ -1,0 +1,30 @@
+:root {
+  --arrow-bg: var(--c-bg-secondary);
+  --arrow-icon: url(/chevron-down-white.svg);
+  --option-bg: var(--c-text-primary);
+  --select-bg: var(--c-bg-tertiary);
+}
+select {
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+
+  padding: var(--size-s) var(--size-m);
+  background:
+    var(--arrow-icon) no-repeat right var(--size-s) center / var(--size-l),
+    linear-gradient(to left, var(--select-bg) 3em, var(--arrow-bg) 3em);
+  color: var(--c-text-primary);
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  &::-ms-expand {
+    display: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  option {
+    color: inherit;
+    background-color: var(--option-bg);
+  }
+}

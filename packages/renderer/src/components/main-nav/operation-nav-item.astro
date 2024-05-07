@@ -1,0 +1,18 @@
+---
+import { DocOperation } from '@flexydox/doc-schema';
+import { getOperationLink } from '../../astro-utils/links';
+import OperationType from '../doc-fragments/operation-type.astro';
+import NavItem from './nav-item.astro';
+
+type Props = {
+  operation: DocOperation;
+  isActive: boolean;
+};
+
+const { operation, isActive }: Props = Astro.props;
+---
+
+<NavItem id={operation.id} isActive={isActive} href={getOperationLink(operation.id)}>
+  <OperationType type={operation.operationType} kind={operation.operationKind} />
+  {operation.name}
+</NavItem>

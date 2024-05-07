@@ -1,0 +1,15 @@
+---
+const { items, title, class: className } = Astro.props;
+const hasItems = items?.length > 0;
+---
+
+{
+  hasItems && (
+    <section class:list={["stack", className]}>
+      <h6>{title}</h6>
+      <section class="stack-s">
+        <slot />
+      </section>
+    </section>
+  )
+}

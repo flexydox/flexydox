@@ -1,0 +1,16 @@
+---
+import { DocOperation, DocType } from '@flexydox/doc-schema';
+import { loadAllPages, loadPage } from '../../asset-loader';
+import DefaultLayout from '../../layouts/default-layout.astro';
+
+export async function getStaticPaths() {
+  const allPages = await loadAllPages();
+  return allPages.map((page) => ({ params: { slug: page.slug } }));
+}
+const { slug } = Astro.params;
+const pageData = await loadPage(slug);
+---
+
+<DefaultLayout>
+  <section set:html={pageData?.content} />
+</DefaultLayout>
