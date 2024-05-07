@@ -1,0 +1,33 @@
+---
+import { DocType, DocTypeLink } from "@flexydox/doc-schema";
+import { typeLinkFromType } from "../../astro-utils/type-link-from-type";
+import PopOver from "../pop-over.astro";
+import Type from "./type.astro";
+import { linkUrl } from "../../utils/link-url";
+
+const linkProp: DocTypeLink = Astro.props.link;
+const typeId = Astro.props.typeId;
+const showPopOver = Astro.props.showPopOver;
+
+const allTypes = Astro.locals.types as DocType[];
+
+const type = allTypes.find((type) => type.id === typeId);
+
+const link = linkProp ?? typeLinkFromType(type);
+const href = link?.href;
+const title = link?.title;
+const description = link?.description;
+
+const linkHref = linkUrl(`/types/${href}`);
+const nextId = Astro.locals.nextId++;
+const popOverId = type && showPopOver ? `po-${type?.id}-${nextId}` : null;
+---
+
+<PopOver popOverId={popOverId}>
+  <Fragment slot="trigger">
+    <a href={linkHref}>
+      {title}
+    </a>
+  </Fragment>
+  <Type showPopOver={false} type={type} />
+</PopOver>

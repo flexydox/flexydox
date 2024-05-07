@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<style>
+  #nav-toggle-button-section {
+    cursor: pointer;
+    .open {
+      display: block;
+    }
+    .close {
+      display: none;
+    }
+    &.is-open {
+      .open {
+        display: none;
+      }
+      .close {
+        display: block;
+      }
+    }
+  }
+</style>
+<button id="nav-toggle-button-section">
+  <Icon class="open" name="hamburger-menu" />
+  <Icon class="close" name="close" />
+</button>

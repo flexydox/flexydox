@@ -1,0 +1,108 @@
+# Flexydox DocSchema
+
+*The schema for the Flexydox unified API documentation format.*
+
+## Properties
+
+- **`$schema`** *(string)*: The URL to the JSON schema that this document conforms to.
+- **`namespaces`** *(array)*: The namespaces (typically APIs) that are available in the schema.
+  - **Items** *(object)*: Cannot contain additional properties.
+    - **`id`** *(string, required)*: The unique identifier for the namespace.
+    - **`name`** *(string, required)*: The name of the namespace.
+    - **`spec`** *(string, required)*: The type of specification that the namespace is defined in. Must be one of: `["graphql", "openapi3.0"]`.
+    - **`source`** *(string, required)*: The source of the namespace. This could be a URL or a file path.
+    - **`inferGroups`** *(boolean)*: Whether the groups should be inferred from the source specification. Defaults to false.
+- **`operations`** *(array)*: The API operations that are available in the schema.
+  - **Items** *(object)*: Cannot contain additional properties.
+    - **`id`** *(string, required)*: The unique identifier for the operation.
+    - **`namespaceId`** *(string, required)*: The namespace that the operation belongs to.
+    - **`operationType`** *(string, required)*: The type of operation that is being performed. Must be one of: `["query", "mutation", "subscription", "get", "post", "put", "delete", "options", "head", "patch", "trace"]`.
+    - **`operationKind`** *(string, required)*: The kind of operation that is being performed. Must be one of: `["read", "modify", "subscribe", "other"]`.
+    - **`name`** *(string, required)*: The name of the operation.
+    - **`description`** *(string)*: A description of the operation.
+    - **`arguments`** *(array, required)*: The arguments that are demanded by the operation.
+      - **Items**: Refer to *[#/definitions/OperationArgument](#definitions/OperationArgument)*.
+    - **`returns`** *(array, required)*: The types that are returned by the operation.
+      - **Items** *(object)*
+        - **`typeRef`**: Refer to *[#/definitions/DocTypeRef](#definitions/DocTypeRef)*.
+        - **`status`** *(string, required)*: The status of the operation result. Must be one of: `["success", "error", "unknown"]`.
+        - **`statusCode`** *(string)*: The status code of the operation result.
+        - **`mediaType`** *(string)*: The media type of the operation result.
+    - **`deprecationReason`** *(string)*: The reason why the operation is deprecated.
+    - **`groups`** *(array, required)*: The group ids that the operation belongs to.
+      - **Items** *(string)*: The unique identifier for the group.
+    - **`examples`** *(array, required)*
+      - **Items** *(object)*: Code examples for the operation. Can contain additional properties.
+        - **`operationId`** *(string, required)*: The unique identifier for the operation.
+        - **`code`** *(string, required)*: The code example body.
+        - **`lang`** *(string, required)*: The language of the code example. Must be one of: `["plaintext", "graphql", "http"]`.
+        - **`title`** *(string, required)*: The title of the code example.
+        - **`description`** *(string)*: A description of the code example.
+        - **`headers`** *(object)*: The http headers that are required for the code example. Can contain additional properties.
+          - **Additional properties** *(string)*
+        - **`query`** *(object)*: The query parameters that are required for the code example. Can contain additional properties.
+          - **Additional properties** *(string)*
+        - **`path`** *(string)*: Example request path.
+- **`types`** *(array)*: The types that are available in the schema.
+  - **Items** *(object)*
+    - **`id`** *(string, required)*: The unique identifier for the type.
+    - **`name`** *(string, required)*: The name of the type.
+    - **`namespaceId`** *(string, required)*: The namespace that the type belongs to.
+    - **`description`** *(string)*: A description of the type.
+    - **`deprecationReason`** *(string)*: The reason why the type is deprecated.
+    - **`kind`** *(string, required)*: The kind of type that is being defined. Must be one of: `["object", "enum", "scalar", "interface", "union", "input", "list"]`.
+    - **`values`** *(array)*: The enum values that are available for the type.
+      - **Items** *(object)*
+        - **`value`** *(string, required)*: The value of the enum.
+        - **`description`** *(string)*: A description of the enum value.
+        - **`deprecationReason`** *(string)*: The reason why the enum value is deprecated.
+    - **`groups`** *(array, required)*: The group ids that the type belongs to.
+      - **Items** *(string)*
+    - **`interfaces`** *(array)*: The interfaces (type ids) that the type implements.
+      - **Items** *(string)*
+    - **`fields`** *(array)*: The fields that are available for the type.
+      - **Items** *(object)*
+        - **`name`** *(string, required)*: The name of the field.
+        - **`description`** *(string)*: A description of the field.
+        - **`deprecationReason`** *(string)*: The reason why the field is deprecated.
+        - **`arguments`** *(array)*: The arguments that are demanded by the field. Only applicable for api specifications, which support this feature.
+          - **Items**: Refer to *[#/definitions/OperationArgument](#definitions/OperationArgument)*.
+        - **`typeRef`**: Refer to *[#/definitions/DocTypeRef](#definitions/DocTypeRef)*.
+    - **`unionTypes`** *(array)*: The type ids that are part of the union.
+      - **Items** *(string)*
+- **`groups`** *(array)*: The groups that are available in the schema.
+  - **Items** *(object)*
+    - **`id`** *(string, required)*: The unique identifier for the group.
+    - **`name`** *(string, required)*: The name of the group.
+    - **`regex`** *(string, required)*: The regular expression that is used to match the group.
+- **`customPages`** *(array)*: The custom pages that are available in the schema.
+  - **Items** *(object)*
+    - **`content`** *(string, required)*: The content of the custom page.
+    - **`slug`** *(string, required)*: The slug of the custom page. It is used to generate the URL of the page.
+    - **`title`** *(string, required)*: The title of the custom page.
+## Definitions
+
+- <a id="definitions/DocTypeRef"></a>**`DocTypeRef`** *(object)*: A reference to a type in the schema. Cannot contain additional properties.
+  - **`typeId`** *(string, required)*: The unique identifier for the type. Can be undefined if the type is an array or list.
+  - **`namespaceId`** *(string, required)*: The namespace that the type belongs to.
+  - **`required`** *(boolean, required)*: Whether the type is required.
+  - **`collectionType`** *(string, required)*: The type of collection that the type is. Must be one of: `["array", "list", "none"]`.
+  - **`ofType`**: Refer to *[#/definitions/DocTypeRef](#definitions/DocTypeRef)*.
+  - **`link`**: Refer to *[#/definitions/DocTypeLink](#definitions/DocTypeLink)*.
+- <a id="definitions/DocTypeLink"></a>**`DocTypeLink`** *(object)*: A link to a type in the schema. Cannot contain additional properties.
+  - **`href`** *(string)*: The URL to the type.
+  - **`title`** *(string, required)*: The title of the type.
+  - **`description`** *(string)*: A description of the type.
+- <a id="definitions/OperationArgument"></a>**`OperationArgument`** *(object)*
+  - **`name`** *(string, required)*: The name of the argument.
+  - **`description`** *(string)*: A description of the argument.
+  - **`deprecationReason`** *(string)*: The reason why the argument is deprecated.
+  - **`typeRef`** *(object, required)*
+    - **`typeId`** *(string, required)*
+    - **`namespaceId`** *(string, required)*
+    - **`required`** *(boolean, required)*
+    - **`collectionType`** *(string, required)*
+    - **`link`** *(object, required)*
+      - **`href`** *(string, required)*
+      - **`title`** *(string, required)*
+      - **`description`** *(string, required)*

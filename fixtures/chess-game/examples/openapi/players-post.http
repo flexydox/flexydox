@@ -1,0 +1,8 @@
+---
+title: Create player example
+description: Creates a player with minimal input provided
+---
+POST /players
+X-Custom-Header: custom-header-value
+
+{ "format": "json", "data": { "name": "Bob" } }

@@ -1,0 +1,45 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "description": "Flexydox - universal API documentation generator",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/flexydox/flexydox"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.1.4"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "build-cli": "node ./scripts/build-cli",
+    "coverage": "vitest run --coverage",
+    "test": "turbo test",
+    "e2e": "turbo e2e"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@types/node": "20.11.28",
+    "@vitest/coverage-v8": "^1.6.0",
+    "commitlint": "^19.3.0",
+    "esbuild": "0.19.12",
+    "lefthook": "^1.6.10",
+    "only-allow": "^1.2.1",
+    "strip-ansi": "^7.1.0",
+    "turbo": "^1.13.3",
+    "typescript": "5.3.3",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "edit-json-file": "^1.8.0",
+    "rimraf": "^5.0.7",
+    "shelljs": "^0.8.5"
+  }
+}

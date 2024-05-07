@@ -1,0 +1,9 @@
+{
+  "name": "@flexydox/cli-e2e",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "e2e": "vitest run ."
+  }
+}

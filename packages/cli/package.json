@@ -1,0 +1,51 @@
+{
+  "name": "@flexydox/cli",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/flexydox/flexydox"
+  },
+  "bin": {
+    "flexydox": "flexydox.js"
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias --resolve-full-paths",
+    "clean": "rimraf dist"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./dist/core/index.js"
+    }
+  },
+  "files": ["dist", "flexydox.js"],
+  "main": "dist/cli/index.js",
+  "dependencies": {
+    "@astrojs/markdown-remark": "^5.0.0",
+    "@csstools/postcss-global-data": "^2.1.1",
+    "@flexydox/doc-provider": "workspace:*",
+    "@flexydox/doc-schema": "workspace:*",
+    "@flexydox/logger": "workspace:*",
+    "@floating-ui/dom": "^1.6.3",
+    "@iconify/tools": "^4.0.2",
+    "astro": "^4.3.3",
+    "astro-icon": "^1.1.0",
+    "autoprefixer": "^10.4.19",
+    "classnames": "^2.5.1",
+    "commander": "^12.0.0",
+    "cssnano": "^6.1.2",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "marked": "^12.0.2",
+    "open-props": "^1.6.18",
+    "postcss-custom-media": "^10.0.4",
+    "postcss-nesting": "^12.1.1",
+    "tsc-alias": "^1.8.8"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/js-yaml": "^4.0.9"
+  }
+}

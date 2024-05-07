@@ -1,0 +1,456 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Flexydox DocSchema",
+  "description": "The schema for the Flexydox unified API documentation format.",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The URL to the JSON schema that this document conforms to."
+    },
+    "namespaces": {
+      "type": "array",
+      "description": "The namespaces (typically APIs) that are available in the schema",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the namespace"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the namespace"
+          },
+          "spec": {
+            "type": "string",
+            "description": "The type of specification that the namespace is defined in.",
+            "enum": ["graphql", "openapi3.0"]
+          },
+          "source": {
+            "type": "string",
+            "description": "The source of the namespace. This could be a URL or a file path."
+          },
+          "inferGroups": {
+            "type": "boolean",
+            "description": "Whether the groups should be inferred from the source specification. Defaults to false."
+          }
+        },
+        "required": ["id", "name", "spec", "source"]
+      }
+    },
+    "operations": {
+      "type": "array",
+      "description": "The API operations that are available in the schema.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the operation"
+          },
+          "namespaceId": {
+            "type": "string",
+            "description": "The namespace that the operation belongs to"
+          },
+          "operationType": {
+            "type": "string",
+            "description": "The type of operation that is being performed",
+            "enum": [
+              "query",
+              "mutation",
+              "subscription",
+              "get",
+              "post",
+              "put",
+              "delete",
+              "options",
+              "head",
+              "patch",
+              "trace"
+            ]
+          },
+          "operationKind": {
+            "type": "string",
+            "description": "The kind of operation that is being performed",
+            "enum": ["read", "modify", "subscribe", "other"]
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the operation"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the operation"
+          },
+          "arguments": {
+            "type": "array",
+            "description": "The arguments that are demanded by the operation",
+            "items": { "$ref": "#/definitions/OperationArgument" }
+          },
+          "returns": {
+            "type": "array",
+            "description": "The types that are returned by the operation.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "typeRef": {
+                  "$ref": "#/definitions/DocTypeRef"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The status of the operation result",
+                  "enum": ["success", "error", "unknown"]
+                },
+                "statusCode": {
+                  "type": "string",
+                  "description": "The status code of the operation result"
+                },
+                "mediaType": {
+                  "type": "string",
+                  "description": "The media type of the operation result"
+                }
+              },
+              "required": ["typeRef", "status"]
+            }
+          },
+          "deprecationReason": {
+            "type": "string",
+            "description": "The reason why the operation is deprecated"
+          },
+          "groups": {
+            "description": "The group ids that the operation belongs to",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The unique identifier for the group"
+            }
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "description": "Code examples for the operation",
+              "properties": {
+                "operationId": {
+                  "type": "string",
+                  "description": "The unique identifier for the operation"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The code example body"
+                },
+                "lang": {
+                  "type": "string",
+                  "description": "The language of the code example",
+                  "enum": ["plaintext", "graphql", "http"]
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of the code example"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A description of the code example"
+                },
+                "headers": {
+                  "type": "object",
+                  "description": "The http headers that are required for the code example",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "query": {
+                  "type": "object",
+                  "description": "The query parameters that are required for the code example",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Example request path"
+                }
+              },
+              "required": ["operationId", "code", "lang", "title"]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "namespaceId",
+          "operationType",
+          "operationKind",
+          "name",
+          "arguments",
+          "returns",
+          "groups",
+          "examples"
+        ]
+      }
+    },
+    "types": {
+      "type": "array",
+      "description": "The types that are available in the schema",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the type"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the type"
+          },
+          "namespaceId": {
+            "type": "string",
+            "description": "The namespace that the type belongs to"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the type"
+          },
+          "deprecationReason": {
+            "type": "string",
+            "description": "The reason why the type is deprecated"
+          },
+          "kind": {
+            "type": "string",
+            "description": "The kind of type that is being defined",
+            "enum": ["object", "enum", "scalar", "interface", "union", "input", "list"]
+          },
+          "values": {
+            "type": "array",
+            "description": "The enum values that are available for the type",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "The value of the enum"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A description of the enum value"
+                },
+                "deprecationReason": {
+                  "type": "string",
+                  "description": "The reason why the enum value is deprecated"
+                }
+              },
+              "required": ["value"]
+            }
+          },
+          "groups": {
+            "type": "array",
+            "description": "The group ids that the type belongs to",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interfaces": {
+            "type": "array",
+            "description": "The interfaces (type ids) that the type implements",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "type": "array",
+            "description": "The fields that are available for the type",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the field",
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A description of the field"
+                },
+                "deprecationReason": {
+                  "type": "string",
+                  "description": "The reason why the field is deprecated"
+                },
+                "arguments": {
+                  "type": "array",
+                  "description": "The arguments that are demanded by the field. Only applicable for api specifications, which support this feature.",
+                  "items": {
+                    "$ref": "#/definitions/OperationArgument"
+                  }
+                },
+                "typeRef": {
+                  "$ref": "#/definitions/DocTypeRef"
+                }
+              },
+              "required": ["name", "typeRef"]
+            }
+          },
+          "unionTypes": {
+            "type": "array",
+            "description": "The type ids that are part of the union",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["id", "name", "namespaceId", "kind", "groups"]
+      }
+    },
+    "groups": {
+      "type": "array",
+      "description": "The groups that are available in the schema",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the group"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the group"
+          },
+          "regex": {
+            "type": "string",
+            "description": "The regular expression that is used to match the group"
+          }
+        },
+        "required": ["id", "name", "regex"]
+      }
+    },
+    "customPages": {
+      "type": "array",
+      "description": "The custom pages that are available in the schema",
+      "items": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content of the custom page"
+          },
+          "slug": {
+            "type": "string",
+            "description": "The slug of the custom page. It is used to generate the URL of the page."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the custom page"
+          }
+        },
+        "required": ["content", "slug", "title"]
+      }
+    }
+  },
+  "definitions": {
+    "DocTypeRef": {
+      "type": "object",
+      "description": "A reference to a type in the schema",
+      "additionalProperties": false,
+      "properties": {
+        "typeId": {
+          "type": "string",
+          "description": "The unique identifier for the type. Can be undefined if the type is an array or list."
+        },
+        "namespaceId": {
+          "type": "string",
+          "description": "The namespace that the type belongs to"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the type is required"
+        },
+        "collectionType": {
+          "type": "string",
+          "description": "The type of collection that the type is",
+          "enum": ["array", "list", "none"]
+        },
+        "ofType": {
+          "$ref": "#/definitions/DocTypeRef"
+        },
+        "link": {
+          "$ref": "#/definitions/DocTypeLink"
+        }
+      },
+      "required": ["typeId", "namespaceId", "required", "collectionType", "link"]
+    },
+    "DocTypeLink": {
+      "type": "object",
+      "description": "A link to a type in the schema",
+      "additionalProperties": false,
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "The URL to the type"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the type"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the type"
+        }
+      },
+      "required": ["title"]
+    },
+    "OperationArgument": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the argument"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the argument"
+        },
+        "deprecationReason": {
+          "type": "string",
+          "description": "The reason why the argument is deprecated"
+        },
+        "typeRef": {
+          "type": "object",
+          "properties": {
+            "typeId": {
+              "type": "string"
+            },
+            "namespaceId": {
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "collectionType": {
+              "type": "string"
+            },
+            "link": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": ["href", "title", "description"]
+            }
+          },
+          "required": ["typeId", "namespaceId", "required", "collectionType", "link"]
+        }
+      },
+      "required": ["name", "typeRef"]
+    }
+  },
+  "required": ["namespaces", "operations", "types", "groups", "customPages"]
+}

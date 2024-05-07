@@ -1,0 +1,11 @@
+:root {
+  /* spacing */
+  --ratio: 1.8;
+  --size-xxs: calc(var(--size-xs) / var(--ratio));
+  --size-xs: calc(var(--size-s) / var(--ratio));
+  --size-s: calc(var(--size-m) / var(--ratio));
+  --size-m: 1rem;
+  --size-l: calc(var(--size-m) * var(--ratio));
+  --size-xl: calc(var(--size-l) * var(--ratio));
+  --size-xxl: calc(var(--size-xl) * var(--ratio));
+}

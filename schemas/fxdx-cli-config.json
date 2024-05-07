@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Flexydox CLI configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "outputFolder": {
+      "type": "string",
+      "description": "The folder to output the generated documentation to. Relative to the current working directory.",
+      "examples": [
+        {
+          "outputFolder": "./fxdx-docs"
+        }
+      ]
+    },
+    "base": {
+      "type": "string",
+      "description": "The base path to deploy to.",
+      "examples": [{ "base": "/my-path-prefix" }]
+    },
+    "site": {
+      "type": "string",
+      "description": "Your final deployed URL.",
+      "examples": [{ "site": "https://api-docs.my-site.dev" }]
+    },
+
+    "title": {
+      "type": "string",
+      "description": "The title of the documentation. it will appear in the header of the documentation.",
+      "examples": [{ "title": "My API Documentation" }]
+    },
+    "logo": {
+      "$ref": "#/definitions/Logo",
+      "description": "The logo to display in the header of the documentation."
+    },
+    "apis": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/API"
+      },
+      "description": "The APIs to generate documentation for."
+    },
+    "customPagesFolder": {
+      "type": "string",
+      "description": "The folder containing custom pages to include in the documentation. Relative to this configuration file.",
+      "examples": [{ "customPagesFolder": "./custom-pages" }]
+    },
+    "examplesFolder": {
+      "type": "string",
+      "description": "The folder containing example requests and responses to include in the documentation. Relative to this configuration file.",
+      "examples": [{ "examplesFolder": "./examples" }]
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Group"
+      },
+      "description": "The groups to use to categorize the APIs."
+    }
+  },
+  "required": ["apis", "outputFolder", "title"],
+  "definitions": {
+    "API": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the API. This is used to generate unique URLs for the types and operations.",
+          "examples": [{ "id": "my-api-v1" }]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the API as it should appear in the documentation.",
+          "examples": [{ "name": "My API" }]
+        },
+        "inferGroups": {
+          "type": "boolean",
+          "description": "Whether to infer groups from the API specification. Currently groups can be inferred  from OpenAPI 3.0 using the tags defined in the specification.",
+          "default": true,
+          "examples": [{ "inferGroups": false }]
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the API specification (OpenAPI 3.0 or GraphGL schema) to generate documentation for.It can be a local file path (absolute or relative to this configuration file) or a URL. For GraphQL schemas, the URL may point to the introspection query result or to the schema itself.",
+          "examples": [
+            {
+              "url": "https://api.my-site.dev/openapi.json"
+            },
+            { "url": "./openapi.json" },
+            { "url": "/home/openapi.json" },
+            { "url": "./my-graphql-api.graphql" },
+            { "url": "https://api.my-site.dev/my-graphql-api" },
+            { "url": "https://api.my-site.dev/my-graphql-api.graphql" }
+          ]
+        }
+      },
+      "required": ["id", "name", "url"],
+      "title": "API",
+      "description": "An API to generate documentation for."
+    },
+    "Group": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the group as it should appear in the documentation.",
+          "examples": [{ "name": "User" }]
+        },
+        "regex": {
+          "type": "string",
+          "description": "A regular expression to match the type or operation names. Matching types or operations will be assigned to this group.",
+          "examples": [{ "regex": "/user/i" }]
+        }
+      },
+      "required": ["name", "regex"],
+      "title": "Group"
+    },
+    "Logo": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The logo to display in the header of the documentation.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the logo image. It can be a local file path (absolute or relative to this configuration file) or a URL.",
+          "examples": [
+            { "url": "https://api.my-site.dev/logo.png" },
+            { "url": "./logo.svg" },
+            { "url": "/home/logo.png" }
+          ]
+        },
+        "width": {
+          "type": "integer",
+          "description": "The width of the logo image in pixels.",
+          "examples": [{ "width": 100 }]
+        },
+        "height": {
+          "type": "integer",
+          "description": "The height of the logo image in pixels.",
+          "examples": [{ "height": 50 }]
+        },
+        "alt": {
+          "type": "string",
+          "description": "The alt text for the logo image.",
+          "examples": [{ "alt": "My API Logo" }]
+        }
+      },
+      "required": ["height", "url", "width"],
+      "title": "Logo"
+    }
+  }
+}

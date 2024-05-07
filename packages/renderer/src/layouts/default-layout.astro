@@ -1,0 +1,60 @@
+---
+import "open-props/style";
+import "open-props/buttons.min.css";
+import "../styles/variables.css";
+import "../styles/colors.css";
+
+import "../styles/theme-switcher.css";
+
+import "../styles/layout.css";
+import "../styles/base.css";
+import "../styles/select.css";
+
+import CompanyLogo from "../components/company-logo.astro";
+import MainNav from "../components/main-nav/index.astro";
+import ThemeIcon from "../components/theme-icon.astro";
+
+import { Image } from "astro:assets";
+import { loadSiteData } from "../asset-loader";
+import NavToggleButton from "../components/nav-toggle-button.astro";
+import { linkUrl } from "../utils/link-url";
+const siteData = await loadSiteData();
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <!-- Load synchronously to avoid FOUC -->
+    <script is:inline src={linkUrl("/theme-switcher.js")}></script>
+    <script src="../scripts/main-nav.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <section class="l-page">
+      <header class="l-page-header">
+        <NavToggleButton />
+
+        <section class="header-title">
+          <h3>{siteData.title}</h3>
+        </section>
+        <section class="header-links"></section>
+
+        <section class="header-controls">
+          <ThemeIcon />
+        </section>
+      </header>
+      <nav class="l-page-main-nav">
+        <section class="l-page-nav-header">
+          <CompanyLogo />
+        </section>
+
+        <MainNav />
+      </nav>
+      <section class="l-page-main-content">
+        <section class="l-page-content-wrapper">
+          <slot />
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+---
+import { DocType } from "@flexydox/doc-schema";
+import cx from "classnames";
+import DeprecationInfo from "./deprecation-info.astro";
+import Description from "./description.astro";
+import ListItems from "./list-items.astro";
+import TypeField from "./type-field.astro";
+import TypeLink from "./type-link.astro";
+import TypeValue from "./type-value.astro";
+const type: DocType = Astro.props.type;
+const { id, name, kind, description, deprecationReason } = type;
+const typeKind = (kind ?? "unknown").toLowerCase();
+const kindFormatted = (typeKind ?? "").toLowerCase();
+const showPopOver = Astro.props.showPopOver;
+---
+
+<style>
+  .title {
+    font-size: var(--font-size-fluid-1);
+    margin-top: var(--size-xl);
+  }
+  .title > em {
+    font-style: normal;
+    display: inline-block;
+    margin-left: var(--size-m);
+    color: var(--c-text-secondary);
+  }
+</style>
+
+<div id={id} class="type stack-l">
+  <h4 class="title">
+    <strong>{name}</strong>
+    <em>{kindFormatted}</em>
+  </h4>
+
+  <Description>{description}</Description>
+
+  <ListItems title="Implements" class="interfaces" items={type.interfaces}>
+    {
+      type.interfaces?.map((typeId) => (
+        <TypeLink showPopOver={showPopOver} typeId={typeId} />
+      ))
+    }
+  </ListItems>
+
+  <ListItems title="Attributes" class="fields" items={type.fields}>
+    {
+      type.fields?.map((field) => (
+        <TypeField showPopOver={showPopOver} field={field} />
+      ))
+    }
+  </ListItems>
+
+  <ListItems title="Union" class="values" items={type.unionTypes}>
+    {type.unionTypes?.map((typeId) => <TypeLink typeId={typeId} />)}
+  </ListItems>
+
+  <ListItems title="Possible values" class="values" items={type.values}>
+    {type.values?.map((value) => <TypeValue value={value} />)}
+  </ListItems>
+
+  {deprecationReason && <DeprecationInfo reason={deprecationReason} />}
+</div>

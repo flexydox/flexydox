@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a bug to help us improve **flexydox**
+body:
+  - type: textarea
+    attributes:
+      label: Current behavior
+      description: Describe how the issue manifests. Include logs, or code to help explain the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: Describe what the desired behavior would be.
+    validations:
+      required: true
+
+
+  - type: dropdown
+    id: affected-packages
+    attributes:
+      label: Which **@flexydox** package(s) are the source of the bug?
+      options:
+      - 'cli'
+      - 'cli-e2e'
+      - 'doc-provider'
+      - 'doc-schema'
+      - 'logger'
+      - 'renderer'
+      multiple: true
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        Output of `flexydox --version`
+
+  - type: textarea
+    id: other
+    attributes:
+      label: Anything else?

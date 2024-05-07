@@ -1,0 +1,33 @@
+---
+const { reason } = Astro.props;
+import { Icon } from 'astro-icon/components';
+---
+
+<style>
+  .deprecation-info {
+    color: var(--c-deprecation-info);
+    background-color: var(--c-deprecation-info-bg);
+    padding: var(--size-s) var(--size-m);
+    border-radius: 0 var(--size-xs) var(--size-xs) 0;
+    border-left: 3px solid var(--c-deprecation-info-border);
+    display: flex;
+    align-items: center;
+    gap: var(--size-xs);
+
+    svg {
+      vertical-align: middle;
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+    .deprecation-info-title {
+      font-weight: 500;
+      padding-right: var(--size-s);
+    }
+  }
+</style>
+
+<div class="deprecation-info">
+  <Icon name="warning" />
+  <span class="deprecation-info-title">Deprecated:</span>
+  <span class="deprecation-info-reason">{reason}</span>
+</div>

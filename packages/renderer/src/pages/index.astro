@@ -1,0 +1,11 @@
+---
+import { getDocConfig, loadAllPages } from "../asset-loader";
+import DefaultLayout from "../layouts/default-layout.astro";
+const cfg = await getDocConfig();
+
+const allPages = await loadAllPages();
+---
+
+<DefaultLayout>
+  <h1>{cfg.title}</h1>
+</DefaultLayout>

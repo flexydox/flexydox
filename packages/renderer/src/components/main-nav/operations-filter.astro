@@ -1,0 +1,10 @@
+---
+import { Namespace } from '@flexydox/doc-schema';
+
+const allNamespaces = Astro.locals.namespaces as Namespace[];
+---
+
+<select name="operations-filter" id="operations-filter">
+  <option value="all">Show All APIs</option>
+  {allNamespaces.map((ns) => <option value={ns.id}>{ns.name}</option>)}
+</select>

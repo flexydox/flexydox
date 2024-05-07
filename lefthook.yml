@@ -1,0 +1,14 @@
+pre-push:
+  commands:
+    check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm biome check --no-errors-on-unmatched --files-ignore-unknown=true {push_files}
+pre-commit:
+  commands:
+    check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true
+commit-msg:
+  commands:
+    "lint commit message":
+      run: pnpm commitlint --edit {1}

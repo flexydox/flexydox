@@ -1,0 +1,25 @@
+version: "3"
+services:
+  #  Chess Game API Example
+  chess:
+    container_name: fxdx-chess
+    image: flexydox/flexydox:latest
+    pull_policy: always
+    # Run the build command with the configuration file
+    command: ["flexydox", "-c", "/config/fxdx.config.yaml", "build"]
+    volumes:
+      # Mount the output documentation folder
+      - ./docs/chess:/docs
+      # Mount the configuration folder
+      - ./sites/chess:/config
+  #  GitHub API Example - based on real OpenAPI 3.0 and GraphQL schemas
+  github:
+    container_name: fxdx-github
+    image: flexydox/flexydox:latest
+    pull_policy: always
+    # Run the build command with the configuration file
+    command: ["flexydox", "-c", "/config/fxdx.config.yaml", "build"]
+    volumes:
+      - ./docs/github:/docs
+      - ./sites/github:/config
+

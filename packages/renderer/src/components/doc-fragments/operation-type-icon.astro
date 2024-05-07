@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getOperationTypeData } from '../../astro-utils/get-operation-type-data';
+const type = Astro.props.type;
+
+const mappedType = getOperationTypeData(type);
+---
+
+<style>
+  .op-kind {
+    display: flex;
+    align-items: center;
+  }
+</style>
+{
+  mappedType && (
+    <em class="op-kind" title={mappedType.title}>
+      <Icon name={mappedType.apiType} />
+    </em>
+  )
+}

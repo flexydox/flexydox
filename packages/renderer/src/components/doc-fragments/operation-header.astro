@@ -1,0 +1,45 @@
+---
+import { markDeprecated } from '../../astro-utils/mark-deprecated';
+import Groups from './groups.astro';
+import OperationTypeIcon from './operation-type-icon.astro';
+import OperationType from './operation-type.astro';
+const { type, groups, kind, deprecated } = Astro.props;
+---
+
+<style>
+  .header {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    line-height: var(--size-l);
+    height: var(--size-l);
+
+    font-weight: 200;
+    font-size: var(--font-size-3);
+    margin-top: var(--size-l);
+    gap: var(--size-xs);
+
+    .annotations {
+      display: flex;
+      align-items: center;
+      margin-left: var(--size-l);
+    }
+  }
+  @media (--small-viewport) {
+    .header {
+      grid-template-columns: 1fr;
+      height: auto;
+      word-wrap: break-word;
+    }
+  }
+</style>
+<section class="header">
+  <span class={markDeprecated(deprecated)}>
+    <OperationType type={type} kind={kind} />
+    <slot />
+  </span>
+  <span class="annotations">
+    <OperationTypeIcon type={type} />
+    <Groups groups={groups} />
+  </span>
+</section>
