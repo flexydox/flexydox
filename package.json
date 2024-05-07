@@ -1,0 +1,36 @@
+{
+  "name": "root",
+  "version": "0.0.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=8.15.5"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "build-cli": "./scripts/build-cli.sh",
+    "coverage": "vitest run --coverage",
+    "postinstall": "lefthook install"
+  },
+  "packageManager": "pnpm@8.15.5",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.7.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@types/node": "20.11.28",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "commitlint": "^19.3.0",
+    "esbuild": "0.19.12",
+    "lefthook": "^1.6.10",
+    "only-allow": "^1.2.1",
+    "semantic-release": "^23.1.1",
+    "strip-ansi": "^7.1.0",
+    "turbo": "^1.13.3",
+    "typescript": "5.3.3",
+    "vitest": "^1.6.0"
+  }
+}

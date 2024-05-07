@@ -1,0 +1,10 @@
+---
+import { loadSiteData } from '../asset-loader';
+const siteData = await loadSiteData();
+---
+
+{
+  siteData.logo && (
+    <img src={siteData.logo.url} alt={siteData.logo.alt} width={siteData.logo.width} height={siteData.logo.height} />
+  )
+}

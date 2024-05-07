@@ -1,0 +1,92 @@
+---
+const popOverId = Astro.props.popOverId;
+---
+
+<style>
+  .popover[popover]:not(:popover-open):not(dialog[open]) {
+    display: none;
+  }
+  .popover {
+    --horiz-padding: var(--size-m);
+    border: none;
+    box-shadow: var(--shadow-6);
+    border-radius: var(--radius-3);
+    height: max-content;
+
+    position: absolute;
+    width: minmax(300px, 400px);
+    max-width: 60svh;
+    margin: 0;
+    bottom: 100px;
+
+    color: var(--c-text-primary);
+    background-color: var(--c-bg-tertiary);
+    padding: 0;
+    padding-bottom: var(--size-l);
+
+    :global(.type > *) {
+      padding: 0 var(--horiz-padding);
+    }
+
+    :global(.title) {
+      background-color: var(--c-bg-secondary);
+      padding: var(--size-l) var(--horiz-padding);
+      margin: 0;
+    }
+  }
+</style>
+<script>
+  import { fade } from 'astro:transitions';
+  // @ts-ignore
+  import { computePosition, autoUpdate } from 'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3/+esm';
+
+  function init() {
+    const triggers = document.querySelectorAll('.po-trigger');
+    triggers.forEach((trigger) => {
+      const popOverId = trigger.getAttribute('data-po-target');
+      if (!popOverId) {
+        return;
+      }
+      const popOver = document.getElementById(popOverId);
+      if (!popOver) {
+        return;
+      }
+      autoUpdate(trigger, popOver, () => {
+        const pos = computePosition(trigger, popOver, {
+          placement: 'bottom-start'
+        }).then((pos) => {
+          popOver.style.top = `${Math.max(0, pos.y + 2)}px`;
+          popOver.style.left = `${Math.max(0, pos.x - 100)}px`;
+          trigger.addEventListener('mouseenter', () => {
+            popOver.showPopover();
+          });
+          let isOverPopup = false;
+          popOver.addEventListener('mouseenter', () => {
+            isOverPopup = true;
+          });
+          popOver.addEventListener('mouseleave', () => {
+            isOverPopup = false;
+            popOver.hidePopover();
+          });
+          trigger.addEventListener('mouseout', (e) => {
+            setTimeout(() => {
+              if (!isOverPopup) {
+                popOver.hidePopover();
+              }
+            }, 200);
+          });
+        });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+
+<span class="po-trigger" data-po-target={popOverId}>
+  <slot name="trigger" />
+</span>
+
+<section class="popover" id={popOverId} popover>
+  {popOverId && <slot />}
+</section>

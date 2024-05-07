@@ -1,0 +1,16 @@
+---
+import Group from './group.astro';
+const groups: string[] = Astro.props.groups;
+---
+
+<style>
+  .groups {
+    display: flex;
+    gap: var(--size-l);
+    margin-left: var(--size-l);
+  }
+</style>
+
+<section class="groups">
+  {groups.map((group) => <Group title={group} />)}
+</section>

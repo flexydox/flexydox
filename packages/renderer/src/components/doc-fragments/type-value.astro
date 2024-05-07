@@ -1,0 +1,24 @@
+---
+import { DocType, DocTypeField } from '@flexydox/doc-schema';
+import cx from 'classnames';
+import { markDeprecated } from '../../astro-utils/mark-deprecated';
+import DeprecationInfo from './deprecation-info.astro';
+import Description from './description.astro';
+
+const value = Astro.props.value;
+---
+
+<style>
+  .name {
+    font-weight: bold;
+  }
+</style>
+
+<div class="vertical-separator stack-s">
+  <div>
+    <span class:list={['name', markDeprecated(value.deprecationReason)]}>{value.value}</span>
+
+    <Description>{value.description}</Description>
+  </div>
+  {value.deprecationReason && <DeprecationInfo reason={value.deprecationReason} />}
+</div>

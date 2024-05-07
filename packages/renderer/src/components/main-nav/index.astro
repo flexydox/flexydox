@@ -1,0 +1,71 @@
+---
+import { DocSchema, DocType } from '@flexydox/doc-schema';
+import { loadAllPages } from '../../asset-loader';
+import { groupEntities } from '../../utils/grouped-data';
+import NavItem from './nav-item.astro';
+import NavSection from './nav-section.astro';
+import OperationNavItem from './operation-nav-item.astro';
+import OperationsFilter from './operations-filter.astro';
+
+const allTypes = Astro.locals.types as DocType[];
+const doc = Astro.locals.doc as DocSchema;
+const allOperations = doc.operations;
+
+const groups = doc.groups;
+const groupedEntities = groupEntities(doc);
+
+const allPages = await loadAllPages();
+
+const pageId = Astro.params.id;
+
+const isCurrentGroup = (groupId: string) => {
+  return groupedEntities[groupId].operations.some((op) => op.id === pageId);
+};
+
+const isCurrentOperation = (opId: string) => {
+  return opId === pageId;
+};
+---
+
+<style>
+  .main-nav {
+    display: grid;
+    width: var(100% - 2 * var(--padding-horizontal));
+    overflow: hidden;
+    margin-top: var(--size-l);
+    padding: 0 var(--padding-horizontal);
+  }
+</style>
+<div class="main-nav stack-l">
+  <OperationsFilter />
+  <NavSection>
+    {allPages.map((page) => <NavItem href={`/doc/${page.slug}`}>{page.title}</NavItem>)}
+  </NavSection>
+
+  <NavSection class="group">
+    {
+      groups.map((group) => (
+        <NavSection hidden={groupedEntities[group.id].operations.length === 0}>
+          <NavItem collapsible isOpen={isCurrentGroup(group.id)}>
+            {group.name}
+          </NavItem>
+          <NavSection collapsible isOpen={isCurrentGroup(group.id)}>
+            {groupedEntities[group.id].operations.map((op) => (
+              <OperationNavItem isActive={isCurrentOperation(op.id)} operation={op} />
+            ))}
+          </NavSection>
+        </NavSection>
+      ))
+    }
+  </NavSection>
+  <NavSection hidden={groupedEntities['unassigned'].operations.length === 0}>
+    <NavItem collapsible>Other Operations</NavItem>
+    <NavSection collapsible>
+      {
+        groupedEntities['unassigned'].operations.map((op) => (
+          <OperationNavItem isActive={isCurrentOperation(op.id)} operation={op} />
+        ))
+      }
+    </NavSection>
+  </NavSection>
+</div>

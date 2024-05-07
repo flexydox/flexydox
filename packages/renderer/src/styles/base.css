@@ -1,0 +1,5 @@
+.fxdx-deprecated {
+  text-decoration: line-through;
+  color: var(--c-text-inactive) !important;
+  font-weight: 100;
+}

@@ -1,0 +1,27 @@
+---
+import { OperationKind, OperationType } from '@flexydox/doc-schema';
+import { getOperationKindData } from '../../astro-utils/get-operation-kind-data';
+import { getOperationTypeData } from '../../astro-utils/get-operation-type-data';
+
+type Props = {
+  type: OperationType;
+  kind: OperationKind;
+};
+
+const { type, kind } = Astro.props as Props;
+
+const opTypeData = getOperationTypeData(type);
+const opKindData = getOperationKindData(kind);
+const fontSize = opTypeData.apiType === 'graphql' ? 'var(--font-size-1)' : 'var(--font-size-0)';
+
+const color = `var(${opKindData.color})`;
+---
+
+<style define:vars={{ color, fontSize }}>
+  .op-type {
+    color: var(--color);
+    font-size: var(--fontSize);
+  }
+</style>
+
+<span class="op-type">{opTypeData.name}</span>

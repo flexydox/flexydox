@@ -1,0 +1,69 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Code Check - format, lint, commit messages
+        run: pnpm check
+
+      - name: Build
+        run: pnpm turbo build
+
+      - name: Link flexydox binary
+        run: cd ./packages/flexydox-cli && pnpm link --global
+
+      - name: Unit Tests
+        run: pnpm turbo test
+
+      - name: E2E Tests
+        run: pnpm turbo e2e
+
+
+      # TODO: Push to NPM
+
+      # TODO: Create Github Release
+
+
+
+      # TODO: Update docker image version
+
+      - name: Docker - Set up QEMU
+        if: github.event_name == 'push'
+        uses: docker/setup-qemu-action@v3
+
+      - name: Docker - Set up Docker Buildx
+        if: github.event_name == 'push'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker - Login to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker - Build and push
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: flexydox/flexydox:latest

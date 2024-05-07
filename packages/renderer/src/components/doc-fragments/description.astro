@@ -1,0 +1,15 @@
+---
+import { renderMarkdown } from '../../astro-utils/render-markdown';
+
+const val = await Astro.slots.render('default');
+const content = await renderMarkdown(val);
+---
+
+<style>
+  .description {
+    color: var(--c-text-secondary);
+  }
+</style>
+<section class="description stack-xs">
+  <p set:html={content} />
+</section>

@@ -1,0 +1,14 @@
+---
+import { getDocConfig, loadAllPages } from '../asset-loader';
+import DefaultLayout from '../layouts/default-layout.astro';
+const cfg = await getDocConfig();
+
+const allPages = await loadAllPages();
+if (allPages.length > 0) {
+  return Astro.redirect(`/doc/${allPages[0].slug}`);
+}
+---
+
+<DefaultLayout>
+  <h1>{cfg.title}</h1>
+</DefaultLayout>

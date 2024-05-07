@@ -1,0 +1,29 @@
+{
+  "name": "@flexydox/renderer",
+  "version": "1.0.0",
+  "description": "Flexydox Astro documentation renderer ",
+  "main": "index.js",
+  "author": "Josef Karamon",
+  "license": "MIT",
+  "scripts": {
+    "dev": "FXDX_DOC_CONFIG_FILE=../../_docs/doc-config.json astro dev"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^5.0.0",
+    "@flexydox/doc-schema": "workspace:*",
+    "@floating-ui/dom": "^1.6.3",
+    "astro": "^4.3.3",
+    "astro-icon": "^1.1.0",
+    "classnames": "^2.5.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.2",
+    "open-props": "^1.6.18"
+  },
+  "devDependencies": {
+    "@csstools/postcss-global-data": "^2.1.1",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^6.1.2",
+    "postcss-custom-media": "^10.0.4",
+    "postcss-nesting": "^12.1.1"
+  }
+}

@@ -1,0 +1,43 @@
+name: CI Build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Code Check - format, lint, commit messages
+        run: pnpm check
+
+      - name: Build
+        run: pnpm turbo build
+
+      - name: Link flexydox binary
+        run: cd ./packages/flexydox-cli && pnpm link --global
+
+      - name: Unit Tests
+        run: pnpm turbo test
+
+      - name: E2E Tests
+        run: pnpm turbo e2e

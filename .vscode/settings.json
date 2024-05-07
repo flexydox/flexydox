@@ -1,0 +1,33 @@
+{
+  "cSpell.words": [
+    "APIV",
+    "astro",
+    "astrojs",
+    "biomejs",
+    "codebooks",
+    "codespaces",
+    "commitlint",
+    "cssnano",
+    "csstools",
+    "devkit",
+    "flexydox",
+    "FXDX",
+    "Karamon",
+    "lefthook",
+    "lightningcss",
+    "OAPI",
+    "openapi",
+    "preinstall",
+    "remixicon"
+  ],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cssvar.files": ["./node_modules/open-props/open-props.min.css"],
+  "cssvar.ignore": [],
+  "cssvar.extensions": ["css", "postcss", "jsx", "tsx"],
+  "eslint.validate": ["json"],
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
+}
