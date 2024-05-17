@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "license": "MIT",
   "engines": {
     "node": ">=20.10.0",
