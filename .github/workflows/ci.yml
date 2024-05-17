@@ -43,11 +43,8 @@ jobs:
       - name: Code Check - format, lint
         run: pnpm check
 
-      - name: Build
+      - name: Build CLI
         run: pnpm build-cli
-
-      - name: Link flexydox binary
-        run: cd ./packages/flexydox-cli && pnpm link --global
 
       - name: Unit Tests
         run: pnpm turbo test
