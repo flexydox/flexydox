@@ -44,7 +44,7 @@ jobs:
         run: pnpm check
 
       - name: Build
-        run: pnpm turbo build
+        run: pnpm build-cli
 
       - name: Link flexydox binary
         run: cd ./packages/flexydox-cli && pnpm link --global
