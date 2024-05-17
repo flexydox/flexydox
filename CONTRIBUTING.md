@@ -162,7 +162,7 @@ The `footer` is optional. The [Commit Message Footer](#commit-message-footer) fo
   │       │
   │       └─⫸ Commit Scope: cli|cli-e2e|doc-schema|doc-provider|logger|renderer
   │
-  └─⫸ Commit Type: build|docs|feat|fix|perf|refactor|style|test
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|style|test
 ```
 
 The `<type>` and `<summary>` fields are mandatory, the `(<scope>)` field is optional.
