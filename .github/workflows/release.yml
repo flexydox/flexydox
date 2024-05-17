@@ -1,7 +1,6 @@
+name: Release
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -20,6 +19,9 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
         run: pnpm dlx commitlint --last --verbose
@@ -30,8 +32,7 @@ jobs:
 
 
 
-      - name: Install dependencies
-        run: pnpm install
+
 
       - name: Code Check - format, lint, commit messages
         run: pnpm check
