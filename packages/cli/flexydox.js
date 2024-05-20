@@ -11,7 +11,7 @@ async function main() {
     }
   }
 
-  return import('./dist/main.js')
+  return import('./dist/cli/src/main.js')
     .then(({ cli }) => cli(process.argv))
     .catch((error) => {
       console.error(error);

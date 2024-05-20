@@ -7,21 +7,24 @@ import { Namespace } from '@flexydox/doc-schema';
 import { logger } from '@flexydox/logger';
 import { APIDefinitionConfig, GroupConfig } from '../config/app-config';
 import { stringToRegex } from './string-to-regex';
+import { resolve } from 'path';
+import { resolveRelativePathToConfigFile } from './resolve-relative-path';
 
 export async function parseAPI(api: APIDefinitionConfig, groupConfigs: GroupConfig[]) {
-  const definition = await recognizeSchema(api.url);
+  const apiUrl = resolveRelativePathToConfigFile(api.url);
+  const definition = await recognizeSchema(apiUrl);
 
   if (!definition.isRecognized) {
-    throw new Error(`API Url is invalid or has a wrong format: '${api.url}'`);
+    throw new Error(`API Url is invalid or has a wrong format: '${apiUrl}'`);
   }
 
-  logger.info(`Parsing '${definition.type}' API ${api.url} `);
+  logger.info(`Parsing '${definition.type}' API ${apiUrl} `);
 
   const ns: Namespace = {
     id: api.id,
     name: api.name,
     spec: definition.type ?? 'openapi3.0',
-    source: api.url
+    source: apiUrl
   };
   const groups = (groupConfigs ?? []).map((g) => {
     const regex = stringToRegex(g.regex);
@@ -35,13 +38,13 @@ export async function parseAPI(api: APIDefinitionConfig, groupConfigs: GroupConf
 
     const provider = new GraphQLSchemaProvider(definition.graphQLSchema, ns, groups);
     const result = await provider.getSchema();
-    logger.info(`'${definition.type}' API ${api.url} parsed successfully`);
+    logger.info(`'${definition.type}' API ${apiUrl} parsed successfully`);
     return result;
   }
   if (definition.type === 'openapi3.0') {
     const provider = new OpenApi30SchemaProvider(ns, groups);
     const result = await provider.getSchema();
-    logger.info(`'${definition.type}' API ${api.url} parsed successfully`);
+    logger.info(`'${definition.type}' API ${apiUrl} parsed successfully`);
     return result;
   }
 }

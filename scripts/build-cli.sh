@@ -3,10 +3,11 @@ CLI_DIR=./dist/cli
 ASTRO_SOURCE_DIR=./packages/renderer
 ASTRO_OUTPUT_DIR=$CLI_DIR/astro
 
-rm -rf $CLI_DIR
 
+pnpm clean
+pnpm turbo clean --force
 
-pnpm turbo build
+pnpm turbo build --force
 pnpm deploy --filter=cli $CLI_DIR
 mkdir -p $ASTRO_OUTPUT_DIR
 cp -R $ASTRO_SOURCE_DIR/src $ASTRO_OUTPUT_DIR

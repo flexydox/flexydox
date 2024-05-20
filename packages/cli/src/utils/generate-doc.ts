@@ -6,7 +6,7 @@ import { getConfig } from '../config/app-config';
 import { DocConfig, saveConfig } from '@flexydox/doc-schema';
 import { AstroInlineConfig } from 'astro';
 import { copyAsset, customAssetDir, getAssetsSrc } from './copy-asset';
-import { resolveRelativePath } from './resolve-relative-path';
+import { resolveRelativePathToConfigFile, resolveRelativePathToCwd } from './resolve-relative-path';
 
 export async function generateDoc(
   schemaPath: string,
@@ -21,19 +21,19 @@ export async function generateDoc(
     throw new Error('Icon integration not found');
   }
 
-  const absoluteSchemaPath = resolveRelativePath(schemaPath);
+  const absoluteSchemaPath = resolveRelativePathToConfigFile(schemaPath);
 
-  const outDir = resolveRelativePath(appConfig.outputFolder);
+  const outDir = resolveRelativePathToCwd(appConfig.outputFolder);
 
   const __dirname = new URL('.', import.meta.url).pathname;
   const rootDir = resolve(process.cwd());
-  const astroRootDir = resolve(__dirname, '../../astro');
+  const astroRootDir = resolve(__dirname, '../../../../astro');
   const siteOutDir = join(outDir, 'site');
   const astroIconDir = resolve(astroRootDir, 'src/icons');
   const astroPublicDir = resolve(astroRootDir, 'public');
 
   const logo = appConfig?.logo;
-  const logoUrl = resolveRelativePath(logo?.url);
+  const logoUrl = resolveRelativePathToConfigFile(logo?.url);
 
   logger.info(`Root directory (cwd): '${rootDir}'`);
   logger.info(`Output directory: '${outDir}'`);

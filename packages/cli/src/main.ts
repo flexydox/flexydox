@@ -4,21 +4,33 @@ import { buildSchemaAction } from './actions/build-schema-action';
 
 import { parseConfigFile } from './utils/parse-config-file';
 
-import { setLogLevel } from '@flexydox/logger';
+import { logger, setLogLevel } from '@flexydox/logger';
 import { getConfig } from './config/app-config';
+import { setConfigDirectory } from './utils/resolve-relative-path';
+import { join, dirname } from 'node:path';
 
 program.name('flexydox').description('Flexydox CLI').version('0.0.1');
 
 export async function cli(args: string[]) {
   program.hook('preAction', async () => {
-    const configPath = program.opts()?.config;
+    const configPathArg = program.opts()?.config;
     const verbose = program.opts()?.verbose;
     const veryVerbose = program.opts()?.veryVerbose;
+
+    const configPath = configPathArg ? join(process.cwd(), configPathArg) : undefined;
+
     if (verbose) {
       setLogLevel('debug');
     }
     if (veryVerbose) {
       setLogLevel('trace');
+    }
+
+    if (configPath) {
+      logger.info(`Using config file: ${configPath}`);
+      const configDir = dirname(configPath);
+      logger.info('Config directory:', configDir);
+      setConfigDirectory(configDir);
     }
 
     await parseConfigFile(configPath);

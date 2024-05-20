@@ -2,7 +2,7 @@ import { extname, join } from 'path';
 import { SourceSpec } from '@flexydox/doc-schema';
 import { readFile, readdir } from 'fs/promises';
 import { getConfig } from '../config/app-config';
-import { resolveRelativePath } from './resolve-relative-path';
+import { resolveRelativePathToConfigFile } from './resolve-relative-path';
 
 import { logger } from '@flexydox/logger';
 import yaml from 'js-yaml';
@@ -26,12 +26,13 @@ export async function resolveAllPageFiles(): Promise<string[]> {
     logger.warn('Custom pages folder not provided');
     return [];
   }
+  const customPagesFolder = resolveRelativePathToConfigFile(appConfig.customPagesFolder);
 
   const files = appConfig.customPagesFiles ?? [];
 
-  const filesFromFolder = await getFilesFromFolder(appConfig.customPagesFolder, '.md');
+  const filesFromFolder = await getFilesFromFolder(customPagesFolder, '.md');
   const allFiles = [...files, ...filesFromFolder];
-  return allFiles.map((file) => resolveRelativePath(file));
+  return allFiles.map((file) => resolveRelativePathToConfigFile(file));
 }
 
 export async function loadSharedExampleConfig(apiId: string): Promise<SharedExampleData | null> {
@@ -40,7 +41,7 @@ export async function loadSharedExampleConfig(apiId: string): Promise<SharedExam
     logger.warn('Examples folder not provided');
     return null;
   }
-  const folder = join(appConfig.examplesFolder, apiId);
+  const folder = resolveRelativePathToConfigFile(join(appConfig.examplesFolder, apiId));
   let fileContent = null;
   const fileName = join(folder, '.shared.yaml');
   try {
@@ -63,10 +64,14 @@ export async function resolveAllExampleFiles(apiId: string, spec: SourceSpec): P
     return [];
   }
 
-  const folder = join(appConfig.examplesFolder, apiId);
+  const folder = resolveRelativePathToConfigFile(join(appConfig.examplesFolder, apiId));
+
+  logger.debug(`Looking for examples in ${folder}`);
 
   const extension = spec === 'graphql' ? '.graphql' : '.http';
 
   const filesFromFolder = await getFilesFromFolder(folder, extension);
-  return filesFromFolder.map((file) => resolveRelativePath(file));
+  logger.debug(`Found ${filesFromFolder.length} examples in ${folder}`);
+  logger.debug(filesFromFolder.join(', '));
+  return filesFromFolder.map((file) => resolveRelativePathToConfigFile(file));
 }
