@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import {
   GraphQLSchemaProvider,
   OpenApi30SchemaProvider,
@@ -6,9 +7,8 @@ import {
 import { Namespace } from '@flexydox/doc-schema';
 import { logger } from '@flexydox/logger';
 import { APIDefinitionConfig, GroupConfig } from '../config/app-config';
-import { stringToRegex } from './string-to-regex';
-import { resolve } from 'path';
 import { resolveRelativePathToConfigFile } from './resolve-relative-path';
+import { stringToRegex } from './string-to-regex';
 
 export async function parseAPI(api: APIDefinitionConfig, groupConfigs: GroupConfig[]) {
   const apiUrl = resolveRelativePathToConfigFile(api.url);
