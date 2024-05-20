@@ -7,7 +7,7 @@ import { parseConfigFile } from './utils/parse-config-file';
 import { dirname, join } from 'node:path';
 import { logger, setLogLevel } from '@flexydox/logger';
 import { getConfig } from './config/app-config';
-import { setConfigDirectory } from './utils/resolve-relative-path';
+import { resolveRelativePathToCwd, setConfigDirectory } from './utils/resolve-relative-path';
 
 program.name('flexydox').description('Flexydox CLI').version('0.0.1');
 
@@ -17,7 +17,7 @@ export async function cli(args: string[]) {
     const verbose = program.opts()?.verbose;
     const veryVerbose = program.opts()?.veryVerbose;
 
-    const configPath = configPathArg ? join(process.cwd(), configPathArg) : undefined;
+    const configPath = configPathArg ? resolveRelativePathToCwd(configPathArg) : undefined;
 
     if (verbose) {
       setLogLevel('debug');
