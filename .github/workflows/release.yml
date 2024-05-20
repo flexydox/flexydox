@@ -31,23 +31,18 @@ jobs:
         run: pnpm dlx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
 
-
-
-
-      - name: Code Check - format, lint, commit messages
+      - name: Code Check - format, lint
         run: pnpm check
 
-      - name: Build
-        run: pnpm turbo build
-
-      - name: Link flexydox binary
-        run: cd ./packages/flexydox-cli && pnpm link --global
+      - name: Build CLI
+        run: pnpm build-cli
 
       - name: Unit Tests
         run: pnpm turbo test
 
       - name: E2E Tests
         run: pnpm turbo e2e
+
 
 
       # TODO: Push to NPM
