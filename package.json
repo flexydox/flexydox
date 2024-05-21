@@ -19,7 +19,6 @@
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
     "@commitlint/config-conventional": "^19.2.2",
-    "@semantic-release/changelog": "^6.0.3",
     "@types/node": "20.11.28",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -28,13 +27,13 @@
     "esbuild": "0.19.12",
     "lefthook": "^1.6.10",
     "only-allow": "^1.2.1",
-    "semantic-release": "^23.1.1",
     "strip-ansi": "^7.1.0",
     "turbo": "^1.13.3",
     "typescript": "5.3.3",
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "git-conventional-commits": "^2.6.7",
     "rimraf": "^5.0.7"
   }
 }
