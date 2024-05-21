@@ -33,7 +33,6 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "git-conventional-commits": "^2.6.7",
     "rimraf": "^5.0.7"
   }
 }

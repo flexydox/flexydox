@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      git-conventional-commits:
-        specifier: ^2.6.7
-        version: 2.6.7
       rimraf:
         specifier: ^5.0.7
         version: 5.0.7
@@ -3760,14 +3757,6 @@ packages:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
 
-  /git-conventional-commits@2.6.7:
-    resolution: {integrity: sha512-n6QJJpP6s10GJUTXZp0Mce/W8aL8RK1J2/EDNjZYQRSe7vA2h20Ria2sd1LUISS2oPzKr0218/iVdrnGakUVtQ==}
-    hasBin: true
-    dependencies:
-      yaml: 2.4.2
-      yargs: 17.7.2
-    dev: false
-
   /git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
@@ -7239,12 +7228,6 @@ packages:
   /yaml@1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
-    dev: false
-
-  /yaml@2.4.2:
-    resolution: {integrity: sha512-B3VqDZ+JAg1nZpaEmWtTXUlBneoGx6CPM9b0TENK6aoSu5t73dItudwdgmi6tHlIZZId4dZ9skcAQ2UbcyAeVA==}
-    engines: {node: '>= 14'}
-    hasBin: true
     dev: false
 
   /yargs-parser@21.1.1:

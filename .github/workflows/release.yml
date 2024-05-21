@@ -25,17 +25,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
         run: pnpm commitlint --last --verbose
 
-      - name: Validate PR commits with commitlint
-        if: github.event_name == 'pull_request'
-        run: pnpm commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
-
-
       - name: Code Check - format, lint
         run: pnpm check
+
 
       - name: Build CLI
         run: pnpm build-cli
@@ -47,38 +44,43 @@ jobs:
         run: pnpm turbo e2e
 
 
-
-      # TODO: Push to NPM
-
-      # TODO: Create Github Release
-
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm dlx semantic-release
-
-      # TODO: Update docker image version
-
-      - name: Docker - Set up QEMU
-        if: github.event_name == 'push'
-        uses: docker/setup-qemu-action@v3
-
-      - name: Docker - Set up Docker Buildx
-        if: github.event_name == 'push'
-        uses: docker/setup-buildx-action@v3
-
-      - name: Docker - Login to Docker Hub
-        if: github.event_name == 'push'
-        uses: docker/login-action@v3
+      - name: Create Release PR
+        uses: googleapis/release-please-action@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # this is a built-in strategy in release-please, see "Action Inputs"
+          # for more options
+          release-type: node
 
-      - name: Docker - Build and push
-        if: github.event_name == 'push'
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: flexydox/flexydox:latest
+
+      # - name: Publish to NPM
+      #   run: cd dist/cli && npm publish --provenance --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
+      # # TODO: Create Github Release
+
+      # - name: Docker - Set up QEMU
+      #   if: github.event_name == 'push'
+      #   uses: docker/setup-qemu-action@v3
+
+      # - name: Docker - Set up Docker Buildx
+      #   if: github.event_name == 'push'
+      #   uses: docker/setup-buildx-action@v3
+
+      # - name: Docker - Login to Docker Hub
+      #   if: github.event_name == 'push'
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # - name: Docker - Build and push
+      #   if: github.event_name == 'push'
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     push: true
+      #     platforms: linux/amd64,linux/arm64
+      #     tags: flexydox/flexydox:latest
