@@ -11,7 +11,7 @@
     "ignore": [
       ".release-please-manifest.json",
       "release-please-config.json",
-      "**/package.json",
+      "**/*/package.json",
       "package.json",
       ".vscode",
       "./dist",
