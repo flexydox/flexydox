@@ -1,0 +1,7 @@
+{
+  "packages": {
+    "dist/cli": {
+      "release-type": "node"
+    }
+  }
+}
