@@ -53,9 +53,9 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # this is a built-in strategy in release-please, see "Action Inputs"
-          # for more options
           release-type: node
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
 
       # - name: Publish to NPM
@@ -68,7 +68,6 @@ jobs:
       # # TODO: Create Github Release
 
       # - name: Docker - Set up QEMU
-      #   if: github.event_name == 'push'
       #   uses: docker/setup-qemu-action@v3
 
       # - name: Docker - Set up Docker Buildx
