@@ -9,6 +9,10 @@
     "lineWidth": 100,
     "attributePosition": "auto",
     "ignore": [
+      ".release-please-manifest.json",
+      "release-please-config.json",
+      "**/package.json",
+      "package.json",
       ".vscode",
       "./dist",
       "./coverage",
