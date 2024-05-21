@@ -1,6 +1,6 @@
 {
   "packages": {
-    "dist/cli": {
+    "packages/cli": {
       "release-type": "node"
     }
   }
