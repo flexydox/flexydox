@@ -4,8 +4,7 @@
       "release-type": "node"
     },
     "packages/cli": {
-      "release-type": "node",
-      "skip-github-release": true
+      "release-type": "node"
     }
   }
 }
