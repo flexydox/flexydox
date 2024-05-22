@@ -3,7 +3,7 @@
   "tag-separator": "@",
   "include-component-in-tag": true,
   "packages": {
-    "packages/cli": {
+    ".": {
       "package-name": "cli"
     }
   }
