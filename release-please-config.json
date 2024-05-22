@@ -1,10 +1,9 @@
 {
   "packages": {
-    ".": {
-      "release-type": "node"
-    },
     "packages/cli": {
-      "release-type": "node"
+      "package-name": "cli",
+      "release-type": "node",
+      "changelog-path": "../../CHANGELOG.md"
     }
   }
 }
