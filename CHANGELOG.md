@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/flexydox/flexydox/compare/root-v1.0.0...root-v1.1.0) (2024-05-22)
+
+
+### Features
+
+* test release & doc update ([f2b8adc](https://github.com/flexydox/flexydox/commit/f2b8adc6757c9e32951d9f8c8109e54e48b4ea6d))
+
 ## 1.0.0 (2024-05-22)
 
 
