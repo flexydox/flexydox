@@ -3,8 +3,9 @@
   "tag-separator": "@",
   "include-component-in-tag": true,
   "packages": {
-    ".": {
-      "package-name": "cli"
+    "packages/cli": {
+      "package-name": "cli",
+      "changelog-path": "../../CHANGELOG.md"
     }
   }
 }

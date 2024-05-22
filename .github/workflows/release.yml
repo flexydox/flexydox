@@ -16,15 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
@@ -45,6 +45,7 @@ jobs:
 
 
       - name: Create Release PR
+        id: release
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.FXDX_GITHUB_TOKEN }}
@@ -74,7 +75,7 @@ jobs:
 
 
       - name: Debug
-        run : echo "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }} - ${{ steps.release.outputs.tag_name }}"
+        run : echo "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }} - ${{ steps.release.outputs.tag_name }} ${{ steps.release.outputs.paths_released }}"
 
 
 
