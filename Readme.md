@@ -65,8 +65,12 @@ https://flexydox.org
 
 ```bash
 
-# Global installation 
+# Global installation - NPM 
 npm install -g @flexydox/cli
+
+# Global installation - Yarn
+yarn global add @flexydox/cli
+
 
 ```
 
