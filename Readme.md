@@ -60,6 +60,17 @@ https://flexydox.org
 
 ## Getting Started
 
+### Install
+
+
+```bash
+
+# Global installation 
+npm install -g @flexydox/cli
+
+```
+
+
 ### Docker
 
 
