@@ -1,9 +1,7 @@
 {
   "packages": {
-    ".": {
-      "release-type": "node"
-    },
     "packages/cli": {
+      "package-name": "cli",
       "release-type": "node"
     }
   }
