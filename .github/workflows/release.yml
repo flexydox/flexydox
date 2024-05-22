@@ -41,6 +41,17 @@ jobs:
         run: pnpm check
 
 
+     
+
+
+      - name: Create Release PR
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.FXDX_GITHUB_TOKEN }}
+          release-type: node
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
       - name: Build CLI
         run: pnpm build-cli
 
@@ -49,15 +60,6 @@ jobs:
 
       - name: E2E Tests
         run: pnpm turbo e2e
-
-
-      - name: Create Release PR
-        uses: googleapis/release-please-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
         
 
 
