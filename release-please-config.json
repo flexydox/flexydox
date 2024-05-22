@@ -1,9 +1,10 @@
 {
   "release-type": "node",
+  "tag-separator": "@",
+  "include-component-in-tag": true,
   "packages": {
-    "packages/cli": {
-      "package-name": "cli",
-      "release-type": "node"
+    ".": {
+      "package-name": "cli"
     }
   }
 }
