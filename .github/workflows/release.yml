@@ -52,25 +52,29 @@ jobs:
           manifest-file: .release-please-manifest.json
 
       - name: Build CLI
-        if: ${{ steps.release.outputs.cli--release_created }}
+        if: ${{ steps.release.outputs.release_created }}
         run: pnpm build-cli
 
       - name: Unit Tests
-        if: ${{ steps.release.outputs.cli--release_created }}
+        if: ${{ steps.release.outputs.release_created }}
         run: pnpm turbo test
 
       - name: E2E Tests
-        if: ${{ steps.release.outputs.cli--release_created }}
+        if: ${{ steps.release.outputs.release_created }}
         run: pnpm turbo e2e
 
 
 
       - name: Publish to NPM
-        if: ${{ steps.release.outputs.cli--release_created }}
+        if: ${{ steps.release.outputs.release_created }}
         # run: cd dist/cli && npm publish --provenance --access public
         run: ls -la dist/cli && cat dist/cli/package.json
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+      - name: Debug
+        run : echo "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }} - ${{ steps.release.outputs.tag_name }}"
 
 
 
