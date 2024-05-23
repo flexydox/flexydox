@@ -17,7 +17,9 @@
     "lightningcss",
     "OAPI",
     "openapi",
+    "popd",
     "preinstall",
+    "pushd",
     "remixicon"
   ],
   "editor.formatOnSave": true,

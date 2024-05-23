@@ -10,7 +10,7 @@
     "clean": "rimraf dist",
     "check": "biome check .",
     "format": "biome format --write .",
-    "build-cli": "./scripts/build-cli.sh",
+    "build-cli": "node ./scripts/build-cli",
     "coverage": "vitest run --coverage",
     "postinstall": "lefthook install"
   },
@@ -33,6 +33,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "rimraf": "^5.0.7"
+    "rimraf": "^5.0.7",
+    "shelljs": "^0.8.5"
   }
 }

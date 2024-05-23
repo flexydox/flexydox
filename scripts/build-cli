@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const shell = require('shelljs');
+const cwd = process.cwd();
+const path = require('path');
+console.log('current working directory:', cwd);
+
+const cliDir = path.join(cwd, 'dist/cli');
+const astroSourceDir = path.join(cwd, 'packages/renderer');
+const astroOutputDir = path.join(cliDir, `astro`);
+
+console.log('cliDir:', cliDir);
+console.log('astroSourceDir:', astroSourceDir);
+console.log('astroOutputDir:', astroOutputDir);
+
+shell.exec('pnpm clean');
+shell.exec('pnpm turbo clean --force');
+shell.exec('pnpm turbo build --force');
+
+shell.exec(`pnpm deploy --filter=cli ${cliDir}`);
+shell.mkdir('-p', astroOutputDir);
+shell.cp('-r', `${astroSourceDir}/src`, astroOutputDir);
+shell.cp('-r', `${astroSourceDir}/public`, astroOutputDir);
+shell.cp('-r', `${astroSourceDir}/package.json`, astroOutputDir);
+shell.cp('-r', `${astroSourceDir}/postcss.config.cjs`, astroOutputDir);
+
+shell.pushd(cliDir);
+console.log('Unlinking @flexydox/cli');
+shell.exec('pnpm uninstall --global @flexydox/cli');
+console.log('Linking @flexydox/cli');
+shell.exec('pnpm link --global');
+shell.popd();
