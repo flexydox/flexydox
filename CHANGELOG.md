@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/flexydox/flexydox/compare/cli@v1.2.0...cli@v1.3.0) (2024-05-24)
+
+
+### Features
+
+* test release & doc update ([25ed2ad](https://github.com/flexydox/flexydox/commit/25ed2adfa253525a191f911448f0d9c14479f7f8))
+* test release & doc update ([b497bbf](https://github.com/flexydox/flexydox/commit/b497bbfb372bdfb8f7ae04368efaf05564c8051a))
+
 ## [1.2.0](https://github.com/flexydox/flexydox/compare/cli-v1.1.0...cli@v1.2.0) (2024-05-22)
 
 
