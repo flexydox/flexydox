@@ -33,6 +33,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "edit-json-file": "^1.8.0",
     "rimraf": "^5.0.7",
     "shelljs": "^0.8.5"
   }

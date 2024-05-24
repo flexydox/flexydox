@@ -68,8 +68,7 @@ jobs:
 
       - name: Publish to NPM
         if: ${{ steps.release.outputs.release_created }}
-        # run: cd dist/cli && npm publish --provenance --access public
-        run: ls -la dist/cli && cat dist/cli/package.json
+        run: cd dist/cli && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

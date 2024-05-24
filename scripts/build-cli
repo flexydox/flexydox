@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const shell = require('shelljs');
+const editJsonFile = require('edit-json-file');
 const cwd = process.cwd();
 const path = require('path');
 console.log('current working directory:', cwd);
@@ -8,6 +9,10 @@ console.log('current working directory:', cwd);
 const cliDir = path.join(cwd, 'dist/cli');
 const astroSourceDir = path.join(cwd, 'packages/renderer');
 const astroOutputDir = path.join(cliDir, `astro`);
+
+const packageJson = editJsonFile(path.join(cwd, 'package.json'));
+
+const version = packageJson.get('version') || '0.0.0';
 
 console.log('cliDir:', cliDir);
 console.log('astroSourceDir:', astroSourceDir);
@@ -18,6 +23,13 @@ shell.exec('pnpm turbo clean --force');
 shell.exec('pnpm turbo build --force');
 
 shell.exec(`pnpm deploy --filter=cli ${cliDir}`);
+
+const cliPackageJson = editJsonFile(path.join(cliDir, 'package.json'));
+
+console.log('setting @flexydox/cli package.json version to: ', version);
+cliPackageJson.set('version', version);
+cliPackageJson.save();
+
 shell.mkdir('-p', astroOutputDir);
 shell.cp('-r', `${astroSourceDir}/src`, astroOutputDir);
 shell.cp('-r', `${astroSourceDir}/public`, astroOutputDir);
