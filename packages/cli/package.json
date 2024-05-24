@@ -2,7 +2,6 @@
   "name": "@flexydox/cli",
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
   "type": "module",
   "bin": {
     "flexydox": "flexydox.js"
@@ -17,10 +16,7 @@
       "default": "./dist/core/index.js"
     }
   },
-  "files": [
-    "dist",
-    "flexydox.js"
-  ],
+  "files": ["dist", "flexydox.js"],
   "main": "dist/cli/index.js",
   "dependencies": {
     "@astrojs/markdown-remark": "^5.0.0",
