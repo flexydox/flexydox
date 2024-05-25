@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "url": "https://github.com/flexydox/flexydox",
   "bin": {
     "flexydox": "flexydox.js"
   },
