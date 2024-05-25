@@ -4,7 +4,8 @@
   "license": "MIT",
   "type": "module",
   "repository": {
-    "url": "https://github.com/flexydox/flexydox",
+    "url": "https://github.com/flexydox/flexydox"
+  },
   "bin": {
     "flexydox": "flexydox.js"
   },
