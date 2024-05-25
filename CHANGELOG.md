@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/flexydox/flexydox/compare/cli@v1.5.0...cli@v1.6.0) (2024-05-25)
+
+
+### Features
+
+* update package.json ([c96945f](https://github.com/flexydox/flexydox/commit/c96945f08866445f7226b5d6efa3911f5ce77459))
+* update package.json ([2f77129](https://github.com/flexydox/flexydox/commit/2f77129502207e4fa20d3bf91c098e0b1b35bec7))
+
 ## [1.5.0](https://github.com/flexydox/flexydox/compare/cli@v1.4.0...cli@v1.5.0) (2024-05-24)
 
 
