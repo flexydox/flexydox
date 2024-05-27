@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/flexydox/flexydox/compare/cli@v1.6.0...cli@v1.7.0) (2024-05-27)
+
+
+### Features
+
+* release to DockerHub ([375e59f](https://github.com/flexydox/flexydox/commit/375e59faeef39b8ae3c5b510a238ee9023f4dae3))
+
 ## [1.6.0](https://github.com/flexydox/flexydox/compare/cli@v1.5.0...cli@v1.6.0) (2024-05-25)
 
 
