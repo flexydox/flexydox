@@ -69,6 +69,8 @@ https://flexydox.org
 
 
 
+docker run -it --mount type=bind,source=https://github.com/flexydox/flexydox/tree/main/fixtures/chess-game,target=/app/fixtures flexydox/flexydox bash
+
 
 ```
 

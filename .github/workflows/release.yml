@@ -112,4 +112,7 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: flexydox/flexydox:${{steps.set_release_version.outputs.version}}
+          tags: |
+            flexydox/flexydox:latest
+            flexydox/flexydox:${{steps.set_release_version.outputs.version}}
+
