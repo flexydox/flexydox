@@ -78,7 +78,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         id: set_release_version
         run : |
-          echo "version=${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}" >> "$GITHUB_OUTPUT
+          echo "version=${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}" >> "$GITHUB_OUTPUT"
 
       - name: Release Info
         if: ${{ steps.release.outputs.release_created }}

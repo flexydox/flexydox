@@ -58,18 +58,14 @@ https://flexydox.org
 - Technical view - filter operations by API Service
 
 
-## Getting Started
+## Usage
 
-### Install
+### Docker
 
 
 ```bash
 
-# Global installation - NPM 
-npm install -g @flexydox/cli
 
-# Global installation - Yarn
-yarn global add @flexydox/cli
 
 
 ```
