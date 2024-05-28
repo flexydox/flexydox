@@ -1,5 +1,9 @@
 {
+  "$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
   "vcs": { "clientKind": "git", "enabled": true, "useIgnoreFile": true },
+  "files": {
+    "ignore": ["**/.turbo", "*.astro"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": true,
