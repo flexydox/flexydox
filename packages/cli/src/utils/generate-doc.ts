@@ -82,6 +82,9 @@ export async function generateDoc(
 
     mode: 'production' as 'development' | 'production',
     root: astroRootDir,
+    build: {
+      format: 'file'
+    },
     site,
     base,
     output: 'static' as 'static' | 'server',
