@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/flexydox/flexydox/compare/cli@v1.11.0...cli@v1.12.0) (2024-05-28)
+
+
+### Features
+
+* add base path support ([d66b1d9](https://github.com/flexydox/flexydox/commit/d66b1d943d44714d40e7ffaa2b158f6b3e4aae62))
+
 ## [1.11.0](https://github.com/flexydox/flexydox/compare/cli@v1.10.0...cli@v1.11.0) (2024-05-27)
 
 
