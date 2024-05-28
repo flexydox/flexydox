@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/flexydox/flexydox/compare/cli@v1.12.0...cli@v1.13.0) (2024-05-28)
+
+
+### Features
+
+* switch astro build format to `file` ([19a5e42](https://github.com/flexydox/flexydox/commit/19a5e4257f3e0caeec2fa94036757228eccf1838))
+
 ## [1.12.0](https://github.com/flexydox/flexydox/compare/cli@v1.11.0...cli@v1.12.0) (2024-05-28)
 
 
