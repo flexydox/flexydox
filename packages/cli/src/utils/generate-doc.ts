@@ -31,6 +31,7 @@ export async function generateDoc(
   const siteOutDir = join(outDir, 'site');
   const astroIconDir = resolve(astroRootDir, 'src/icons');
   const astroPublicDir = resolve(astroRootDir, 'public');
+  const { site, base } = appConfig;
 
   const logo = appConfig?.logo;
   const logoUrl = resolveRelativePathToConfigFile(logo?.url);
@@ -81,6 +82,8 @@ export async function generateDoc(
 
     mode: 'production' as 'development' | 'production',
     root: astroRootDir,
+    site,
+    base,
     output: 'static' as 'static' | 'server',
     outDir: siteOutDir,
     vite: {
@@ -107,4 +110,6 @@ export async function generateDoc(
   logger.info(`Site Output directory: '${siteOutDir}'`);
   logger.info(`Astro root directory: '${astroRootDir}'`);
   logger.info(`Astro icons directory: '${astroIconDir}'`);
+  logger.info(`Astro site url: '${site ?? ''}'`);
+  logger.info(`Astro base path: '${base ?? ''}'`);
 }

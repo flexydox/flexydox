@@ -1,17 +1,18 @@
 ---
-import { Icon } from 'astro-icon/components';
-import CollapsibleIcon from './collapsible-icon.astro';
+import { Icon } from "astro-icon/components";
+import CollapsibleIcon from "./collapsible-icon.astro";
+import { linkUrl } from "../../utils/link-url";
 
-const href = Astro.props.href;
+const href = Astro.props.href ? linkUrl(Astro.props.href) : null;
 const id = Astro.props.id;
-const ns = id ? id.split('.')[0] : '';
+const ns = id ? id.split(".")[0] : "";
 const collapsible = Astro.props.collapsible;
 const isOpen = Astro.props.isOpen;
 const isActive = Astro.props.isActive;
 
-const isActiveClass = isActive ? 'active' : '';
-const iconName = isOpen ? 'collapse' : 'expand';
-const collapsibleClass = collapsible ? 'collapsible' : '';
+const isActiveClass = isActive ? "active" : "";
+const iconName = isOpen ? "collapse" : "expand";
+const collapsibleClass = collapsible ? "collapsible" : "";
 ---
 
 <style>
@@ -49,7 +50,10 @@ const collapsibleClass = collapsible ? 'collapsible' : '';
 
 {
   href && (
-    <div data-ns={ns} class:list={['nav-item', isActiveClass, collapsibleClass]}>
+    <div
+      data-ns={ns}
+      class:list={["nav-item", isActiveClass, collapsibleClass]}
+    >
       <a href={href} id={id} class="nav-item-link">
         <slot />
       </a>
@@ -60,7 +64,7 @@ const collapsibleClass = collapsible ? 'collapsible' : '';
 
 {
   !href && (
-    <div class:list={['nav-item', isActiveClass, collapsibleClass]}>
+    <div class:list={["nav-item", isActiveClass, collapsibleClass]}>
       <slot />
       {collapsible && <CollapsibleIcon iconName={iconName} />}
     </div>

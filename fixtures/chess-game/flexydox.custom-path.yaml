@@ -1,5 +1,6 @@
 outputFolder: _docs/e2e
 title: Chess Game API Example
+base: /custom-path-prefix
 logo:
   url: ./logo.svg
   width: 100

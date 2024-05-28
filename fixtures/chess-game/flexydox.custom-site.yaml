@@ -1,5 +1,6 @@
 outputFolder: _docs/e2e
 title: Chess Game API Example
+site: https://examples.flexydox.com
 logo:
   url: ./logo.svg
   width: 100

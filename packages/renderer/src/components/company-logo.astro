@@ -1,10 +1,16 @@
 ---
-import { loadSiteData } from '../asset-loader';
+import { loadSiteData } from "../asset-loader";
+import { linkUrl } from "../utils/link-url";
 const siteData = await loadSiteData();
 ---
 
 {
   siteData.logo && (
-    <img src={siteData.logo.url} alt={siteData.logo.alt} width={siteData.logo.width} height={siteData.logo.height} />
+    <img
+      src={linkUrl(siteData.logo.url)}
+      alt={siteData.logo.alt}
+      width={siteData.logo.width}
+      height={siteData.logo.height}
+    />
   )
 }

@@ -13,8 +13,11 @@
     "clean": "rimraf dist",
     "check": "biome check .",
     "format": "biome format --write .",
+    "build": "turbo build",
     "build-cli": "node ./scripts/build-cli",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "test": "turbo test",
+    "e2e": "turbo e2e"
   },
   "packageManager": "pnpm@8.15.5",
   "private": true,

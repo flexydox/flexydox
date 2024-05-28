@@ -6,7 +6,9 @@
   "author": "Josef Karamon",
   "license": "MIT",
   "scripts": {
-    "dev": "FXDX_DOC_CONFIG_FILE=../../_docs/doc-config.json astro dev"
+    "dev": "FXDX_DOC_CONFIG_FILE=../../_docs/doc-config.json astro dev",
+    "dev:base-url": "FXDX_DOC_CONFIG_FILE=../../_docs/doc-config.json astro dev --base=/custom-base-url --trailingSlash=never",
+    "build:base-url": "FXDX_DOC_CONFIG_FILE=../../_docs/doc-config.json astro build --base=/custom-base-url --trailingSlash=never"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^5.0.0",

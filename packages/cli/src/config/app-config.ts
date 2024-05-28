@@ -22,6 +22,8 @@ export interface AppConfig {
    **/
   apis: APIDefinitionConfig[];
   outputFolder: string;
+  base: string;
+  site: string;
   title: string;
   logo: AssetImageData;
   /**
