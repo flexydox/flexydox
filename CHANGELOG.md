@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/flexydox/flexydox/compare/cli@v1.13.0...cli@v1.14.0) (2024-05-28)
+
+
+### Features
+
+* switch astro build format to `directory` ([145f6d0](https://github.com/flexydox/flexydox/commit/145f6d0640454233ee7b273212531717514d4c85))
+
 ## [1.13.0](https://github.com/flexydox/flexydox/compare/cli@v1.12.0...cli@v1.13.0) (2024-05-28)
 
 
