@@ -38,6 +38,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "@adobe/jsonschema2md": "^8.0.2",
     "edit-json-file": "^1.8.0",
     "rimraf": "^5.0.7",
     "shelljs": "^0.8.5"
