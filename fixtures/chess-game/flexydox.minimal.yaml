@@ -1,0 +1,6 @@
+outputFolder: _docs/e2e
+title: Chess Game API Example
+apis:
+  - id: graphql
+    name: Chess Game GraphQL API
+    url: ./schemas/chess-game-schema.graphql

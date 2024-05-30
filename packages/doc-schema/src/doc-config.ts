@@ -1,6 +1,9 @@
 import { dirname, join } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 
+/**
+ * AssetImageData interface - describes an image asset
+ */
 export interface AssetImageData {
   url: string;
   alt: string;

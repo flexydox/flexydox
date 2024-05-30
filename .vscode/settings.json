@@ -31,5 +31,8 @@
   "eslint.validate": ["json"],
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "yaml.schemas": {
+    "schemas/flexydox-config.schema.json": "*flexydox**.yaml"
   }
 }

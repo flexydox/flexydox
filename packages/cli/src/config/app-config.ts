@@ -11,6 +11,7 @@ export interface APIDefinitionConfig {
   name: string;
   url: string;
   version: string;
+  inferGroups: boolean;
 }
 
 /**
