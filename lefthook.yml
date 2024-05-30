@@ -8,5 +8,9 @@ pre-commit:
     check:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: pnpm biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-    commit-msg:
-      run: pnpm commitlint --edit $1
+commit-msg:
+  commands:
+    lint-commit-msg:
+      scrips:
+        "commitlint.sh":
+          runner: bash
