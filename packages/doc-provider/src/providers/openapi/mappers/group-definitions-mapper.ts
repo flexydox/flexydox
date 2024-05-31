@@ -1,7 +1,7 @@
 import { GroupDefinition } from '@flexydox/doc-schema';
 import { OpenAPIV3 as OpenAPI } from 'openapi-types';
-import { groupDefinitionMapper } from './group-definition-mapper';
 import { MapperContext } from '../../mapper-context';
+import { groupDefinitionMapper } from './group-definition-mapper';
 
 export function groupDefinitionsMapper(
   ctx: MapperContext,
