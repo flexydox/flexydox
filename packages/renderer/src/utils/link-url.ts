@@ -1,4 +1,6 @@
+import { join } from 'node:path';
+
 export function linkUrl(url: string) {
   // @ts-ignore
-  return `${import.meta.env.BASE_URL}${url}`;
+  return join(import.meta.env.BASE_URL, url);
 }

@@ -57,7 +57,7 @@ export function docOperationsFromPathMapper(
   for (const operationKey of possibleOperations as OpenAPI.HttpMethods[]) {
     const operation: OpenAPI.OperationObject | undefined = path[operationKey];
     if (operation) {
-      groupDefinitionsMapper(ctx.groups, operation.tags);
+      groupDefinitionsMapper(ctx, operation.tags);
       operations.push(docOperationMapper(ctx, path, pathKey, operationKey, operation));
     }
   }

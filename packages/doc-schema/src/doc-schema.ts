@@ -44,6 +44,8 @@ export interface Namespace {
   spec: SourceSpec;
   /** source from which API spec was obtained */
   source: string;
+  /** If true, FlexyDox will try to infer groups from the api */
+  inferGroups: boolean;
 }
 
 /**

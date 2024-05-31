@@ -25,27 +25,16 @@ async function recognizeOpenAPISchema(url: string): Promise<SchemaDefinition> {
 
     const version: string = result.version as string;
 
-    if (semver.satisfies(version, '2.x')) {
-      return {
-        type: 'openapi2.0',
-        isRecognized: true
-      };
-    }
     if (semver.satisfies(version, '3.0.x')) {
       return {
         type: 'openapi3.0',
         isRecognized: true
       };
     }
-    if (semver.satisfies(version, '3.1.x')) {
-      return {
-        type: 'openapi3.1',
-        isRecognized: true
-      };
-    }
+
     return {
-      type: 'openapi3.0',
-      isRecognized: true
+      type: null,
+      isRecognized: false
     };
   } catch (e) {
     logger.trace(`Error recognizing OpenAPI schema from ${url}`, e);

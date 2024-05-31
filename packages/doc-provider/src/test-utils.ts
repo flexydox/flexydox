@@ -15,7 +15,8 @@ export function createMapperContext(
       id: name,
       name,
       spec,
-      source: name
+      source: name,
+      inferGroups: true
     },
     groups: new Map(),
     types: new Map()

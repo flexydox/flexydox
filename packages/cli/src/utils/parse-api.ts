@@ -24,7 +24,8 @@ export async function parseAPI(api: APIDefinitionConfig, groupConfigs: GroupConf
     id: api.id,
     name: api.name,
     spec: definition.type ?? 'openapi3.0',
-    source: apiUrl
+    source: apiUrl,
+    inferGroups: api.inferGroups ?? true
   };
   const groups = (groupConfigs ?? []).map((g) => {
     const regex = stringToRegex(g.regex);

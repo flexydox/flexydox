@@ -36,14 +36,17 @@ const popOverId = Astro.props.popOverId;
   }
 </style>
 <script>
-  import { fade } from 'astro:transitions';
+  import { fade } from "astro:transitions";
   // @ts-ignore
-  import { computePosition, autoUpdate } from 'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3/+esm';
+  import {
+    computePosition,
+    autoUpdate
+  } from "https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3/+esm";
 
   function init() {
-    const triggers = document.querySelectorAll('.po-trigger');
+    const triggers = document.querySelectorAll(".po-trigger");
     triggers.forEach((trigger) => {
-      const popOverId = trigger.getAttribute('data-po-target');
+      const popOverId = trigger.getAttribute("data-po-target");
       if (!popOverId) {
         return;
       }
@@ -53,22 +56,22 @@ const popOverId = Astro.props.popOverId;
       }
       autoUpdate(trigger, popOver, () => {
         const pos = computePosition(trigger, popOver, {
-          placement: 'bottom-start'
+          placement: "bottom-start"
         }).then((pos) => {
           popOver.style.top = `${Math.max(0, pos.y + 2)}px`;
           popOver.style.left = `${Math.max(0, pos.x - 100)}px`;
-          trigger.addEventListener('mouseenter', () => {
+          trigger.addEventListener("mouseenter", () => {
             popOver.showPopover();
           });
           let isOverPopup = false;
-          popOver.addEventListener('mouseenter', () => {
+          popOver.addEventListener("mouseenter", () => {
             isOverPopup = true;
           });
-          popOver.addEventListener('mouseleave', () => {
+          popOver.addEventListener("mouseleave", () => {
             isOverPopup = false;
             popOver.hidePopover();
           });
-          trigger.addEventListener('mouseout', (e) => {
+          trigger.addEventListener("mouseout", (e) => {
             setTimeout(() => {
               if (!isOverPopup) {
                 popOver.hidePopover();
@@ -80,7 +83,7 @@ const popOverId = Astro.props.popOverId;
     });
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener("DOMContentLoaded", init);
 </script>
 
 <span class="po-trigger" data-po-target={popOverId}>

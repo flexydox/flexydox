@@ -31,7 +31,7 @@ ctx.types.set('openapi3.components-schemas-User', {
   name: 'User',
   description: 'User type reference',
   namespaceId: ctx.namespace.id,
-  kind: 'OBJECT',
+  kind: 'object',
   fields: [],
   interfaces: [],
   groups: []

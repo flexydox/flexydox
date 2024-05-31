@@ -12,7 +12,7 @@ const userDocType: DocType = {
   name: 'User',
   description: 'User type reference',
   namespaceId: ctx.namespace.id,
-  kind: 'OBJECT',
+  kind: 'object',
   fields: [
     {
       name: 'firstName',
@@ -123,7 +123,7 @@ describe('openapi/mappers/docTypeMapper', () => {
         id: 'openapi3.components-schemas-User',
         namespaceId: ctx.namespace.id,
         groups: [],
-        kind: 'OBJECT',
+        kind: 'object',
         name: 'User',
         description: 'User object',
         fields: [
@@ -176,7 +176,7 @@ describe('openapi/mappers/docTypeMapper', () => {
           id: 'openapi3.components-schemas-Account',
           namespaceId: ctx.namespace.id,
           groups: [],
-          kind: 'OBJECT',
+          kind: 'object',
           name: 'Account',
           description: 'Account object',
           fields: [
@@ -214,7 +214,7 @@ describe('openapi/mappers/docTypeMapper', () => {
         namespaceId: ctx.namespace.id,
         interfaces: [],
         groups: [],
-        kind: 'OBJECT',
+        kind: 'object',
         name: 'User',
         description: 'User type reference',
         fields: [
@@ -261,7 +261,7 @@ describe('openapi/mappers/docTypeMapper', () => {
         id: 'openapi3.components-schemas-AnyOfUser',
         namespaceId: ctx.namespace.id,
         groups: [],
-        kind: 'OBJECT',
+        kind: 'object',
         name: 'AnyOfUser',
         description: 'AnyOfUser object',
         fields: [

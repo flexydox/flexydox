@@ -1,12 +1,15 @@
 import { GroupDefinition } from '@flexydox/doc-schema';
 import { OpenAPIV3 as OpenAPI } from 'openapi-types';
 import { groupDefinitionMapper } from './group-definition-mapper';
+import { MapperContext } from '../../mapper-context';
 
 export function groupDefinitionsMapper(
-  groups: Map<string, GroupDefinition>,
+  ctx: MapperContext,
   tags: OpenAPI.TagObject[] | string[] | null | undefined
 ) {
-  if (!tags) {
+  const { groups } = ctx;
+
+  if (!tags || !ctx.namespace.inferGroups) {
     return;
   }
   tags.forEach((tag) => {

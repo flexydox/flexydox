@@ -9,11 +9,11 @@ interface BasicType {
 }
 
 const basicTypes: BasicType[] = [
-  { name: 'string', kind: 'SCALAR', description: 'The OpenAPI string type' },
-  { name: 'number', kind: 'SCALAR', description: 'The OpenAPI number type' },
-  { name: 'integer', kind: 'SCALAR', description: 'The OpenAPI integer type' },
-  { name: 'boolean', kind: 'SCALAR', description: 'The OpenAPI boolean type' },
-  { name: 'array', kind: 'LIST', description: 'The OpenAPI array type' }
+  { name: 'string', kind: 'scalar', description: 'The OpenAPI string type' },
+  { name: 'number', kind: 'scalar', description: 'The OpenAPI number type' },
+  { name: 'integer', kind: 'scalar', description: 'The OpenAPI integer type' },
+  { name: 'boolean', kind: 'scalar', description: 'The OpenAPI boolean type' },
+  { name: 'array', kind: 'list', description: 'The OpenAPI array type' }
 ];
 
 export function getBasicTypes(ctx: MapperContext): DocType[] {

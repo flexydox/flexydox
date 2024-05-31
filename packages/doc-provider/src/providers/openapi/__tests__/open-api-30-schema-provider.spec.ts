@@ -11,7 +11,8 @@ describe('Open API 3.0 Provider', () => {
       id: 'chess-game-api',
       name: 'Chess Game API',
       spec: 'openapi3.0',
-      source: file
+      source: file,
+      inferGroups: true
     };
 
     it('should work', async () => {

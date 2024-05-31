@@ -25,7 +25,7 @@ export class OpenApi30SchemaProvider extends OpenAPISchemaProvider {
   }
 
   private getGroups(): GroupDefinition[] {
-    groupDefinitionsMapper(this._ctx.groups, this.doc.tags);
+    groupDefinitionsMapper(this._ctx, this.doc.tags);
     return Array.from(this._ctx.groups.values());
   }
 

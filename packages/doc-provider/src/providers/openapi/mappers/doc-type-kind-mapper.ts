@@ -7,10 +7,10 @@ import { DocTypeKind } from '@flexydox/doc-schema';
 export function docTypeKindMapper(type: string | null | undefined): DocTypeKind {
   switch (type) {
     case 'array':
-      return 'LIST';
+      return 'list';
     case 'object':
-      return 'OBJECT';
+      return 'object';
     default:
-      return 'SCALAR';
+      return 'scalar';
   }
 }

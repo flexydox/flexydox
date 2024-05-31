@@ -8,7 +8,8 @@ describe('mapTypeRef', () => {
     id: 'ns1',
     name: 'ns1',
     spec: 'graphql',
-    source: 'http://localhost:4000/graphql'
+    source: 'http://localhost:4000/graphql',
+    inferGroups: true
   };
 
   const allTypes: DocType[] = [
@@ -16,7 +17,7 @@ describe('mapTypeRef', () => {
       id: 'ns1.User',
       name: 'User',
       namespaceId: namespace.id,
-      kind: 'OBJECT',
+      kind: 'object',
       description: 'User description',
 
       fields: [

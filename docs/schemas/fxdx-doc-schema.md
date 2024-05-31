@@ -11,6 +11,7 @@
     - **`name`** *(string, required)*: The name of the namespace.
     - **`spec`** *(string, required)*: The type of specification that the namespace is defined in. Must be one of: `["graphql", "openapi3.0"]`.
     - **`source`** *(string, required)*: The source of the namespace. This could be a URL or a file path.
+    - **`inferGroups`** *(boolean)*: Whether the groups should be inferred from the source specification. Defaults to false.
 - **`operations`** *(array)*: The API operations that are available in the schema.
   - **Items** *(object)*: Cannot contain additional properties.
     - **`id`** *(string, required)*: The unique identifier for the operation.

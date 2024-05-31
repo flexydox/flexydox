@@ -1,16 +1,16 @@
 ---
-import { DocType } from '@flexydox/doc-schema';
-import cx from 'classnames';
-import DeprecationInfo from './deprecation-info.astro';
-import Description from './description.astro';
-import ListItems from './list-items.astro';
-import TypeField from './type-field.astro';
-import TypeLink from './type-link.astro';
-import TypeValue from './type-value.astro';
+import { DocType } from "@flexydox/doc-schema";
+import cx from "classnames";
+import DeprecationInfo from "./deprecation-info.astro";
+import Description from "./description.astro";
+import ListItems from "./list-items.astro";
+import TypeField from "./type-field.astro";
+import TypeLink from "./type-link.astro";
+import TypeValue from "./type-value.astro";
 const type: DocType = Astro.props.type;
 const { id, name, kind, description, deprecationReason } = type;
-const typeKind = (kind ?? 'unknown').toLowerCase();
-const kindFormatted = (typeKind ?? '').toLowerCase();
+const typeKind = (kind ?? "unknown").toLowerCase();
+const kindFormatted = (typeKind ?? "").toLowerCase();
 const showPopOver = Astro.props.showPopOver;
 ---
 
@@ -36,15 +36,23 @@ const showPopOver = Astro.props.showPopOver;
   <Description>{description}</Description>
 
   <ListItems title="Implements" class="interfaces" items={type.interfaces}>
-    {type.interfaces?.map((typeId) => <TypeLink showPopOver={showPopOver} typeId={typeId} />)}
+    {
+      type.interfaces?.map((typeId) => (
+        <TypeLink showPopOver={showPopOver} typeId={typeId} />
+      ))
+    }
   </ListItems>
 
   <ListItems title="Attributes" class="fields" items={type.fields}>
-    {type.fields?.map((field) => <TypeField showPopOver={showPopOver} field={field} />)}
+    {
+      type.fields?.map((field) => (
+        <TypeField showPopOver={showPopOver} field={field} />
+      ))
+    }
   </ListItems>
 
-  <ListItems title="Union" class="values" items={type.types}>
-    {type.types?.map((typeId) => <TypeLink typeId={typeId} />)}
+  <ListItems title="Union" class="values" items={type.unionTypes}>
+    {type.unionTypes?.map((typeId) => <TypeLink typeId={typeId} />)}
   </ListItems>
 
   <ListItems title="Possible values" class="values" items={type.values}>

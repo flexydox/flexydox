@@ -6,7 +6,7 @@ function serverError(ctx: MapperContext): DocType {
     id: 'openapi3.components-schemas-ServerError',
     name: 'ServerError',
     description: 'Error',
-    kind: 'OBJECT',
+    kind: 'object',
     namespaceId: ctx.namespace.id,
     groups: [],
     fields: [
@@ -47,7 +47,7 @@ function player(ctx: MapperContext): DocType {
   return {
     id: 'openapi3.components-schemas-Player',
     name: 'Player',
-    kind: 'OBJECT',
+    kind: 'object',
     namespaceId: ctx.namespace.id,
     groups: [],
     fields: [
@@ -88,7 +88,7 @@ function playersResponse(ctx: MapperContext): DocType {
     id: 'openapi3.components-schemas-PlayerResponse',
     name: 'PlayerResponse',
     description: 'PlayerResponse',
-    kind: 'OBJECT',
+    kind: 'object',
     namespaceId: ctx.namespace.id,
     groups: [],
 

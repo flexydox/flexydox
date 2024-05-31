@@ -15,6 +15,17 @@ export interface BuildOptions {
   previewServer: boolean;
 }
 
+function jsonReplacer(_key: string, value: unknown) {
+  if (value instanceof RegExp) {
+    return value.toString();
+  }
+  return value;
+}
+
+function serializeSchema(schema: DocSchema): string {
+  return JSON.stringify(schema, jsonReplacer, 2);
+}
+
 export async function fxdxBuild(options: BuildOptions) {
   const cfg = getConfig();
   const apis = cfg.apis;
@@ -36,7 +47,7 @@ export async function fxdxBuild(options: BuildOptions) {
   const targetSchemaPath = resolve(process.cwd(), join(cfg.outputFolder, 'doc-schema.json'));
 
   logger.info(`Writing final schema to '${targetSchemaPath}'`);
-  await writeFile(join(targetSchemaPath), JSON.stringify(targetSchema, null, 2));
+  await writeFile(join(targetSchemaPath), serializeSchema(targetSchema), { encoding: 'utf-8' });
 
   await generateDoc(targetSchemaPath, previewServer, generateDocFlag);
 }

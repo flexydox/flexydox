@@ -58,7 +58,7 @@ export function docTypeMapper(
       namespaceId: ctx.namespace.id,
       kind: docTypeKindMapper(schema.type),
       groups: matchedGroups,
-      types: types.map((type) => type.id),
+      unionTypes: types.map((type) => type.id),
       description: schema.description,
       fields: docTypeFieldsMapper(ctx, schema)
     };

@@ -74,7 +74,7 @@ export class GraphQLSchemaProvider extends SchemaProvider {
         if (!dt) {
           throw new Error(`Type ${t.name} not found in schema during 2nd pass`);
         }
-        dt.types = t.getTypes().map((i) => {
+        dt.unionTypes = t.getTypes().map((i) => {
           const underlyingType = getNamedType(i);
           const schemaType = docSchema.types.find((t) => t.name === underlyingType.name);
           if (!schemaType) {
