@@ -29,6 +29,9 @@
       "packages/renderer/.astro"
     ]
   },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "rules": {
       "recommended": false,

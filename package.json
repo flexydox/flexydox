@@ -7,11 +7,11 @@
   },
   "engines": {
     "node": ">=20.10.0",
-    "pnpm": ">=8.15.5"
+    "pnpm": ">=9.1.4"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "check": "biome check .",
+    "check": "biome check --error-on-warnings --log-level=warn .",
     "format": "biome format --write .",
     "build": "turbo build",
     "build-cli": "node ./scripts/build-cli",
@@ -19,10 +19,10 @@
     "test": "turbo test",
     "e2e": "turbo e2e"
   },
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@9.1.4",
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "1.7.2",
+    "@biomejs/biome": "1.7.3",
     "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "20.11.28",
     "@vitest/coverage-v8": "^1.6.0",
