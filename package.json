@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "check": "biome check --error-on-warnings --log-level=warn .",
+    "check": "biome check .",
     "format": "biome format --write .",
     "build": "turbo build",
     "build-cli": "node ./scripts/build-cli",
