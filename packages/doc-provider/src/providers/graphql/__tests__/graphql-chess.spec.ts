@@ -37,7 +37,7 @@ describe('GraphQLSchemaProvider', () => {
 
   it('output should contain type with String scalar definition', () => {
     expect(output.types).toEqual(
-      expect.arrayContaining([expect.objectContaining({ kind: 'SCALAR', name: 'String' })])
+      expect.arrayContaining([expect.objectContaining({ kind: 'scalar', name: 'String' })])
     );
   });
 
