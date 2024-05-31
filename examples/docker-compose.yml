@@ -1,0 +1,18 @@
+version: "3"
+services:
+  github:
+    container_name: fxdx-github
+    image: flexydox/flexydox:latest
+    pull_policy: always
+    command: ["flexydox", "-c", "/data/fxdx.config.yaml", "build"]
+    volumes:
+      - ./docs/github:/docs
+      - ./sites/github:/data
+  chess:
+    container_name: fxdx-chess
+    image: flexydox/flexydox:latest
+    pull_policy: always
+    command: ["flexydox", "-c", "/data/fxdx.config.yaml", "build"]
+    volumes:
+      - ./docs/chess:/docs
+      - ./sites/chess:/data

@@ -60,7 +60,7 @@ https://flexydox.org
 
 ## Getting Started
 
-TODO: 
+TODO: Write Docker usage - ref to flexydox examples
 
 ### Docker
 
