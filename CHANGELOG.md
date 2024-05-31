@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.2](https://github.com/flexydox/flexydox/compare/cli@v1.14.1...cli@v1.14.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* wf trigger ([dcc17ef](https://github.com/flexydox/flexydox/commit/dcc17efb4853873dc7a7bbded112787cf9294c39))
+
 ## [1.14.1](https://github.com/flexydox/flexydox/compare/cli@v1.14.0...cli@v1.14.1) (2024-05-31)
 
 
