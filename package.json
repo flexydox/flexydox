@@ -25,8 +25,6 @@
     "@biomejs/biome": "1.7.2",
     "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "20.11.28",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
     "@vitest/coverage-v8": "^1.6.0",
     "commitlint": "^19.3.0",
     "esbuild": "0.19.12",
@@ -38,7 +36,6 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@adobe/jsonschema2md": "^8.0.2",
     "edit-json-file": "^1.8.0",
     "rimraf": "^5.0.7",
     "shelljs": "^0.8.5"
