@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.14.1](https://github.com/flexydox/flexydox/compare/cli@v1.14.0...cli@v1.14.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* commitlint ([6cdb6e8](https://github.com/flexydox/flexydox/commit/6cdb6e80894c8f7b8e0a0c54bdf1501541914332))
+* tests ([7df4a44](https://github.com/flexydox/flexydox/commit/7df4a4413393164ddb9c720c968b9dd0b3fbafdd))
+* workflow trigger ([3cbe571](https://github.com/flexydox/flexydox/commit/3cbe571bdd55219f1f1095fd7fc570876a4a3885))
+
 ## [1.14.0](https://github.com/flexydox/flexydox/compare/cli@v1.13.0...cli@v1.14.0) (2024-05-28)
 
 
