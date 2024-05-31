@@ -24,20 +24,12 @@ export type OperationReturnStatus = 'success' | 'error' | 'unknown';
 /**
  * Source API specifications supported by FlexyDox
  **/
-export type SourceSpec = 'graphql' | 'openapi2.0' | 'openapi3.0' | 'openapi3.1';
+export type SourceSpec = 'graphql' | 'openapi3.0';
 
 /**
  * Possible kinds of the type.
  **/
-export type DocTypeKind =
-  | 'SCALAR'
-  | 'OBJECT'
-  | 'NON_NULL'
-  | 'INTERFACE'
-  | 'UNION'
-  | 'ENUM'
-  | 'INPUT_OBJECT'
-  | 'LIST';
+export type DocTypeKind = 'scalar' | 'object' | 'interface' | 'union' | 'enum' | 'input' | 'list';
 
 /**
  * A namespace is a collection of types and operations.
@@ -241,7 +233,7 @@ export interface DocType {
   /** List of interfaces implemented by this type. */
   interfaces?: Maybe<string[]>;
   /** List of types that are the union of this type. */
-  types?: Maybe<string[]>;
+  unionTypes?: Maybe<string[]>;
   /** FlexyDox groups */
   groups: string[];
 }

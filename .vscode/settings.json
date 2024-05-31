@@ -33,6 +33,12 @@
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
   "yaml.schemas": {
-    "schemas/flexydox-config.schema.json": "*flexydox**.yaml"
-  }
+    "schemas/fxdx-cli-config.json": "*flexydox**.yaml"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["**/doc-schema.json"],
+      "url": "./schemas/fxdx-doc-schema.json"
+    }
+  ]
 }
