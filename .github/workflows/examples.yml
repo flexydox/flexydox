@@ -2,10 +2,6 @@ name: Generate and deploy API documentation
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
-
 jobs:
   update_homepage:
     runs-on: ubuntu-latest
