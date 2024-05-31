@@ -58,7 +58,9 @@ https://flexydox.org
 - Technical view - filter operations by API Service
 
 
-## Usage
+## Getting Started
+
+TODO: 
 
 ### Docker
 
@@ -75,26 +77,22 @@ docker run -it --mount type=bind,source=https://github.com/flexydox/flexydox/tre
 ```
 
 
-### CLI
 
 
 
-### Configuration
+## Configuration Reference
 
 
 
+## Development
+
+### Project Structure
+
+### Contributing
 
 
-
-
-
-### Packages
 
 ## Credits
-
-## Contributions
-
-## Contributing
 
 ## Get help
 
