@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/flexydox/flexydox/compare/cli-v1.14.1...cli@v1.15.0) (2024-06-01)
+
+
+### Features
+
+* initial commit ([e781d2b](https://github.com/flexydox/flexydox/commit/e781d2b85ff0a441fb3ba9297d0fb2244117b892))
+
 ## [1.14.1](https://github.com/flexydox/flexydox/compare/cli@v1.14.0...cli@v1.14.1) (2024-05-31)
 
 
