@@ -7,6 +7,7 @@
 ```yaml
 outputFolder: ./_docs                 # Generated documentation output folder
 title: Chess Game API Example         # Generated documentation title
+base: /chess                          # Base path prefix for the generated documentation
 logo:                                 # Generated documentation logo
   url: ./fixtures/logos/logo.svg     
   width: 100
@@ -38,7 +39,9 @@ flexydox -c ./fixtures/chess-game/flexydox.yaml
 
 3. It will generate this example API documentation:
 
-[Example API Doc](http://fxdx-chess.s3-website.eu-central-1.amazonaws.com/doc/overview/)
+[http://examples.flexydox.org/chess](http://examples.flexydox.org/chess)
+
+
 
 
 ## Web
@@ -91,6 +94,7 @@ The CLI configuration file reference is available [docs/schemas/fxdx-cli-config.
 
 ### Configuration Examples 
 You can find configuration examples of in the `./examples` folder.
+Generated documentation examples are available at [http://examples.flexydox.org](http://examples.flexydox.org).
 
 
 ## Development
