@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const postcssGlobalData = require('@csstools/postcss-global-data');
-const postcssCustomMedia = require('postcss-custom-media');
+
 const postcssNesting = require('postcss-nesting');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
@@ -8,13 +7,5 @@ const cssnano = require('cssnano');
 const { join } = require('path');
 
 module.exports = {
-  plugins: [
-    postcssGlobalData({
-      files: [join(__dirname, './src/styles/media.css')]
-    }),
-    postcssCustomMedia(),
-    autoprefixer(),
-    cssnano(),
-    postcssNesting()
-  ]
+  plugins: [autoprefixer(), cssnano(), postcssNesting()]
 };
