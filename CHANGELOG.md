@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/flexydox/flexydox/compare/cli@v1.1.0...cli@v1.1.1) (2024-06-02)
+
+
+### Bug Fixes
+
+* css media query vars ([#36](https://github.com/flexydox/flexydox/issues/36)) ([5c89be3](https://github.com/flexydox/flexydox/commit/5c89be3e673c10db30abf39084b8bdd6040060b1))
+
 ## [1.1.0](https://github.com/flexydox/flexydox/compare/cli-v1.0.0...cli@v1.1.0) (2024-06-02)
 
 
