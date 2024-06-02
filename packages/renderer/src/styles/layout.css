@@ -155,7 +155,7 @@ body {
 #nav-toggle-button-section {
   display: none;
 }
-@media (--small-viewport) {
+@media (max-width: 1280px) {
   #nav-toggle-button-section {
     display: block;
   }
