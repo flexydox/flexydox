@@ -23,11 +23,13 @@ const siteData = await loadSiteData();
 
 <html lang="en" data-theme="dark">
   <head>
+    <link type="image/svg+xml" rel="icon" href={linkUrl("/favicon.svg")} />
     <!-- Load synchronously to avoid FOUC -->
     <script is:inline src={linkUrl("/theme-switcher.js")}></script>
     <script src="../scripts/main-nav.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{siteData.title}</title>
   </head>
   <body>
     <section class="l-page">
@@ -37,7 +39,15 @@ const siteData = await loadSiteData();
         <section class="header-title">
           <h3>{siteData.title}</h3>
         </section>
-        <section class="header-links"></section>
+        <section class="header-links">
+          <a
+            target="_blank"
+            title="Flexydox homepage"
+            href="https://flexydox.org"
+          >
+            <img src={linkUrl("flexydox-logo.svg")} alt="Flexydox" />
+          </a>
+        </section>
 
         <section class="header-controls">
           <ThemeIcon />

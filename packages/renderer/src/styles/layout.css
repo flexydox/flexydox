@@ -11,6 +11,7 @@
   --main-nav-width: 450px;
   --page-height: 100svh;
   --header-height: 50px;
+  --header-img-size: calc(var(--header-height) - 2px);
 }
 
 html,
@@ -46,6 +47,15 @@ body {
   .header-title h3 {
     font-size: var(--font-size-4);
     color: var(--c-brand);
+  }
+  .header-links {
+    justify-self: end;
+    img {
+      width: var(--header-img-size);
+      height: var(--header-img-size);
+      margin-right: var(--size-2);
+
+    }
   }
 }
 
