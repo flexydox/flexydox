@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/flexydox/flexydox/compare/cli@v1.1.1...cli@v1.1.2) (2024-06-03)
+
+
+### Bug Fixes
+
+* is relative path ([#38](https://github.com/flexydox/flexydox/issues/38)) ([26b0add](https://github.com/flexydox/flexydox/commit/26b0addcfcbd8239a1becd1ebf831017fe91fa16))
+
 ## [1.1.1](https://github.com/flexydox/flexydox/compare/cli@v1.1.0...cli@v1.1.1) (2024-06-02)
 
 
