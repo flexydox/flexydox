@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/flexydox/flexydox/compare/cli@v1.1.2...cli@v1.1.3) (2024-06-03)
+
+
+### Bug Fixes
+
+* select option has white text and bg ([aae178a](https://github.com/flexydox/flexydox/commit/aae178aacfa2decdb9c1f34c7fc2058b85451fea)), closes [#40](https://github.com/flexydox/flexydox/issues/40)
+
 ## [1.1.2](https://github.com/flexydox/flexydox/compare/cli@v1.1.1...cli@v1.1.2) (2024-06-03)
 
 
