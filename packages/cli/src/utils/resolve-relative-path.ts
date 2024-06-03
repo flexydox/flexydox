@@ -6,7 +6,13 @@ export function setConfigDirectory(path: string) {
   configDirectory = path;
 }
 
-export function isRelativePath(pathname: string) {
+export function isRelativePath(pathname: string | null | undefined) {
+  if (!pathname) {
+    return true;
+  }
+  if (pathname.startsWith('http://') || pathname.startsWith('https://')) {
+    return false;
+  }
   return !isAbsolute(pathname);
 }
 
