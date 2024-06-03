@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isRelativePath } from '../resolve-relative-path';
 
 describe('resolve-relative-path', () => {
