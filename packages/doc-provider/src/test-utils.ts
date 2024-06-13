@@ -1,4 +1,10 @@
-import { DocSchema, SourceSpec } from '@flexydox/doc-schema';
+import {
+  DocOperation,
+  DocSchema,
+  DocType,
+  GroupDefinition,
+  SourceSpec
+} from '@flexydox/doc-schema';
 import { MapperContext } from './providers/mapper-context';
 
 import { join } from 'path';
@@ -55,4 +61,14 @@ export async function writeTestSchema(schema: TestSchema, content: DocSchema) {
   await writeFile(getTmpFileName(schema), JSON.stringify(content, null, '\t'), {
     encoding: 'utf-8'
   });
+}
+
+export function getOperation(schema: DocSchema, operationId: string): DocOperation | undefined {
+  return schema.operations.find((op) => op.id === operationId);
+}
+export function getType(schema: DocSchema, typeId: string): DocType | undefined {
+  return schema.types.find((op) => op.id === typeId);
+}
+export function getGroup(schema: DocSchema, groupId: string): GroupDefinition | undefined {
+  return schema.groups.find((op) => op.id === groupId);
 }

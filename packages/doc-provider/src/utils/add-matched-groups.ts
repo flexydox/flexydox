@@ -1,11 +1,17 @@
 import { GroupDefinition } from '@flexydox/doc-schema';
 import { logger } from '@flexydox/logger';
+import { MapperContext } from '../providers/mapper-context';
 
 export function addMatchedGroups(
-  allGroups: GroupDefinition[],
+  ctx: MapperContext,
   testString: string,
   entityName: string
 ): string[] {
+  if (!ctx.namespace.inferGroups) {
+    return [];
+  }
+  const allGroups = [...ctx.groups.values()];
+
   if (allGroups?.length === 0) {
     return [];
   }

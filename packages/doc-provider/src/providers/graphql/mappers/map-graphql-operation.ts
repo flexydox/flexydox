@@ -12,17 +12,17 @@ import { addMatchedGroups } from '../../../utils/add-matched-groups';
 import { getTypeId } from '../../../utils/get-type-id';
 import { mapGraphQLOperationArgument } from './map-graphql-operation-argument';
 import { mapTypeRef } from './map-type-ref';
+import { MapperContext } from '../../mapper-context';
 
 export function mapGraphQLOperation(
+  ctx: MapperContext,
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   op: GraphQLField<any, any, any>,
   opType: 'mutation' | 'query',
-  namespace: Namespace,
-  schemaTypes: DocType[],
-  groups: GroupDefinition[]
+  schemaTypes: DocType[]
 ): DocOperation {
   logger.debug(`> mapping ${opType} ${op.name}`);
-
+  const { namespace } = ctx;
   // determine return type
   const typeRef = mapTypeRef(namespace, op.type, schemaTypes);
 
@@ -55,7 +55,7 @@ export function mapGraphQLOperation(
     examples: []
   };
 
-  docOp.groups = addMatchedGroups(groups, op.name, `${opType} ${docOp.name}`);
+  docOp.groups = addMatchedGroups(ctx, op.name, `${opType} ${docOp.name}`);
 
   return docOp;
 }
