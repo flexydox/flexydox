@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { addMatchedGroups } from '../add-matched-groups';
-import { MapperContext } from '../../providers/mapper-context';
 import { GroupDefinition } from '@flexydox/doc-schema';
+import { describe, expect, it } from 'vitest';
+import { MapperContext } from '../../providers/mapper-context';
+import { addMatchedGroups } from '../add-matched-groups';
 
 const buildCtx = (groups: GroupDefinition[]): MapperContext => {
   return {

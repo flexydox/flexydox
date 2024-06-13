@@ -10,9 +10,9 @@ import { logger } from '@flexydox/logger';
 import type { GraphQLField } from 'graphql';
 import { addMatchedGroups } from '../../../utils/add-matched-groups';
 import { getTypeId } from '../../../utils/get-type-id';
+import { MapperContext } from '../../mapper-context';
 import { mapGraphQLOperationArgument } from './map-graphql-operation-argument';
 import { mapTypeRef } from './map-type-ref';
-import { MapperContext } from '../../mapper-context';
 
 export function mapGraphQLOperation(
   ctx: MapperContext,

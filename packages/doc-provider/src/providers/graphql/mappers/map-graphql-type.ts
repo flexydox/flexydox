@@ -2,8 +2,8 @@ import { DocType, EnumValue, GroupDefinition, Namespace } from '@flexydox/doc-sc
 import { GraphQLEnumType, GraphQLNamedType } from 'graphql';
 import { addMatchedGroups } from '../../../utils/add-matched-groups';
 import { getTypeId } from '../../../utils/get-type-id';
-import { GraphQLTypeMap } from './graphql-type-map';
 import { MapperContext } from '../../mapper-context';
+import { GraphQLTypeMap } from './graphql-type-map';
 
 export function mapGraphQLType(ctx: MapperContext, t: GraphQLNamedType): DocType {
   const { namespace } = ctx;

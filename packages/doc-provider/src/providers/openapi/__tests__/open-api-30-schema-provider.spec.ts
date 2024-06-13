@@ -1,5 +1,5 @@
 import { DocSchema, Namespace } from '@flexydox/doc-schema';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { getGroup, getOpenApiSchemaFile, getOperation, writeTestSchema } from '../../../test-utils';
 import { SchemaProvider } from '../../schema-provider';
 import { OpenApi30SchemaProvider } from '../open-api-30-schema-provider';
