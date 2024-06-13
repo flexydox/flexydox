@@ -60,6 +60,7 @@
       "suspicious": {
         "noControlCharactersInRegex": "error",
         "noDebugger": "error",
+        "noConsoleLog": "error",
         "noEmptyBlockStatements": "error",
         "noExplicitAny": "error",
         "noExtraNonNullAssertion": "error",
