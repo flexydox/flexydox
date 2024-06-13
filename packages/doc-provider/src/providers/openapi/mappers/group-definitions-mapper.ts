@@ -12,6 +12,7 @@ export function groupDefinitionsMapper(
   if (!tags || !ctx.namespace.inferGroups) {
     return;
   }
+
   tags.forEach((tag) => {
     const tagName = typeof tag === 'string' ? tag : tag.name;
 

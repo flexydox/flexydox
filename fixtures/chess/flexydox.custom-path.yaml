@@ -1,6 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/flexydox/flexydox/main/schemas/fxdx-cli-config.json
 outputFolder: _docs/e2e
 title: Chess Game API Example
-site: https://examples.flexydox.com
+base: /custom-path-prefix
 logo:
   url: ./logo.svg
   width: 100

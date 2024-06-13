@@ -34,19 +34,17 @@ export function docOperationMapper(
   operation.summary = concatStrings('\n', commonSummary, operation.summary);
   const { namespace } = ctx;
 
-  const pathMatchedGroups = addMatchedGroups(
-    [...ctx.groups.values()],
-    pathKey,
-    `operation pathKey ${pathKey}`
-  );
+  const pathMatchedGroups = addMatchedGroups(ctx, pathKey, `operation pathKey ${pathKey}`);
   const opMatchedGroups = addMatchedGroups(
-    [...ctx.groups.values()],
+    ctx,
     operationKey,
     `operation operationKey ${operationKey} [pathKey: ${pathKey}]`
   );
 
+  const operationTags = ctx.namespace.inferGroups ? operation.tags : [];
+
   const allGroupIds = [
-    ...new Set([...pathMatchedGroups, ...opMatchedGroups, ...(operation.tags ?? [])])
+    ...new Set([...pathMatchedGroups, ...opMatchedGroups, ...(operationTags ?? [])])
   ];
 
   return {

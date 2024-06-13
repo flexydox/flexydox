@@ -2,13 +2,11 @@ import { DocType, EnumValue, GroupDefinition, Namespace } from '@flexydox/doc-sc
 import { GraphQLEnumType, GraphQLNamedType } from 'graphql';
 import { addMatchedGroups } from '../../../utils/add-matched-groups';
 import { getTypeId } from '../../../utils/get-type-id';
+import { MapperContext } from '../../mapper-context';
 import { GraphQLTypeMap } from './graphql-type-map';
 
-export function mapGraphQLType(
-  t: GraphQLNamedType,
-  namespace: Namespace,
-  groups: GroupDefinition[]
-): DocType {
+export function mapGraphQLType(ctx: MapperContext, t: GraphQLNamedType): DocType {
+  const { namespace } = ctx;
   const dt: DocType = {
     id: getTypeId(namespace, t.name),
     name: t.name,
@@ -17,7 +15,7 @@ export function mapGraphQLType(
     kind: GraphQLTypeMap[t.constructor.name],
     groups: []
   };
-  dt.groups = addMatchedGroups(groups, dt.name, `type ${dt.name}`);
+  dt.groups = addMatchedGroups(ctx, dt.name, `type ${dt.name}`);
 
   // add enum values
   if (t instanceof GraphQLEnumType) {

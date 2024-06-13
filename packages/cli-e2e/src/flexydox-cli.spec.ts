@@ -11,12 +11,15 @@ export interface CLIOptions {
 export function runCLI(opts?: CLIOptions) {
   const command = opts?.command ?? 'build';
   const configFile = opts?.configFile ?? '';
-  const fixtureFolder = opts?.fixtureFolder ?? 'chess-game';
+  const fixtureFolder = opts?.fixtureFolder ?? 'chess';
   const fixtureFullPath = resolve(join(__dirname, '../../../fixtures', fixtureFolder));
   const configPath = configFile ? `--config ${resolve(join(fixtureFullPath, configFile))}` : '';
   const cmd = `flexydox ${command} ${configPath}`;
+  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
   console.log('\nRunning command:');
+  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
   console.log(cmd);
+  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
   console.log('\n');
   return execSync(cmd, { encoding: 'utf-8', cwd: fixtureFullPath }).toString();
 }

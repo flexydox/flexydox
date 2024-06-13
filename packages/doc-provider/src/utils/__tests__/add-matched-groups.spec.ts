@@ -1,15 +1,27 @@
+import { GroupDefinition } from '@flexydox/doc-schema';
 import { describe, expect, it } from 'vitest';
+import { MapperContext } from '../../providers/mapper-context';
 import { addMatchedGroups } from '../add-matched-groups';
+
+const buildCtx = (groups: GroupDefinition[]): MapperContext => {
+  return {
+    types: new Map(),
+    namespace: { id: 'test', inferGroups: true, name: 'test', source: 'test', spec: 'openapi3.0' },
+    groups: new Map(groups.map((g) => [g.id, g]))
+  };
+};
 
 describe('addMatchedGroups', () => {
   it('should return empty array if no groups match', () => {
     const groups = [{ id: 'issues', name: 'issues', regex: /issues/i }];
-    const result = addMatchedGroups(groups, 'users', 'test');
+    const ctx = buildCtx(groups);
+    const result = addMatchedGroups(ctx, 'users', 'test');
     expect(result).toEqual([]);
   });
   it('should return matched group id', () => {
     const groups = [{ id: 'issues', name: 'issues', regex: /issues/i }];
-    const result = addMatchedGroups(groups, 'issues', 'test');
+    const ctx = buildCtx(groups);
+    const result = addMatchedGroups(ctx, 'issues', 'test');
     expect(result).toEqual(['issues']);
   });
   it('should return multiple matched group ids', () => {
@@ -17,11 +29,13 @@ describe('addMatchedGroups', () => {
       { id: 'issues', name: 'issues', regex: /issues/i },
       { id: 'users', name: 'users', regex: /user/i }
     ];
-    const result = addMatchedGroups(groups, 'issues and users', 'test');
+    const ctx = buildCtx(groups);
+    const result = addMatchedGroups(ctx, 'issues and users', 'test');
     expect(result).toEqual(['issues', 'users']);
   });
   it('should return empty array if no groups provided', () => {
-    const result = addMatchedGroups([], 'issues and users', 'test');
+    const ctx = buildCtx([]);
+    const result = addMatchedGroups(ctx, 'issues and users', 'test');
     expect(result).toEqual([]);
   });
 });

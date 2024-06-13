@@ -54,7 +54,7 @@ export class GraphQLSchemaProvider extends SchemaProvider {
       if (isInternalType(graphQLSchema, t)) {
         continue;
       }
-      const dt = mapGraphQLType(t, namespace, groups);
+      const dt = mapGraphQLType(this._ctx, t);
 
       docSchema.types.push(dt);
       docSchema.types.sort((a, b) => a.name.localeCompare(b.name));
@@ -134,11 +134,10 @@ export class GraphQLSchemaProvider extends SchemaProvider {
       const mutations: DocOperation[] = [];
       for (const fieldName in fields) {
         const docOp = mapGraphQLOperation(
+          this._ctx,
           fields[fieldName],
           'mutation',
-          namespace,
-          docSchema.types,
-          docSchema.groups
+          docSchema.types
         );
         mutations.push(docOp);
       }
@@ -152,13 +151,7 @@ export class GraphQLSchemaProvider extends SchemaProvider {
       logger.debug(`> mapping ${Object.keys(fields).length} queries`);
       const queries: DocOperation[] = [];
       for (const fieldName in fields) {
-        const docOp = mapGraphQLOperation(
-          fields[fieldName],
-          'query',
-          namespace,
-          docSchema.types,
-          docSchema.groups
-        );
+        const docOp = mapGraphQLOperation(this._ctx, fields[fieldName], 'query', docSchema.types);
         queries.push(docOp);
       }
       queries.sort((a, b) => a.name.localeCompare(b.name));

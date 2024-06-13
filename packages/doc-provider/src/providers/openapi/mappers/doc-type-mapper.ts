@@ -35,11 +35,7 @@ export function docTypeMapper(
     return mergeDocTypesFields(docTypes);
   }
 
-  const matchedGroups = addMatchedGroups(
-    [...ctx.groups.values()],
-    schemaKey,
-    `type ${schemaPath}${schemaKey}`
-  );
+  const matchedGroups = addMatchedGroups(ctx, schemaKey, `type ${schemaPath}${schemaKey}`);
 
   if (schema.oneOf) {
     const types = (schema.oneOf ?? [])
