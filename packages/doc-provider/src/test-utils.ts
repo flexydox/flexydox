@@ -36,17 +36,18 @@ const fixtureFiles = {
 
 const tmpDir = join(__dirname, `../../../tmp`);
 
-const getFixtureSchemasDir = () => join(__dirname, `../../../fixtures/chess-game/schemas`);
+const getFixtureSchemasDir = (schema: TestSchema) =>
+  join(__dirname, `../../../fixtures/${schema}/schemas`);
 const getTmpFileName = (name: string) => join(tmpDir, `${name}.json`);
 
 export function getGraphQLSchemaFile(schema: TestSchema): string {
   const schemaFile = fixtureFiles.graphql[schema];
-  return join(getFixtureSchemasDir(), schemaFile);
+  return join(getFixtureSchemasDir(schema), schemaFile);
 }
 
 export function getOpenApiSchemaFile(schema: TestSchema): string {
   const schemaFile = fixtureFiles.openapi[schema];
-  return join(getFixtureSchemasDir(), schemaFile);
+  return join(getFixtureSchemasDir(schema), schemaFile);
 }
 
 export async function writeTestSchema(schema: TestSchema, content: DocSchema) {

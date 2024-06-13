@@ -11,7 +11,7 @@ export interface CLIOptions {
 export function runCLI(opts?: CLIOptions) {
   const command = opts?.command ?? 'build';
   const configFile = opts?.configFile ?? '';
-  const fixtureFolder = opts?.fixtureFolder ?? 'chess-game';
+  const fixtureFolder = opts?.fixtureFolder ?? 'chess';
   const fixtureFullPath = resolve(join(__dirname, '../../../fixtures', fixtureFolder));
   const configPath = configFile ? `--config ${resolve(join(fixtureFullPath, configFile))}` : '';
   const cmd = `flexydox ${command} ${configPath}`;
