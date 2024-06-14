@@ -17,7 +17,6 @@ export function operationReturnsMapper(
   const responseStatuses = Object.keys(responses);
   return responseStatuses.flatMap((responseStatus) => {
     const response: OpenAPI.ResponseObject | OpenAPI.ReferenceObject = responses[responseStatus];
-
     if ('$ref' in response) {
       return {
         status: operationReturnStatusMapper(responseStatus),
@@ -27,11 +26,12 @@ export function operationReturnsMapper(
     } else {
       const responses = [];
 
-      for (const [, mediaResponse] of Object.entries(response.content ?? {})) {
+      for (const [mediaKey, mediaResponse] of Object.entries(response.content ?? {})) {
         responses.push({
           status: operationReturnStatusMapper(responseStatus),
           statusCode: responseStatus,
-          typeRef: docTypeRefMapper(ctx, mediaResponse.schema)
+          typeRef: docTypeRefMapper(ctx, mediaResponse.schema),
+          mediaType: mediaKey
         } as OperationReturn);
       }
       return responses;
