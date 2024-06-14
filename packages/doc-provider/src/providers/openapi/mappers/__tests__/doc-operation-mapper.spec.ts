@@ -35,6 +35,7 @@ describe('openapi/mappers/docOperationMapper', () => {
         returns: [
           {
             status: 'success',
+            mediaType: 'application/json',
             statusCode: '200',
             typeRef: {
               typeId: 'openapi3.components-schemas-PlayerResponse',
@@ -50,6 +51,7 @@ describe('openapi/mappers/docOperationMapper', () => {
           },
           {
             status: 'error',
+            mediaType: 'application/json',
             statusCode: '500',
             typeRef: {
               typeId: 'openapi3.components-schemas-ServerError',

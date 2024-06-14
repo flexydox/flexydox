@@ -46,6 +46,23 @@ export interface Namespace {
   source: string;
   /** If true, FlexyDox will try to infer groups from the api */
   inferGroups: boolean;
+
+  /**
+   * Base URL of the API
+   */
+  baseUrl?: string;
+
+  /**
+   * Namespace version
+   * Used to distinguish between different versions of the same API
+   *
+   */
+  version?: string;
+
+  /**
+   * Namespace description
+   */
+  description?: string;
 }
 
 /**

@@ -69,6 +69,10 @@ export class OpenApi30SchemaProvider extends OpenAPISchemaProvider {
 
   public async getSchema(): Promise<DocSchema> {
     await this.parse();
+    this._ctx.namespace.baseUrl = this._ctx.namespace.baseUrl ?? this.doc.servers?.[0]?.url;
+    this._ctx.namespace.version = this._ctx.namespace.version ?? this.doc.info.version;
+    this._ctx.namespace.description = this._ctx.namespace.description ?? this.doc.info.description;
+
     // Two times to ensure all types are mapped and referenced
     this.inferTypes();
     this.inferTypes();

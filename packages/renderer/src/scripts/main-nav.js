@@ -57,9 +57,7 @@ function loadFilterValue() {
   return localStorage.getItem('operations-filter') ?? 'all';
 }
 
-function filterNavItems(val) {
-  showAllGroups();
-  const groupsSection = document.querySelector(`.nav-section.group`);
+function filterGroupSection(groupsSection, val) {
   if (val === 'all') {
     saveFilterValue(val);
     groupsSection.querySelectorAll('.nav-item').forEach((navItem) => {
@@ -76,6 +74,15 @@ function filterNavItems(val) {
   hiddenItems.forEach((navItem) => {
     navItem.classList.add('hidden');
   });
+}
+
+function filterNavItems(val) {
+  showAllGroups();
+  const groupsSection = document.querySelector(`.nav-section.group`);
+  filterGroupSection(groupsSection, val);
+
+  const otherOpsSection = document.querySelector(`.nav-section.other-operations`);
+  filterGroupSection(otherOpsSection, val);
 
   hideEmptyGroups();
 

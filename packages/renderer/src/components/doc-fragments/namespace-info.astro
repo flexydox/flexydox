@@ -1,0 +1,27 @@
+---
+const namespaceId = Astro.props.namespaceId;
+
+const ns = Astro.locals.namespaces.find((ns) => ns.id === namespaceId);
+---
+
+<style>
+  .ns {
+    font-weight: bold;
+  }
+  .ns > * + * {
+    margin-left: var(--size-s);
+  }
+</style>
+{
+  ns && (
+    <span class="ns">
+      {ns.baseUrl && (
+        <a target="_blank" href={ns.baseUrl}>
+          {ns.baseUrl}
+        </a>
+      )}
+      <span>{ns?.name}</span>
+      <span>{ns?.version}</span>
+    </span>
+  )
+}
