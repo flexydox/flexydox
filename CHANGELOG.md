@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/flexydox/flexydox/compare/cli@v1.1.4...cli@v1.1.5) (2024-06-14)
+
+
+### Bug Fixes
+
+* group should regex match not working when infer groups is false ([76230cf](https://github.com/flexydox/flexydox/commit/76230cf854d1e4d4ad4c0ffad8473902ea9100c0))
+
 ## [1.1.4](https://github.com/flexydox/flexydox/compare/cli@v1.1.3...cli@v1.1.4) (2024-06-14)
 
 
