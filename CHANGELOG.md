@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/flexydox/flexydox/compare/cli@v1.2.0...cli@v1.2.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* improve namespace info look ([0045866](https://github.com/flexydox/flexydox/commit/004586634e214936c5122c972ef4148eed2b3458))
+* remove invalid baseUrl assignment ([605ce23](https://github.com/flexydox/flexydox/commit/605ce23c59bdef60d5857987e6736bb0cbed3d8f))
+
 ## [1.2.0](https://github.com/flexydox/flexydox/compare/cli@v1.1.5...cli@v1.2.0) (2024-06-14)
 
 
