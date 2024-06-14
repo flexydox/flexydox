@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/flexydox/flexydox/compare/cli@v1.1.5...cli@v1.2.0) (2024-06-14)
+
+
+### Features
+
+* provide enhanced api info on op detail ([5d221ff](https://github.com/flexydox/flexydox/commit/5d221fff75b19d49da3b17218276a712c38ddfeb))
+
+
+### Bug Fixes
+
+* filter other operations ([84f6b25](https://github.com/flexydox/flexydox/commit/84f6b25596017e40881e15e977cf191769d8e24f))
+* media type mapping ([76b1247](https://github.com/flexydox/flexydox/commit/76b1247d5a522a166dc02a17cf34a81e33bdfba5))
+
 ## [1.1.5](https://github.com/flexydox/flexydox/compare/cli@v1.1.4...cli@v1.1.5) (2024-06-14)
 
 
