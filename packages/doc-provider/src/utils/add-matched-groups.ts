@@ -7,9 +7,6 @@ export function addMatchedGroups(
   testString: string,
   entityName: string
 ): string[] {
-  if (!ctx.namespace.inferGroups) {
-    return [];
-  }
   const allGroups = [...ctx.groups.values()];
 
   if (allGroups?.length === 0) {
