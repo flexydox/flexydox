@@ -1,4 +1,4 @@
-import { DocSchema, Namespace } from '@flexydox/doc-schema';
+import { DocSchema, GroupDefinition, Namespace } from '@flexydox/doc-schema';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { getGroup, getOpenApiSchemaFile, getOperation, writeTestSchema } from '../../../test-utils';
 import { SchemaProvider } from '../../schema-provider';
@@ -32,7 +32,7 @@ describe('Open API 3.0 Provider', () => {
       expect(group).toBeDefined();
     });
   });
-  describe('Chess Game schema - do not infer groups', () => {
+  describe('Chess Game schema - do not infer groups from tags', () => {
     let schema: DocSchema;
     beforeEach(async () => {
       const file = getOpenApiSchemaFile('chess');
@@ -48,6 +48,30 @@ describe('Open API 3.0 Provider', () => {
       const op = getOperation(schema, 'chess-game-api.players-get');
       const playersGroups = op?.groups || [];
       expect(playersGroups).toEqual([]);
+    });
+  });
+
+  describe('Chess Game schema - map defined groups only', () => {
+    let schema: DocSchema;
+    beforeEach(async () => {
+      const file = getOpenApiSchemaFile('chess');
+      const groups: GroupDefinition[] = [
+        { name: 'Game', id: 'game', regex: /game/i },
+        { name: 'Player', id: 'player', regex: /player/i }
+      ];
+
+      const namespace: Namespace = { ...ns, source: file, inferGroups: false };
+      const provider: SchemaProvider = new OpenApi30SchemaProvider(namespace, groups);
+      schema = await provider.getSchema();
+    });
+
+    it('should have groups defined', () => {
+      expect(schema.groups.length).toEqual(2);
+    });
+    it('should assign player group by regex', () => {
+      const op = getOperation(schema, 'chess-game-api.players-get');
+      const playersGroups = op?.groups || [];
+      expect(playersGroups).toEqual(['player']);
     });
   });
 });
