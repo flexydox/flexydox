@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/flexydox/flexydox/compare/cli@v1.1.3...cli@v1.1.4) (2024-06-14)
+
+
+### Bug Fixes
+
+* **docProvider:** respect inferGroups settings ([fce66d0](https://github.com/flexydox/flexydox/commit/fce66d0ed4ef2baf0df91e31deca4a80e13cf41f))
+
 ## [1.1.3](https://github.com/flexydox/flexydox/compare/cli@v1.1.2...cli@v1.1.3) (2024-06-03)
 
 
