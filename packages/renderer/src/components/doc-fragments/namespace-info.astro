@@ -6,22 +6,32 @@ const ns = Astro.locals.namespaces.find((ns) => ns.id === namespaceId);
 
 <style>
   .ns {
+    margin-top: var(--size-xxl);
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--size-s);
+  }
+  .ns > .name {
     font-weight: bold;
   }
-  .ns > * + * {
-    margin-left: var(--size-s);
+  .ns > .link {
+    grid-area: 2/1/2/4;
   }
 </style>
 {
   ns && (
-    <span class="ns">
-      {ns.baseUrl && (
-        <a target="_blank" href={ns.baseUrl}>
-          {ns.baseUrl}
-        </a>
-      )}
-      <span>{ns?.name}</span>
-      <span>{ns?.version}</span>
-    </span>
+    <div class="ns">
+      <div>API:</div>
+      <div class="name">{ns.name}</div>
+      <div>{ns.version && <>(version: {ns.version})</>}</div>
+
+      <div class="link">
+        {ns.baseUrl && (
+          <a target="_blank" href={ns.baseUrl}>
+            {ns.baseUrl}
+          </a>
+        )}
+      </div>
+    </div>
   )
 }

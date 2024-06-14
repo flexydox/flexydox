@@ -36,8 +36,6 @@ const {
     groups={groups}>{name}</OperationHeader
   >
 
-  <NamespaceInfo namespaceId={namespaceId} />
-
   {deprecationReason && <DeprecationInfo reason={deprecationReason} />}
 
   <Description>{description}</Description>
@@ -63,4 +61,6 @@ const {
       }
     </ListItems>
   </section>
+
+  <NamespaceInfo namespaceId={namespaceId} />
 </div>

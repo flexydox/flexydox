@@ -7,8 +7,9 @@ import ListItems from "./list-items.astro";
 import TypeField from "./type-field.astro";
 import TypeLink from "./type-link.astro";
 import TypeValue from "./type-value.astro";
+import NamespaceInfo from "./namespace-info.astro";
 const type: DocType = Astro.props.type;
-const { id, name, kind, description, deprecationReason } = type;
+const { id, name, kind, description, deprecationReason, namespaceId } = type;
 const typeKind = (kind ?? "unknown").toLowerCase();
 const kindFormatted = (typeKind ?? "").toLowerCase();
 const showPopOver = Astro.props.showPopOver;
@@ -60,4 +61,6 @@ const showPopOver = Astro.props.showPopOver;
   </ListItems>
 
   {deprecationReason && <DeprecationInfo reason={deprecationReason} />}
+
+  <NamespaceInfo namespaceId={namespaceId} />
 </div>
