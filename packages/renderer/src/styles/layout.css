@@ -12,16 +12,26 @@
   --page-height: 100svh;
   --header-height: 50px;
   --header-img-size: calc(var(--header-height) - 2px);
+  --c-content-bg: var(--c-bg-primary);
+  --c-side-bg: var(--gray-2);
+
+}
+
+[data-theme='dark'] {
+  --c-content-bg: var(--c-bg-primary);
+  --c-side-bg: var(--gray-11);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
+
 }
 
 .l-page {
   height: var(--page-height);
+  background-color: var(--c-side-bg);
   display: grid;
   grid-template-columns: var(--main-nav-width) 1fr;
   grid-template-rows: auto 1fr;
@@ -35,7 +45,7 @@ body {
 
 .l-page-header {
   grid-area: head;
-  background-color: var(--c-bg-primary);
+  background-color: var(--c-side-bg);
   padding: var(--padding-vertical) var(--padding-horizontal);
   display: grid;
   grid-auto-flow: column;
@@ -60,11 +70,11 @@ body {
 }
 
 .l-page-main-nav {
+  background-color: var(--c-side-bg);
   grid-area: main-nav;
   height: calc(var(--page-height) - var(--padding-vertical) * 2);
   overflow-y: scroll;
   padding: 0;
-  background-color: var(--c-bg-primary);
   border-right: 1px solid var(--c-bg-secondary);
   overflow-y: auto;
   position: relative;
@@ -75,7 +85,6 @@ body {
     min-height: var(--header-height);
     display: grid;
     justify-items: center;
-    background-color: var(--c-bg-primary);
   }
   .main-nav {
     padding: var(--padding-vertical) 0;
@@ -85,7 +94,7 @@ body {
 .l-page-main-content {
   grid-area: content;
   padding: var(--padding-vertical) var(--padding-horizontal);
-  background-color: var(--c-bg-primary);
+  background-color: var(--c-content-bg);
   overflow-y: auto;
   display: grid;
   justify-items: center;

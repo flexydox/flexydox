@@ -1,7 +1,7 @@
 ---
-import { DocOperation, DocType } from '@flexydox/doc-schema';
-import { loadAllPages, loadPage } from '../../asset-loader';
-import DefaultLayout from '../../layouts/default-layout.astro';
+import { DocOperation, DocType } from "@flexydox/doc-schema";
+import { loadAllPages, loadPage } from "../../asset-loader";
+import DefaultLayout from "../../layouts/default-layout.astro";
 
 export async function getStaticPaths() {
   const allPages = await loadAllPages();
@@ -12,5 +12,5 @@ const pageData = await loadPage(slug);
 ---
 
 <DefaultLayout>
-  <section set:html={pageData?.content} />
+  <section class="custom-page" set:html={pageData?.content} />
 </DefaultLayout>
