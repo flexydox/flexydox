@@ -1,33 +1,47 @@
 ---
-import { fade } from 'astro:transitions';
-import { DocType, DocTypeField } from '@flexydox/doc-schema';
-import cx from 'classnames';
-import { markDeprecated } from '../../astro-utils/mark-deprecated';
-import DeprecationInfo from './deprecation-info.astro';
-import Description from './description.astro';
-import Required from './required.astro';
-import Typeref from './type-ref.astro';
-import TypeRef from './type-ref.astro';
+import { fade } from "astro:transitions";
+import { DocType, DocTypeField } from "@flexydox/doc-schema";
+import cx from "classnames";
+import { markDeprecated } from "../../astro-utils/mark-deprecated";
+import DeprecationInfo from "./deprecation-info.astro";
+import Description from "./description.astro";
+import Required from "./required.astro";
+import TypeRef from "./type-ref.astro";
+import TypePopOver from "./type-pop-over.astro";
+import { getDefaultTypeId } from "../../astro-utils/type-ref-to-type-link-map";
 const field: DocTypeField = Astro.props.field;
 const showPopOver = Astro.props.showPopOver;
+
+const defaultTypeId = getDefaultTypeId(field.typeRef);
 ---
 
 <style>
   .name {
     font-weight: bold;
   }
+  .type-name {
+  }
+  .type-name * {
+  }
 </style>
 <div class="vertical-separator stack-s">
-  <div>
-    <span class:list={['name', markDeprecated(field.deprecationReason)]}>{field.name}</span>
-    <span class="type-ref">
-      <TypeRef showPopOver={showPopOver} typeRef={field.typeRef} />
-    </span>
+  <div class="type-name">
+    <span class:list={["name", markDeprecated(field.deprecationReason)]}
+      >{field.name}</span
+    >
+    <TypePopOver showPopOver={showPopOver} typeId={defaultTypeId}>
+      <span class="type-ref">
+        <TypeRef typeRef={field.typeRef} />
+      </span>
 
-    <Required isRequired={field.typeRef.required} />
+      <Required isRequired={field.typeRef.required} />
+    </TypePopOver>
   </div>
-
   <Description>{field.description}</Description>
 
-  {field.deprecationReason && <DeprecationInfo reason={field.deprecationReason} />}
+  {
+    field.deprecationReason && (
+      <DeprecationInfo reason={field.deprecationReason} />
+    )
+  }
 </div>

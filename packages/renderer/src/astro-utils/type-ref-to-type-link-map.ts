@@ -31,3 +31,8 @@ export function typeRefToTypeLinkMap(typeRef: DocTypeRef): TypeLinkMap {
   addTypeLinks(linkMap, typeRef);
   return linkMap;
 }
+
+export function getDefaultTypeId(typeRef: DocTypeRef): string | null {
+  const typeLinkMap = typeRefToTypeLinkMap(typeRef);
+  return typeLinkMap.none.length > 0 ? typeLinkMap.none[0].typeId : null;
+}

@@ -1,9 +1,13 @@
 ---
-import { OperationReturn } from '@flexydox/doc-schema';
-import { Icon } from 'astro-icon/components';
-import TypeRef from './type-ref.astro';
+import { OperationReturn } from "@flexydox/doc-schema";
+import { Icon } from "astro-icon/components";
+import TypeRef from "./type-ref.astro";
+import { getDefaultTypeId } from "../../astro-utils/type-ref-to-type-link-map";
+import TypePopOver from "./type-pop-over.astro";
 
 const opReturn: OperationReturn = Astro.props.opReturn;
+
+const defaultTypeId = getDefaultTypeId(opReturn.typeRef);
 ---
 
 <style>
@@ -26,10 +30,14 @@ const opReturn: OperationReturn = Astro.props.opReturn;
 </style>
 
 <section class="op-return">
-  <span class:list={['status', opReturn.status]}>
+  <span class:list={["status", opReturn.status]}>
     <Icon name={opReturn.status} />
 
-    <span class="status-details">{opReturn.statusCode} {opReturn.mediaType}</span>
+    <span class="status-details"
+      >{opReturn.statusCode} {opReturn.mediaType}</span
+    >
   </span>
-  <TypeRef showPopOver typeRef={opReturn.typeRef} />
+  <TypePopOver showPopOver typeId={defaultTypeId}>
+    <TypeRef showPopOver typeRef={opReturn.typeRef} />
+  </TypePopOver>
 </section>

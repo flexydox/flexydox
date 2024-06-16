@@ -1,0 +1,17 @@
+.custom-page {
+  h1 {
+    margin: var(--size-l) 0;
+  }
+  h2 {
+    margin: var(--size-m) 0;
+  }
+  h3 {
+    margin: var(--size-s) 0;
+  }
+  h4, h5, h6 {
+    margin: var(--size-xs) 0;
+  }
+  .astro-code {
+    padding: var(--size-m);
+  }
+}

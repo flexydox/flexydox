@@ -1,95 +1,69 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const popOverId = Astro.props.popOverId;
 ---
 
 <style>
+  .po-wrapper {
+  }
+  .po-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--size-xs);
+    margin: 0;
+    color: var(--c-bg-alternate);
+    cursor: help;
+    display: inline-block;
+    vertical-align: middle;
+  }
   .popover[popover]:not(:popover-open):not(dialog[open]) {
     display: none;
+  }
+
+  .popover::backdrop {
+    background-color: rgba(0, 0, 0, 0.92);
   }
   .popover {
     --horiz-padding: var(--size-m);
     border: none;
-    box-shadow: var(--shadow-6);
+    box-shadow: var(--shadow-2);
     border-radius: var(--radius-3);
     height: max-content;
 
-    position: absolute;
+    position: fixed;
     width: minmax(300px, 400px);
     max-width: 60svh;
-    margin: 0;
+    margin: auto;
     bottom: 100px;
 
     color: var(--c-text-primary);
-    background-color: var(--c-bg-tertiary);
-    padding: var(--size-l);
-    padding-bottom: var(--size-l);
-
-    :global(.type > *) {
-      padding: 0 var(--horiz-padding);
-    }
+    background-color: var(--c-bg-inactive);
+    border-width: 0;
+    padding: 0;
 
     :global(.title) {
       background-color: var(--c-bg-secondary);
-      padding: var(--size-l) var(--horiz-padding);
+      padding: var(--size-m) var(--horiz-padding);
       margin: 0;
+    }
+    :global(.type > section, .type > div) {
+      padding: 0 var(--horiz-padding);
     }
   }
 </style>
-<script>
-  import { fade } from "astro:transitions";
-  // @ts-ignore
-  import {
-    computePosition,
-    autoUpdate
-  } from "https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3/+esm";
 
-  function init() {
-    const triggers = document.querySelectorAll(".po-trigger");
-    triggers.forEach((trigger) => {
-      const popOverId = trigger.getAttribute("data-po-target");
-      if (!popOverId) {
-        return;
-      }
-      const popOver = document.getElementById(popOverId);
-      if (!popOver) {
-        return;
-      }
-      autoUpdate(trigger, popOver, () => {
-        const pos = computePosition(trigger, popOver, {
-          placement: "bottom-start"
-        }).then((pos) => {
-          popOver.style.top = `${Math.max(0, pos.y + 2)}px`;
-          popOver.style.left = `${Math.max(0, pos.x - 100)}px`;
-          trigger.addEventListener("mouseenter", () => {
-            popOver.showPopover();
-          });
-          let isOverPopup = false;
-          popOver.addEventListener("mouseenter", () => {
-            isOverPopup = true;
-          });
-          popOver.addEventListener("mouseleave", () => {
-            isOverPopup = false;
-            popOver.hidePopover();
-          });
-          trigger.addEventListener("mouseout", (e) => {
-            setTimeout(() => {
-              if (!isOverPopup) {
-                popOver.hidePopover();
-              }
-            }, 200);
-          });
-        });
-      });
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", init);
-</script>
-
-<span class="po-trigger" data-po-target={popOverId}>
-  <slot name="trigger" />
+<span class="po-wrapper">
+  <slot name="trigger" /><button
+    popovertarget={popOverId}
+    class="po-trigger"
+    data-po-target={popOverId}><Icon name="help" /></button
+  >
 </span>
 
 <section class="popover" id={popOverId} popover>
-  {popOverId && <slot />}
+  <div class="overlay">
+    {popOverId && <slot />}
+  </div>
 </section>

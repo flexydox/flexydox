@@ -1,16 +1,22 @@
 ---
-import { DocTypeRef } from '@flexydox/doc-schema';
-import { typeRefToTypeLinkMap } from '../../astro-utils/type-ref-to-type-link-map';
-import TypeLink from './type-link.astro';
+import { DocTypeRef } from "@flexydox/doc-schema";
+import { typeRefToTypeLinkMap } from "../../astro-utils/type-ref-to-type-link-map";
+import TypeLink from "./type-link.astro";
 const typeRef: DocTypeRef = Astro.props.typeRef;
-
-const showPopOver = Astro.props.showPopOver;
 
 const typeLinkMap = typeRefToTypeLinkMap(typeRef);
 ---
 
-{typeLinkMap.list.map((typeLink) => <TypeLink showPopOver={showPopOver} typeId={typeLink.typeId} link={typeLink} />)}
+{
+  typeLinkMap.list.map((typeLink) => (
+    <TypeLink typeId={typeLink.typeId} link={typeLink} />
+  ))
+}
 
-{typeLinkMap.none.map((typeLink) => <TypeLink showPopOver={showPopOver} typeId={typeLink.typeId} link={typeLink} />)}
+{
+  typeLinkMap.none.map((typeLink) => (
+    <TypeLink typeId={typeLink.typeId} link={typeLink} />
+  ))
+}
 
-{typeLinkMap.array.map((typeLink) => <TypeLink typeId={typeLink.typeId} link={{ ...typeLink, title: '[]' }} />)}
+{typeLinkMap.array.map((typeLink) => " []")}

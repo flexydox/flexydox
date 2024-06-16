@@ -1,0 +1,24 @@
+---
+import { DocType } from "@flexydox/doc-schema";
+import PopOver from "../pop-over.astro";
+import TypePopOverContent from "./type-pop-over-content.astro";
+
+const typeId: string = Astro.props.typeId;
+const nextId = Astro.locals.nextId++;
+const popOverId = typeId ? `po-${typeId}-${nextId}` : null;
+const showPopOver = typeId && Astro.props.showPopOver;
+const type = Astro.locals.types.find((t: DocType) => t.id === typeId);
+---
+
+{
+  showPopOver && (
+    <PopOver popOverId={popOverId}>
+      <Fragment slot="trigger">
+        <slot />
+      </Fragment>
+      {type && <TypePopOverContent type={type} />}
+    </PopOver>
+  )
+}
+
+{!showPopOver && <slot />}
