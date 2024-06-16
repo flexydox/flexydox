@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/flexydox/flexydox/compare/cli@v1.2.1...cli@v1.3.0) (2024-06-16)
+
+
+### Features
+
+* enhance popover look & feel ([892afb2](https://github.com/flexydox/flexydox/commit/892afb2c36390e289873c02d8b5e3be6bad604ad))
+
 ## [1.2.1](https://github.com/flexydox/flexydox/compare/cli@v1.2.0...cli@v1.2.1) (2024-06-14)
 
 
