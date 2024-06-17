@@ -43,6 +43,8 @@ export async function fxdxBuild(options: BuildOptions) {
   targetSchema.customPages = customPages;
   await addExamples(targetSchema);
 
+  // Create a full-text index for the schema
+
   await mkdir(cfg.outputFolder, { recursive: true });
   const targetSchemaPath = resolve(process.cwd(), join(cfg.outputFolder, 'doc-schema.json'));
 
