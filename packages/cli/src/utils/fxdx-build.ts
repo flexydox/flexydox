@@ -9,6 +9,7 @@ import { buildCustomPages } from './build-custom-pages';
 import { generateDoc } from './generate-doc';
 import { mergeSchemas } from './merge-schemas';
 import { parseAPI } from './parse-api';
+import { createSimpleFullTextIndex } from '@flexydox/doc-provider';
 
 export interface BuildOptions {
   generateDocFlag: boolean;
@@ -44,6 +45,7 @@ export async function fxdxBuild(options: BuildOptions) {
   await addExamples(targetSchema);
 
   // Create a full-text index for the schema
+  const ftIndex = createSimpleFullTextIndex(targetSchema);
 
   await mkdir(cfg.outputFolder, { recursive: true });
   const targetSchemaPath = resolve(process.cwd(), join(cfg.outputFolder, 'doc-schema.json'));
@@ -51,5 +53,5 @@ export async function fxdxBuild(options: BuildOptions) {
   logger.info(`Writing final schema to '${targetSchemaPath}'`);
   await writeFile(join(targetSchemaPath), serializeSchema(targetSchema), { encoding: 'utf-8' });
 
-  await generateDoc(targetSchemaPath, previewServer, generateDocFlag);
+  await generateDoc(targetSchemaPath, previewServer, generateDocFlag, ftIndex);
 }
