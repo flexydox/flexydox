@@ -1,4 +1,5 @@
 import { join, resolve } from 'path';
+import { createSimpleFullTextIndex } from '@flexydox/doc-provider';
 import { DocSchema } from '@flexydox/doc-schema';
 import { logger } from '@flexydox/logger';
 import { writeFile } from 'fs/promises';
@@ -43,11 +44,14 @@ export async function fxdxBuild(options: BuildOptions) {
   targetSchema.customPages = customPages;
   await addExamples(targetSchema);
 
+  // Create a full-text index for the schema
+  const ftIndex = createSimpleFullTextIndex(targetSchema);
+
   await mkdir(cfg.outputFolder, { recursive: true });
   const targetSchemaPath = resolve(process.cwd(), join(cfg.outputFolder, 'doc-schema.json'));
 
   logger.info(`Writing final schema to '${targetSchemaPath}'`);
   await writeFile(join(targetSchemaPath), serializeSchema(targetSchema), { encoding: 'utf-8' });
 
-  await generateDoc(targetSchemaPath, previewServer, generateDocFlag);
+  await generateDoc(targetSchemaPath, previewServer, generateDocFlag, ftIndex);
 }

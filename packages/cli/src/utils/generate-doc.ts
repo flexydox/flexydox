@@ -3,15 +3,18 @@ import { URL } from 'url';
 import { logger } from '@flexydox/logger';
 import { getConfig } from '../config/app-config';
 
+import { SimpleFullText } from '@flexydox/doc-provider';
 import { DocConfig, saveConfig } from '@flexydox/doc-schema';
 import { AstroInlineConfig } from 'astro';
+import { writeFile } from 'fs/promises';
 import { copyAsset, customAssetDir, getAssetsSrc } from './copy-asset';
 import { resolveRelativePathToConfigFile, resolveRelativePathToCwd } from './resolve-relative-path';
 
 export async function generateDoc(
   schemaPath: string,
   previewServer: boolean,
-  generateDoc: boolean
+  generateDoc: boolean,
+  ftIndex: SimpleFullText
 ) {
   const { build, preview } = await import('astro');
   const { default: icon } = await import('astro-icon');
@@ -107,7 +110,21 @@ export async function generateDoc(
   } else {
     await build(cfg);
   }
-  process.chdir(cwdStored);
+
+  const ftIndexFile = 'ft-index.json';
+  const ftIndexContent = JSON.stringify(ftIndex, null, '\t');
+
+  // Save the full-text index to site folder
+  await writeFile(join(siteOutDir, ftIndexFile), ftIndexContent, {
+    encoding: 'utf-8'
+  });
+
+  // Save the full-text index to root output folder
+  await writeFile(join(outDir, ftIndexFile), ftIndexContent, {
+    encoding: 'utf-8'
+  });
+
+  await process.chdir(cwdStored);
   logger.info(`Root directory (cwd): '${rootDir}'`);
   logger.info(`Output directory: '${outDir}'`);
   logger.info(`Site Output directory: '${siteOutDir}'`);

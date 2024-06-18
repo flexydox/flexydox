@@ -16,4 +16,8 @@ export type Color =
   | '--c-text-tag-3'
   | '--c-bg-tag-1'
   | '--c-bg-tag-2'
-  | '--c-bg-tag-3';
+  | '--c-bg-tag-3'
+  | '--c-op-kind-read'
+  | '--c-op-kind-modify'
+  | '--c-op-kind-subscribe'
+  | '--c-op-kind-other';

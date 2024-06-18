@@ -27,6 +27,10 @@
   font-family: var(--font-base);
 }
 
+.shadow {
+  box-shadow: var(--box-x, 10px) var(--box-y, 7px) var(--box-blur, 15px) var(--box-scale, 0) var(--box-color, var(--c-box-shadow));
+}
+
 html, body {
   font-size: var(--font-base);
 }

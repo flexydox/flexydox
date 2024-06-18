@@ -19,10 +19,12 @@ import { Image } from "astro:assets";
 import { loadSiteData } from "../asset-loader";
 import NavToggleButton from "../components/nav-toggle-button.astro";
 import { linkUrl } from "../utils/link-url";
+import Search from "../components/doc-fragments/search.astro";
+
 const siteData = await loadSiteData();
 ---
 
-<html lang="en" data-theme="dark">
+<html lang="en" data-base-url={import.meta.env.BASE_URL} data-theme="dark">
   <head>
     <link type="image/svg+xml" rel="icon" href={linkUrl("/favicon.svg")} />
     <!-- Load synchronously to avoid FOUC -->
@@ -58,7 +60,7 @@ const siteData = await loadSiteData();
         <section class="l-page-nav-header">
           <CompanyLogo />
         </section>
-
+        <Search />
         <MainNav />
       </nav>
       <section class="l-page-main-content">

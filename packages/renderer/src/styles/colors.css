@@ -1,7 +1,7 @@
 :root {
   --c-brand: var(--indigo-6);
 
-  --c-text-primary: var(--gray-12);
+  --c-text-primary: var(--gray-11);
   --c-text-secondary: var(--gray-9);
   --c-text-interactive: var(--orange-5);
   --c-text-interactive-hover: var(--orange-2);
@@ -15,13 +15,20 @@
   --c-bg-alternate: var(--sand-9);
   --c-bg-inactive: var(--gray-1);
 
-  --c-text-tag-1: var(--choco-7);
+  --c-text-tag-1: var(--pink-9);
   --c-text-tag-2: var(--indigo-7);
   --c-text-tag-3: var(--orange-7);
 
   --c-bg-tag-1: var(--choco-1);
   --c-bg-tag-2: var(--indigo-1);
   --c-bg-tag-3: var(--orange-1);
+
+  --c-op-kind-read: var(--c-text-tag-2);
+  --c-op-kind-modify: var(--c-text-tag-1);
+  --c-op-kind-subscribe: var(--c-text-tag-3);
+  --c-op-kind-other: var(--c-text-inactive);
+
+  --c-box-shadow: var(--c-bg-secondary);
 }
 [data-theme='dark'] {
   --c-brand: var(--indigo-3);
@@ -33,20 +40,27 @@
   --c-text-success: var(--green-4);
   --c-text-inactive: var(--gray-5);
   --c-text-error: var(--red-4);
-  --c-text-alternate: var(--sand-9);
+  --c-text-alternate: var(--gray-8);
   --c-bg-primary: var(--gray-12);
   --c-bg-secondary: var(--gray-8);
   --c-bg-tertiary: var(--gray-9);
-  --c-bg-alternate: var(--sand-2);
+  --c-bg-alternate: var(--gray-2);
   --c-bg-inactive: var(--gray-10);
 
-  --c-text-tag-1: var(--choco-3);
+  --c-text-tag-1: var(--pink-6);
   --c-text-tag-2: var(--indigo-3);
   --c-text-tag-3: var(--orange-3);
 
   --c-bg-tag-1: var(--choco-10);
   --c-bg-tag-2: var(--indigo-10);
   --c-bg-tag-3: var(--orange-10);
+
+  --c-op-kind-read: var(--c-text-tag-2);
+  --c-op-kind-modify: var(--c-text-tag-1);
+  --c-op-kind-subscribe: var(--c-text-tag-3);
+  --c-op-kind-other: var(--c-text-inactive);
+
+  --c-box-shadow: hsla(0, 0%, 100%, 0.1);
 }
 
 :root {
@@ -54,6 +68,9 @@
   --c-deprecation-info: color-mix(in srgb, var(--c-text-error) 100%, transparent 30%);
   --c-deprecation-info-bg: color-mix(in srgb, var(--c-text-error) 20%, transparent 80%);
   --c-deprecation-info-border: color-mix(in srgb, var(--c-text-error) 100%, transparent 0%);
+
+
+
 }
 
 :root {
