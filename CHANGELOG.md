@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.0](https://github.com/flexydox/flexydox/compare/cli@v1.3.0...cli@v1.4.0) (2024-06-18)
+
+
+### Features
+
+* full-text index builder ([df28517](https://github.com/flexydox/flexydox/commit/df285179e76a1e2e0a326c52f8b86b45005050c5))
+* generate full-text index file ([896e302](https://github.com/flexydox/flexydox/commit/896e302a2699c5e301c34d007ff86e81e7a32eee))
+* implement client-side full-text search ([1f665ad](https://github.com/flexydox/flexydox/commit/1f665ad57234f5149072bfcd0e4ca1d977cffba6))
+* improve full-text index build ([1d75703](https://github.com/flexydox/flexydox/commit/1d7570304ce2bf81f433a791367c2e066bde5864))
+
 ## [1.3.0](https://github.com/flexydox/flexydox/compare/cli@v1.2.1...cli@v1.3.0) (2024-06-16)
 
 
