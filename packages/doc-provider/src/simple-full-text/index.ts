@@ -1,4 +1,10 @@
-import { DocSchema, OperationKind, OperationType } from '@flexydox/doc-schema';
+import {
+  DocSchema,
+  DocTypeKind,
+  Namespace,
+  OperationKind,
+  OperationType
+} from '@flexydox/doc-schema';
 
 /**
  * Represents a simple full-text index for the schema.
@@ -12,11 +18,14 @@ export interface SimpleFullTextItem {
    * Entity identifier.
    */
   entityId: string;
-  resultType: 'type' | 'operation' | 'argument' | 'customPage' | 'example';
+  resultType: 'type' | 'operation' | 'op-argument' | 'field';
   entityName: string;
+  entityKind?: DocTypeKind;
   subEntityName?: string;
   operationKind?: OperationKind;
   operationType?: OperationType;
+  nsName: string;
+  nsVersion?: string;
   content: string;
 }
 
@@ -150,6 +159,8 @@ const STOP_WORDS = [
   'yourselves'
 ];
 
+const IGNORED_GRAPHQL_TYPES = ['Query', 'Mutation', 'Subscription'];
+
 export interface SimpleFullText {
   items: SimpleFullTextItem[];
 }
@@ -168,13 +179,31 @@ function tokenize(...texts: (string | null | undefined)[]): string {
   return [...new Set(words)].filter((w) => !STOP_WORDS.includes(w)).join('|');
 }
 
+function getNamespace(schema: DocSchema, namespaceId: string): Namespace | null {
+  return schema.namespaces?.find((ns) => ns.id === namespaceId) ?? null;
+}
+
+/**
+ * Creates a simple full-text index for the schema.
+ * @param schema The schema to index.
+ * @returns The full-text index.
+ */
 export function createSimpleFullTextIndex(schema: DocSchema): SimpleFullText {
   const items: SimpleFullTextItem[] = [];
 
   for (const type of schema.types) {
+    const ns = getNamespace(schema, type.namespaceId);
+
+    // Ignore Query, Mutation, and Subscription types from the index
+    if (ns?.spec === 'graphql' && IGNORED_GRAPHQL_TYPES.includes(type.name)) {
+      continue;
+    }
     items.push({
       id: `type-${type.id}`,
+      nsName: ns?.name ?? '',
+      nsVersion: ns?.version,
       entityId: type.id,
+      entityKind: type.kind,
       resultType: 'type',
       entityName: type.name,
       content: tokenize(type.name, type.description)
@@ -182,48 +211,57 @@ export function createSimpleFullTextIndex(schema: DocSchema): SimpleFullText {
     for (const field of type.fields ?? []) {
       items.push({
         id: `field-${type.id}-${field.name}`,
+        nsName: ns?.name ?? '',
+        nsVersion: ns?.version,
         entityId: type.id,
-        resultType: 'argument',
-        entityName: field.name,
+        entityKind: type.kind,
+        resultType: 'field',
+        entityName: type.name,
         subEntityName: field.name,
-        content: tokenize(field.name, field.description)
+        content: tokenize(type.name, type.kind, type.description, field.name, field.description)
       });
     }
   }
 
   for (const operation of schema.operations) {
+    const ns = getNamespace(schema, operation.namespaceId);
     items.push({
       id: `operation-${operation.id}`,
+      nsName: ns?.name ?? '',
+      nsVersion: ns?.version,
       entityId: operation.id,
       resultType: 'operation',
       entityName: operation.name,
-      content: tokenize(operation.name, operation.description),
+      content: tokenize(
+        operation.name,
+        operation.description,
+        operation.operationKind,
+        operation.operationType
+      ),
       operationKind: operation.operationKind,
       operationType: operation.operationType
     });
     for (const argument of operation.arguments ?? []) {
       items.push({
-        id: `argument-${operation.id}-${argument.name}`,
+        id: `arg-${operation.id}-${argument.name}`,
+        nsName: ns?.name ?? '',
+        nsVersion: ns?.version,
         entityId: operation.id,
-        resultType: 'argument',
+        resultType: 'op-argument',
         entityName: operation.name,
         subEntityName: argument.name,
-        content: tokenize(argument.name, argument.description),
+        content: tokenize(
+          operation.name,
+          operation.description,
+          operation.operationKind,
+          operation.operationType,
+          argument.name,
+          argument.description
+        ),
         operationKind: operation.operationKind,
         operationType: operation.operationType
       });
     }
-  }
-
-  for (const customPage of schema.customPages ?? []) {
-    const entityId = customPage.slug ?? customPage.title;
-    items.push({
-      id: `customPage-${entityId}`,
-      entityId,
-      resultType: 'customPage',
-      entityName: customPage.title,
-      content: tokenize(customPage.title, customPage.content)
-    });
   }
 
   return { items };

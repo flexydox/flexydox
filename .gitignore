@@ -7,7 +7,7 @@ tmp
 /out-tsc
 _docs
 examples/docs
-
+packages/renderer/public/ft-index.json
 
 # dependencies
 node_modules

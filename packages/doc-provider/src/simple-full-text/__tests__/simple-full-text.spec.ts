@@ -64,6 +64,7 @@ const testSchema: DocSchema = {
       id: 'ns1',
       inferGroups: true,
       name: 'Namespace1',
+      version: '1.0',
       description: 'Namespace1 description',
       spec: 'openapi3.0',
       source: 'http://example.com/ns1.yaml'
@@ -83,6 +84,8 @@ describe('create simple full text index', () => {
     const result = indexData.items.find((item) => item.id === 'operation-ns1.people-get');
     expect(result).toBeDefined();
     expect(result?.content).toContain('people');
+    expect(result?.nsName).toBe('Namespace1');
+    expect(result?.nsVersion).toBe('1.0');
   });
 
   it('should index firstName field', () => {
