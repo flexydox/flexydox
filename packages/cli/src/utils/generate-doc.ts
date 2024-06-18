@@ -3,12 +3,12 @@ import { URL } from 'url';
 import { logger } from '@flexydox/logger';
 import { getConfig } from '../config/app-config';
 
+import { SimpleFullText } from '@flexydox/doc-provider';
 import { DocConfig, saveConfig } from '@flexydox/doc-schema';
 import { AstroInlineConfig } from 'astro';
+import { writeFile } from 'fs/promises';
 import { copyAsset, customAssetDir, getAssetsSrc } from './copy-asset';
 import { resolveRelativePathToConfigFile, resolveRelativePathToCwd } from './resolve-relative-path';
-import { SimpleFullText } from '@flexydox/doc-provider';
-import { writeFile } from 'fs/promises';
 
 export async function generateDoc(
   schemaPath: string,

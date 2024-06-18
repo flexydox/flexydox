@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { createSimpleFullTextIndex } from '../index';
 import { DocSchema, DocTypeRef } from '@flexydox/doc-schema';
+import { createSimpleFullTextIndex } from '../index';
 
 const createTypeRef = (): DocTypeRef => ({
   typeId: 'ns1.dummy',

@@ -1,4 +1,5 @@
 import { join, resolve } from 'path';
+import { createSimpleFullTextIndex } from '@flexydox/doc-provider';
 import { DocSchema } from '@flexydox/doc-schema';
 import { logger } from '@flexydox/logger';
 import { writeFile } from 'fs/promises';
@@ -9,7 +10,6 @@ import { buildCustomPages } from './build-custom-pages';
 import { generateDoc } from './generate-doc';
 import { mergeSchemas } from './merge-schemas';
 import { parseAPI } from './parse-api';
-import { createSimpleFullTextIndex } from '@flexydox/doc-provider';
 
 export interface BuildOptions {
   generateDocFlag: boolean;
