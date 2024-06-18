@@ -13,7 +13,7 @@ const popOverId = Astro.props.popOverId;
     cursor: pointer;
     padding: var(--size-xs);
     margin: 0;
-    color: var(--c-bg-alternate);
+    color: var(--c-text-secondary);
     cursor: help;
     display: inline-block;
     vertical-align: middle;
@@ -23,12 +23,11 @@ const popOverId = Astro.props.popOverId;
   }
 
   .popover::backdrop {
-    background-color: rgba(0, 0, 0, 0.92);
+    background-color: rgba(0, 0, 0, 0.7);
   }
   .popover {
     --horiz-padding: var(--size-m);
     border: none;
-    box-shadow: var(--shadow-2);
     border-radius: var(--radius-3);
     height: max-content;
 
@@ -62,7 +61,7 @@ const popOverId = Astro.props.popOverId;
   >
 </span>
 
-<section class="popover" id={popOverId} popover>
+<section class="popover shadow" id={popOverId} popover>
   <div class="overlay">
     {popOverId && <slot />}
   </div>

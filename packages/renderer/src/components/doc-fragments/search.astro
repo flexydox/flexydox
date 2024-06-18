@@ -1,0 +1,323 @@
+---
+
+---
+
+<style is:global>
+  #ft-search {
+    display: none;
+    margin: 0 var(--padding-horizontal);
+  }
+
+  #search-suggest {
+    padding: var(--size-xs) var(--size-s);
+    border: 1px solid var(--c-bg-inactive);
+    border-radius: var(--size-xs);
+
+    width: calc(100% - 2 * var(--size-s));
+    font-size: var(--font-size-2);
+  }
+
+  #search-results {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    z-index: 1000;
+    max-height: 60svh;
+    max-width: 100svw;
+    width: 400px;
+    overflow-y: auto;
+    cursor: pointer;
+  }
+
+  #search-results .no-results {
+    background-color: var(--c-bg-secondary);
+    padding: var(--size-m);
+    font-size: var(--font-size-3);
+  }
+
+  #search-results li {
+    border-bottom: 1px solid var(--c-bg-inactive);
+    background-color: var(--c-bg-secondary);
+    display: grid;
+    grid-template-columns: 3fr;
+    grid-template-rows: 3fr 2fr;
+    align-items: center;
+    padding: var(--size-m);
+    gap: var(--size-s);
+    em {
+      font-style: normal;
+    }
+    .info {
+      color: var(--c-text-inactive);
+    }
+
+    .name {
+      h3 {
+        margin: 0;
+        padding: 0;
+        font-size: var(--font-size-3);
+      }
+
+      .op-kind-read {
+        em {
+          color: var(--c-op-kind-read);
+        }
+      }
+      .op-kind-modify {
+        em {
+          color: var(--c-op-kind-modify);
+        }
+      }
+    }
+    .ns {
+      color: var(--c-text-secondary);
+    }
+  }
+
+  #search-results li:last-child {
+    border-bottom: none;
+  }
+
+  #search-results li:hover,
+  #search-results li:focus {
+    background-color: var(--c-bg-inactive);
+  }
+</style>
+<script>
+  //@ts-nocheck
+
+  const fullUrl = (url) => {
+    let baseUrl = document.querySelector("html")?.dataset.baseUrl ?? "/";
+    if (!baseUrl.endsWith("/")) {
+      baseUrl += "/";
+    }
+    if (url.startsWith("/")) {
+      return baseUrl + url.slice(1);
+    }
+
+    return baseUrl + url;
+  };
+  const searchContainer = document.getElementById("ft-search");
+  const searchResults = document.getElementById("search-results");
+  const searchInput = document.getElementById("search-suggest");
+  let searchIndex = null;
+
+  function search(rawQuery) {
+    if (!searchIndex) {
+      return [];
+    }
+
+    const queryWords = rawQuery
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => word);
+    console.log("queryWords", queryWords);
+    const results = searchIndex.filter((item) => {
+      return queryWords.every((word) => {
+        return item.content.toLowerCase().includes(word);
+      });
+    });
+
+    return results.slice(0, 10);
+  }
+
+  function displayNs(data) {
+    if (data.nsVersion) {
+      return `
+        <span class="info">API:</span>
+        <span class="name">
+           ${data.nsName}
+        </span>
+        <em>(${data.nsVersion})</em>
+      `;
+    } else {
+      return `
+        <span class="info">API:</span>
+        <span class="name">
+          ${data.nsName}
+        </span>
+      `;
+    }
+  }
+
+  function displayNoResults() {
+    searchResults.innerHTML = `
+        <h3 class="no-results">No results found</h3>
+    `;
+  }
+
+  function displayType(data) {
+    const url = fullUrl("types/" + data.entityId);
+    return `
+        <section class="name">
+          <a href="${url}">
+            <h3><span class="info">Type:</span> ${data.entityName}</h3>
+          </a>
+        </section>
+        <section class="ns">
+          ${displayNs(data)}
+        </section>
+
+      `;
+  }
+
+  function displayOpArgument(data) {
+    const url = fullUrl("operations/" + data.entityId);
+    return `
+        <section class="name">
+          <a href="${url}">
+
+            <h3 class="op-kind-${data.operationKind}">
+              <em>${data.operationType}</em> ${data.entityName}
+              <span class="info">, arg:</span> ${data.subEntityName}
+            </h3>
+          </a>
+        </section>
+
+        <section class="ns">
+          ${displayNs(data)}
+        </section>
+      `;
+  }
+
+  function displayField(data) {
+    const url = fullUrl("types/" + data.entityId);
+    return `
+        <section class="name">
+          <a href="${url}">
+             <h3><span class="info">Field:</span> ${data.entityName}.${data.subEntityName}</h3>
+          </a>
+        </section>
+        <section class="ns">
+          ${displayNs(data)}
+        </section>
+      `;
+  }
+
+  function displayOperation(data) {
+    const url = fullUrl("operations/" + data.entityId);
+    return `
+        <section class="name">
+          <a href="${url}">
+            <h3 class="op-kind-${data.operationKind}"><em>${data.operationType}</em> ${data.entityName}</h3>
+          </a>
+        </section>
+        <section class="ns">
+          ${displayNs(data)}
+        </section>
+      `;
+  }
+
+  function displayData(results) {
+    if (results.length === 0) {
+      return displayNoResults();
+    }
+    searchResults.innerHTML = "";
+    results.forEach((result) => {
+      const resultEl = document.createElement("li");
+      switch (result.resultType) {
+        case "type":
+          resultEl.innerHTML = displayType(result);
+          break;
+        case "op-argument":
+          resultEl.innerHTML = displayOpArgument(result);
+          break;
+
+        case "field":
+          resultEl.innerHTML = displayField(result);
+          break;
+        case "operation":
+          resultEl.innerHTML = displayOperation(result);
+          break;
+        default:
+          resultEl.innerHTML = `
+            <h3>${result.entityName}</h3>
+          `;
+      }
+      searchResults.appendChild(resultEl);
+    });
+  }
+  async function loadData() {
+    const baseUrl = document.querySelector("html")?.dataset.baseUrl;
+
+    try {
+      evtEl.dispatchEvent(loadingEvent);
+      const result = await fetch(fullUrl("ft-index.json"), {
+        cache: "force-cache"
+      });
+      searchIndex = (await result.json()).items;
+      evtEl.dispatchEvent(successEvent);
+    } catch (e) {
+      evtEl.dispatchEvent(errorEvent);
+      searchIndex = null;
+    }
+  }
+
+  window.addEventListener("click", function (e) {
+    if (!searchResults.contains(e.target)) {
+      searchResults.innerHTML = "";
+    }
+  });
+
+  searchResults.addEventListener("click", function (e) {
+    const li = e.target.closest("li");
+    if (!li) {
+      return;
+    }
+    li.querySelector("a")?.click();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "F3" || ((e.ctrlKey || e.metaKey) && e.code === "KeyF")) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    if (e.key === "Escape") {
+      searchInput.value = "";
+    }
+  });
+
+  searchInput.addEventListener("keyup", (e) => {
+    const query = e.target.value;
+    const results = search(query);
+    if (query.trim() === "") {
+      searchResults.innerHTML = "";
+      return;
+    }
+    console.log("results", results);
+
+    displayData(results);
+  });
+
+  const evtEl = document.createElement("div");
+  const evtName = "searchDataStateChange";
+
+  const loadingEvent = new CustomEvent(evtName, {
+    detail: "loading"
+  });
+  const successEvent = new CustomEvent(evtName, {
+    detail: "success"
+  });
+  const errorEvent = new CustomEvent(evtName, {
+    detail: "error"
+  });
+
+  evtEl.addEventListener(evtName, (e) => {
+    if (e.detail === "success") {
+      searchContainer.style.display = "block";
+    }
+  });
+
+  loadData();
+</script>
+
+<section id="ft-search">
+  <input
+    id="search-suggest"
+    placeholder="Search type or operation ..."
+    autocomplete="off"
+    type="text"
+  />
+  <ol id="search-results" class="shadow"></ol>
+</section>
