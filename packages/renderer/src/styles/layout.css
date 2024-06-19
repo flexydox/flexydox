@@ -49,14 +49,24 @@ body {
   padding: var(--padding-vertical) var(--padding-horizontal);
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: auto 1fr auto;
+
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   height: var(--header-height);
   border-bottom: 1px solid var(--c-bg-secondary);
-  justify-items: stretch;
+
+  justify-items: start;
+  .header-title {
+    justify-self: stretch;
+  }
   .header-title h3 {
+    width: 100%;
+    display: inline-block;
     font-size: var(--font-size-4);
     color: var(--c-brand);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .header-links {
     justify-self: end;
@@ -73,18 +83,25 @@ body {
   background-color: var(--c-side-bg);
   grid-area: main-nav;
   height: calc(var(--page-height) - var(--padding-vertical) * 2);
-  overflow-y: scroll;
+  overflow-y: hidden;
   padding: 0;
   border-right: 1px solid var(--c-bg-secondary);
   overflow-y: auto;
   position: relative;
   .l-page-nav-header {
+    background-color: var(--c-side-bg);
     top: 0;
     position: sticky;
-    padding: var(--padding-vertical) 0;
+    padding: var(--padding-vertical) var(--padding-horizontal);
     min-height: var(--header-height);
     display: grid;
     justify-items: center;
+    gap: var(--size-m);
+
+    > section, select {
+      width: 100%;
+    }
+
   }
   .main-nav {
     padding: var(--padding-vertical) 0;
@@ -181,7 +198,8 @@ body {
   .l-page-main-nav {
     position: absolute;
     left: 0;
-    top: var(--header-height);
+    top: calc(var(--header-height) + 2*var(--padding-vertical));
+    height: calc(var(--page-height) - var(--header-height) - 2*var(--padding-vertical));
     transform: translate3d(-100%, 0, 0);
     transition: transform 0.5s ease-in-out;
     max-width: var(--main-nav-width);
