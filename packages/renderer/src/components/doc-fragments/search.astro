@@ -21,11 +21,11 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: fixed;
+    position: sticky;
     z-index: 1000;
     max-height: 60svh;
     max-width: 100svw;
-    width: 400px;
+    width: 100%;
     overflow-y: auto;
     cursor: pointer;
   }
@@ -37,10 +37,11 @@
   }
 
   #search-results li {
+    user-select: all;
     border-bottom: 1px solid var(--c-bg-inactive);
     background-color: var(--c-bg-secondary);
     display: grid;
-    grid-template-columns: 3fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 3fr 2fr;
     align-items: center;
     padding: var(--size-m);
@@ -57,6 +58,9 @@
         margin: 0;
         padding: 0;
         font-size: var(--font-size-3);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
       .op-kind-read {
@@ -72,6 +76,9 @@
     }
     .ns {
       color: var(--c-text-secondary);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 
@@ -82,6 +89,14 @@
   #search-results li:hover,
   #search-results li:focus {
     background-color: var(--c-bg-inactive);
+    border: none;
+    outline: 1px solid var(--c-bg-inactive);
+  }
+
+  @media (max-width: 768px) {
+    #search-results li {
+      font-size: smaller;
+    }
   }
 </style>
 <script>
@@ -103,6 +118,14 @@
   const searchInput = document.getElementById("search-suggest");
   let searchIndex = null;
 
+  const totalResults = 10;
+
+  function sortedResults(results) {
+    return results.slice(0, totalResults).sort((a, b) => {
+      return a.entityName.localeCompare(b.entityName);
+    });
+  }
+
   function search(rawQuery) {
     if (!searchIndex) {
       return [];
@@ -112,14 +135,43 @@
       .toLowerCase()
       .split(" ")
       .filter((word) => word);
-    console.log("queryWords", queryWords);
-    const results = searchIndex.filter((item) => {
-      return queryWords.every((word) => {
-        return item.content.toLowerCase().includes(word);
-      });
-    });
 
-    return results.slice(0, 10);
+    const exactResults = searchIndex
+      .filter((item) => {
+        return queryWords.every((word) => {
+          return `|${item.content}|`.toLowerCase().includes(`|${word}|`);
+        });
+      })
+      .slice(0, totalResults);
+    if (exactResults.length >= totalResults) {
+      return sortedResults(exactResults);
+    }
+
+    const startsWithResults = searchIndex
+      .filter((item) => {
+        return queryWords.every((word) => {
+          return `|${item.content}|`.toLowerCase().includes(`|${word}`);
+        });
+      })
+      .slice(0, totalResults);
+
+    if (startsWithResults.length + exactResults.length >= totalResults) {
+      return sortedResults([...exactResults, ...startsWithResults]);
+    }
+
+    const includesResults = searchIndex
+      .filter((item) => {
+        return queryWords.every((word) => {
+          return item.content.toLowerCase().includes(word);
+        });
+      })
+      .slice(0, totalResults);
+
+    return sortedResults([
+      ...exactResults,
+      ...startsWithResults,
+      ...includesResults
+    ]);
   }
 
   function displayNs(data) {
@@ -215,27 +267,29 @@
     }
     searchResults.innerHTML = "";
     results.forEach((result) => {
-      const resultEl = document.createElement("li");
+      const li = document.createElement("li");
+      li.tabIndex = 0;
       switch (result.resultType) {
         case "type":
-          resultEl.innerHTML = displayType(result);
+          li.innerHTML = displayType(result);
           break;
         case "op-argument":
-          resultEl.innerHTML = displayOpArgument(result);
+          li.innerHTML = displayOpArgument(result);
           break;
 
         case "field":
-          resultEl.innerHTML = displayField(result);
+          li.innerHTML = displayField(result);
           break;
         case "operation":
-          resultEl.innerHTML = displayOperation(result);
+          li.innerHTML = displayOperation(result);
           break;
         default:
-          resultEl.innerHTML = `
+          li.innerHTML = `
             <h3>${result.entityName}</h3>
           `;
       }
-      searchResults.appendChild(resultEl);
+
+      searchResults.appendChild(li);
     });
   }
   async function loadData() {
@@ -276,6 +330,33 @@
     if (e.key === "Escape") {
       searchInput.value = "";
     }
+    if (e.key === "Enter") {
+      searchResults.querySelector(":focus")?.querySelector("a")?.click();
+    }
+    if (e.key === "ArrowDown") {
+      const focusedEl = searchResults.querySelector("li:focus");
+      if (!focusedEl) {
+        searchResults.querySelector("li")?.focus();
+        return;
+      } else {
+        focusedEl.nextSibling?.focus();
+      }
+    }
+    if (e.key === "ArrowUp") {
+      const focusedEl = searchResults.querySelector("li:focus");
+      if (focusedEl) {
+        const prevEl = focusedEl.previousSibling;
+        window.setTimeout(() => {
+          prevEl?.focus();
+        }, 0);
+
+        return;
+      } else {
+        window.setTimeout(() => {
+          searchResults.querySelector("li")?.focus();
+        }, 0);
+      }
+    }
   });
 
   searchInput.addEventListener("keyup", (e) => {
@@ -285,7 +366,6 @@
       searchResults.innerHTML = "";
       return;
     }
-    console.log("results", results);
 
     displayData(results);
   });
@@ -319,5 +399,5 @@
     autocomplete="off"
     type="text"
   />
-  <ol id="search-results" class="shadow"></ol>
+  <ol id="search-results" role="list" tabindex="0" class="shadow"></ol>
 </section>

@@ -5,7 +5,6 @@ import { groupEntities } from "../../utils/grouped-data";
 import NavItem from "./nav-item.astro";
 import NavSection from "./nav-section.astro";
 import OperationNavItem from "./operation-nav-item.astro";
-import OperationsFilter from "./operations-filter.astro";
 
 const allTypes = Astro.locals.types as DocType[];
 const doc = Astro.locals.doc as DocSchema;
@@ -37,7 +36,6 @@ const isCurrentOperation = (opId: string) => {
   }
 </style>
 <div class="main-nav stack-l">
-  <OperationsFilter />
   <NavSection>
     {
       allPages.map((page) => (
