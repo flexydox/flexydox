@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/flexydox/flexydox/compare/cli@v1.4.0...cli@v1.4.1) (2024-06-19)
+
+
+### Bug Fixes
+
+* **renderer:** small ui fixes ([9be3b87](https://github.com/flexydox/flexydox/commit/9be3b87e9a6232344da0f1e2b95b2d90d59c0e7d))
+
 ## [1.4.0](https://github.com/flexydox/flexydox/compare/cli@v1.3.0...cli@v1.4.0) (2024-06-18)
 
 
