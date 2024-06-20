@@ -2,7 +2,7 @@
 
  Create a **unified documentation** for your API Services effortlessly by combining Open API (Rest API) or GraphQL specification files and custom markdown files using a user-friendly YAML config file.
 
-1. Given this config `./fixtures/chess-game/flexydox.yaml`: 
+1. Given this example config `./fixtures/chess-game/flexydox.yaml`: 
 
 ```yaml
 outputFolder: ./_docs                 # Generated documentation output folder
@@ -20,6 +20,7 @@ apis:                                 # API definitions
   - id: openapi
     name: Chess Game OpenAPI 3.0
     url: ./fixtures/chess-game/schemas/chess-game-30.json 
+    inferGroups: false
 
 customPagesFolder: ./fixtures/chess-game/custom-pages  # custom markdown files folder
 examplesFolder: ./fixtures/chess-game/examples         # operation examples folder
@@ -37,10 +38,9 @@ groups:                              # Group defines a logical categorization of
 flexydox -c ./fixtures/chess-game/flexydox.yaml
 ```
 
-3. It will generate this example API documentation:
+3. Flexydox will generate this example API documentation:
 
 [http://examples.flexydox.org/chess](http://examples.flexydox.org/chess)
-
 
 
 
@@ -50,110 +50,27 @@ https://flexydox.org
 
 
 ## Features
-- One unified generator for multiple APIs - Open API, GraphQL (support for gRPC and tRPC is planned).
-- Custom markdown pages (User Guide, FAQ, Authentication, ..) can be added to the documentation.
-- Custom examples for operations can be added to the documentation.
-- Logical view - concept of groups (domains) allows to logically group operations and types across APIs.
-- Possibility to assign operations or types to a group using regex pattern matching
-- Categorize operations into Read / Modify / Subscribe groups to view them based on their intended usage
+- One **unified documentation** for multiple APIs - Open API, GraphQL (support for gRPC and tRPC is planned)
+- **Custom markdown pages** (User Guide, FAQ, Authentication, ..)
+- **Custom example requests** for operations.
+- Concept of **groups** (domains) allows to logically group operations and types across APIs.
+
+## [Usage](./docs/usage.md).
+
+## [Roadmap](./docs/roadmap.md)
+
+## [Core Concepts](./docs/core-concepts.md)
+
+## [Configuration](./docs/configuration.md)
 
 
-
-## Getting Started - Docker
-
-The easiest way to get started is to use the `flexydox/flexydox` docker image.
+## [CLI](./docs/cli.md)
 
 
-To generate documentation for our Chess API example, you can run the following commands in your terminal:
-
-```bash
-# Docker compose
-cd ./examples
-docker-compose up chess # This run `chess` service from the ./examples/docker-compose.yml
-```
-
-```bash
-# Docker CLI
-# Mount the configuration file and the output folder to the container
-# and run the flexydox build command to generate the documentation
-cd ./examples
-docker run                        \
-  --volume ./sites/chess:/config  \
-  --volume ./docs/chess-output    \
-  flexydox/flexydox flexydox -c /config/fxdx.config.yaml build
-```
-
-
-## Configuration Reference
-
-
-### CLI Configuration file
-The configuration file is a YAML file that defines the generated documentation. 
-
-The CLI configuration file reference is available [docs/schemas/fxdx-cli-config.md](docs/schemas/fxdx-cli-config.md).
-
-### Configuration Examples 
-You can find configuration examples of in the `./examples` folder.
-Generated documentation examples are available at [http://examples.flexydox.org](http://examples.flexydox.org).
 
 
 ## Development
 
-
-### Architecture Overview
-Flexydox splits the api generation process into two main parts:
-1. **Create a unified documentation schema** from the input configuration file which defines the api sources, custom pages, categories, and examples.
-   It will generate a `doc-schema.json` file, which schema is documented in the [`./docs/schemas/fxdx-doc-schema.md`](docs/schemas/fxdx-doc-schema.md) file, 
-   and a `doc-config.json` file which is an input configuration file for the renderer.
-2. **Render the documentation site** using the schema. The renderer is an Astro site 
-   that uses the `doc-config.json` and `doc-schema.json` files to generate the documentation site.
-
-### Prerequisites
-- Node.js 
-- Pnpm
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies
-```bash
-pnpm install
-```
-3. Build the project
-```bash
-pnpm build
-
-# build cli
-pnpm build-cli
-```
-
-### Running the tests
-```bash
-pnpm test
-pnpm e2e
-```
-
-### Development Workflow
-```bash
-flexydox -c ./fixtures/chess-game/flexydox.yaml build
-
-# it should generate the doc-schema.json and doc-config.json in the ./_docs folder.
-
-# Run the documentation site
-pnpm dev # It will run `dev` script from `packages/renderer/package.json` 
-# It will start the astro server at http://localhost:4321
-# Renderer needs to have FXDX_DOC_CONFIG_FILE env variable set 
-# to the path of the generated doc-config.json file.
- 
-
-```
-
-
-
-
-### Project Structure
-
-TBD: Describe the project structure and the main components of the project.
 
 
 ### Contributing
