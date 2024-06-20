@@ -3,7 +3,7 @@
 ## Architecture Overview
 Flexydox splits the api generation process into two main parts:
 1. **Create a unified documentation schema** from the input configuration file which defines the api sources, custom pages, categories, and examples.
-   It will generate a `doc-schema.json` file, which schema is documented in the [`./docs/schemas/fxdx-doc-schema.md`](docs/schemas/fxdx-doc-schema.md) file, 
+   It will generate a `doc-schema.json` file, which schema is documented in the [`./docs/schemas/fxdx-doc-schema.md`](./schemas/fxdx-doc-schema.md) file, 
    and a `doc-config.json` file which is an input configuration file for the renderer.
 2. **Render the documentation site** using the schema. The renderer is an Astro site 
    that uses the `doc-config.json` and `doc-schema.json` files to generate the documentation site.
@@ -69,4 +69,4 @@ pnpm dev # It will run `dev` script from `packages/renderer/package.json`
 - Dockerfile - Dockerfile to build the project
 
 
-[schema]: <./docs/>
+[schema]: ./schemas/fxdx-doc-schema.md
