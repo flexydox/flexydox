@@ -2,9 +2,10 @@
 
  Create a **unified documentation** for your API Services effortlessly by combining Open API (Rest API) or GraphQL specification files and custom markdown files using a user-friendly YAML config file.
 
-1. Given this example config `./fixtures/chess-game/flexydox.yaml`: 
+1. Given the following example config [`./fixtures/chess/flexydox.yaml`](./fixtures/chess/flexydox.yaml): 
 
 ```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/flexydox/flexydox/main/schemas/fxdx-cli-config.json
 outputFolder: ./_docs                 # Generated documentation output folder
 title: Chess Game API Example         # Generated documentation title
 base: /chess                          # Base path prefix for the generated documentation
@@ -33,12 +34,12 @@ groups:                              # Group defines a logical categorization of
     regex: /admin/i
 ```
 
-2. By running Flexydox generator
+1. Build by running Flexydox CLI
 ```bash
-flexydox -c ./fixtures/chess-game/flexydox.yaml
+flexydox -c ./fixtures/chess-game/flexydox.yaml build
 ```
 
-3. Flexydox will generate this example API documentation:
+1. Flexydox will generate this example API documentation:
 
 [http://examples.flexydox.org/chess](http://examples.flexydox.org/chess)
 
@@ -55,7 +56,7 @@ https://flexydox.org
 - **Custom example requests** for operations.
 - Concept of **groups** (domains) allows to logically group operations and types across APIs.
 
-## [Usage](./docs/usage.md).
+## [Usage](./docs/usage.md)
 
 ## [Roadmap](./docs/roadmap.md)
 
@@ -63,15 +64,9 @@ https://flexydox.org
 
 ## [Configuration](./docs/configuration.md)
 
-
 ## [CLI](./docs/cli.md)
 
-
-
-
-## Development
-
-
+## [Development](./docs/development.md)
 
 ### Contributing
 New contributors welcome! Check out our See [Contributors Guide](CONTRIBUTING.md) for help getting started.
