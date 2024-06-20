@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/flexydox/flexydox/compare/cli@v1.4.1...cli@v1.4.2) (2024-06-20)
+
+
+### Bug Fixes
+
+* small CSS fixes ([b0be8d3](https://github.com/flexydox/flexydox/commit/b0be8d3953aba0f5a3a7611073a3552038f41b06)), closes [#57](https://github.com/flexydox/flexydox/issues/57)
+
 ## [1.4.1](https://github.com/flexydox/flexydox/compare/cli@v1.4.0...cli@v1.4.1) (2024-06-19)
 
 
