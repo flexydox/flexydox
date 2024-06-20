@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 const popOverId = Astro.props.popOverId;
 ---
 
-<style>
+<style is:global>
   .po-wrapper {
   }
   .po-trigger {
@@ -27,9 +27,10 @@ const popOverId = Astro.props.popOverId;
   }
   .popover {
     --horiz-padding: var(--size-m);
-    border: none;
+    border: 1px solid white;
     border-radius: var(--radius-3);
     height: max-content;
+    max-height: 80svh;
 
     position: fixed;
     width: minmax(300px, 400px);
@@ -39,15 +40,16 @@ const popOverId = Astro.props.popOverId;
 
     color: var(--c-text-primary);
     background-color: var(--c-bg-inactive);
-    border-width: 0;
+    border: 1px solid var(--c-text-secondary);
     padding: 0;
 
-    :global(.title) {
+    .title {
       background-color: var(--c-bg-secondary);
       padding: var(--size-m) var(--horiz-padding);
       margin: 0;
     }
-    :global(.type > section, .type > div) {
+    .type > section,
+    .type > div {
       padding: 0 var(--horiz-padding);
     }
   }
