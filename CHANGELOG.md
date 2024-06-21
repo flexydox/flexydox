@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/flexydox/flexydox/compare/cli@v1.4.2...cli@v1.5.0) (2024-06-21)
+
+
+### Features
+
+* add docUrl to api definition ([595575b](https://github.com/flexydox/flexydox/commit/595575bab34f86bbbbb95cfe585766880301dcd8))
+
 ## [1.4.2](https://github.com/flexydox/flexydox/compare/cli@v1.4.1...cli@v1.4.2) (2024-06-20)
 
 
