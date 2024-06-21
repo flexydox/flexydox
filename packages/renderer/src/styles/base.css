@@ -1,29 +1,8 @@
-@font-face {
-  font-family: 'Inconsolata', monospace;
-  src: url('/fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf');
-}
 
-@font-face {
-  font-family: 'Dosis', sans-serif;
-  src: url('/fonts/Dosis/Dosis-VariableFont_wght.ttf');
-}
-
-@font-face {
-  font-family: 'Nunito', sans-serif;
-  src: url('/fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf');
-  src: url('/fonts/Nunito_Sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf');
-}
-
-@font-face {
-  font-family: 'SourceSans3', sans-serif;
-  src: url('/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf');
-  src: url('/fonts/Source_Sans_3/SourceSans3-Italic-VariableFont_wght.ttf');
-}
 :root {
-  --font-base: 'SourceSans3', sans-serif;
+  --font-base: 'Source Sans 3', sans-serif;
   --font-heading: 'Nunito', sans-serif;
   --font-monospace: 'Inconsolata', monospace;
-  --font-app-logo: 'Dosis', sans-serif;
   font-family: var(--font-base);
 }
 

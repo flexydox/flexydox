@@ -3,24 +3,27 @@
 
   --c-text-primary: var(--gray-11);
   --c-text-secondary: var(--gray-9);
-  --c-text-interactive: var(--orange-5);
-  --c-text-interactive-hover: var(--orange-2);
+  --c-text-interactive: var(--orange-6);
+  --c-text-interactive-hover: var(--orange-8);
+
+  --c-text-interactive-secondary: var(--brown-6);
   --c-text-success: var(--green-7);
-  --c-text-inactive: var(--gray-7);
+  --c-text-inactive: var(--gray-6);
   --c-text-error: var(--red-6);
   --c-text-alternate: var(--sand-2);
-  --c-bg-primary: var(--gray-0);
+  --c-bg-primary: var(--gray-1);
   --c-bg-secondary: var(--gray-4);
   --c-bg-tertiary: var(--gray-5);
   --c-bg-alternate: var(--sand-9);
   --c-bg-inactive: var(--gray-1);
 
-  --c-text-tag-1: var(--pink-9);
-  --c-text-tag-2: var(--indigo-7);
+  --c-text-tag-1: var(--blue-6);
+  --c-text-tag-2: var(--purple-8);
   --c-text-tag-3: var(--orange-7);
 
-  --c-bg-tag-1: var(--choco-1);
-  --c-bg-tag-2: var(--indigo-1);
+
+  --c-bg-tag-1: var(--blue-1);
+  --c-bg-tag-2: var(--purple-1);
   --c-bg-tag-3: var(--orange-1);
 
   --c-op-kind-read: var(--c-text-tag-2);
@@ -33,10 +36,12 @@
 [data-theme='dark'] {
   --c-brand: var(--indigo-3);
 
-  --c-text-primary: var(--gray-0);
+  --c-text-primary: var(--gray-3);
   --c-text-secondary: var(--gray-6);
   --c-text-interactive: var(--orange-3);
   --c-text-interactive-hover: var(--orange-6);
+
+  --c-text-interactive-secondary: var(--brown-7);
   --c-text-success: var(--green-4);
   --c-text-inactive: var(--gray-5);
   --c-text-error: var(--red-4);
@@ -47,12 +52,12 @@
   --c-bg-alternate: var(--gray-2);
   --c-bg-inactive: var(--gray-10);
 
-  --c-text-tag-1: var(--pink-6);
-  --c-text-tag-2: var(--indigo-3);
+  --c-text-tag-1: var(--indigo-2);
+  --c-text-tag-2: var(--teal-2);
   --c-text-tag-3: var(--orange-3);
 
-  --c-bg-tag-1: var(--choco-10);
-  --c-bg-tag-2: var(--indigo-10);
+  --c-bg-tag-1: var(--indigo-8);
+  --c-bg-tag-2: var(--teal-8);
   --c-bg-tag-3: var(--orange-10);
 
   --c-op-kind-read: var(--c-text-tag-2);
@@ -83,6 +88,6 @@
   }
   a:hover,
   a:hover * {
-    color: color-mix(in srgb, var(--c-text-interactive) 100%, transparent 30%) !important;
+    color: var(--c-text-interactive-hover)!important;
   }
 }

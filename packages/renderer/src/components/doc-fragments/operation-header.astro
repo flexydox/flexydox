@@ -13,7 +13,6 @@ const { type, groups, kind, deprecated } = Astro.props;
     align-items: center;
     line-height: var(--size-l);
     height: var(--size-l);
-
     font-weight: 200;
     font-size: var(--font-size-3);
     margin-top: var(--size-l);
@@ -30,6 +29,10 @@ const { type, groups, kind, deprecated } = Astro.props;
       grid-template-columns: 1fr;
       height: auto;
       word-wrap: break-word;
+      .annotations {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 </style>

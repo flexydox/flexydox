@@ -13,6 +13,7 @@
     - **`source`** *(string, required)*: The schema source of the namespace (API). This could be a URL or a file path. .
     - **`inferGroups`** *(boolean)*: Whether the groups should be inferred from the source specification. Defaults to false.
     - **`baseUrl`** *(string)*: The base URL of the namespace - API server base Url.
+    - **`docUrl`** *(string)*: Optional URL to the documentation of the namespace (api).
     - **`description`** *(string)*: A description of the namespace.
     - **`version`** *(string)*: The version of the namespace.
 - **`operations`** *(array)*: The API operations that are available in the schema.

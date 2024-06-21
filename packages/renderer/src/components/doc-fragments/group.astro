@@ -3,48 +3,16 @@ const title = Astro.props.title;
 ---
 
 <style>
-  :root {
-  }
   .group {
-    font-weight: 800;
+    font-family: var(--font-heading);
     font-size: var(--font-size-1);
-    display: inline-block;
-    color: var(--c-text-alternate);
-    background-color: var(--c-bg-alternate);
-    height: 24px;
-    line-height: 24px;
-    position: relative;
-    padding: 0 var(--size-m) 0 var(--size-m);
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-  }
-  .group:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -12px;
-    width: 0;
-    height: 0;
-    border-color: transparent var(--c-bg-alternate) transparent transparent;
-    border-style: solid;
-    border-width: 12px 12px 12px 0;
-  }
-
-  .group:after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 1px;
-    float: left;
-    width: 5px;
-    height: 5px;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    background: #fff;
-    -webkit-box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.4);
-    box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+    border: none;
+    background-color: var(--c-bg-tag-1);
+    color: var(--c-text-tag-1);
+    border-radius: var(--radius-2);
+    padding: 0 var(--size-s);
+    opacity: 0.8;
   }
 </style>
-<span class="group">{title}</span>
+<div class="group">{title}</div>

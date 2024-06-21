@@ -1,5 +1,6 @@
 ---
 import "open-props/style";
+
 import "open-props/buttons.min.css";
 import "../styles/variables.css";
 import "../styles/colors.css";
@@ -28,6 +29,9 @@ const siteData = await loadSiteData();
 
 <html lang="en" data-base-url={import.meta.env.BASE_URL} data-theme="dark">
   <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+    </style>
     <link type="image/svg+xml" rel="icon" href={linkUrl("/favicon.svg")} />
     <!-- Load synchronously to avoid FOUC -->
     <script is:inline src={linkUrl("/theme-switcher.js")}></script>
