@@ -13,6 +13,7 @@ apis:
   - id: openapi
     name: Chess Game OpenAPI 3.0
     url: ./schemas/chess-game-30.json
+    docUrl: https://github.com/flexydox/flexydox/blob/main/fixtures/chess/schemas/chess-game-30.json
 
 customPagesFolder: ./custom-pages/
 examplesFolder: ./examples

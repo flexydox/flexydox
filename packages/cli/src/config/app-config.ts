@@ -12,6 +12,7 @@ export interface APIDefinitionConfig {
   url: string;
   version: string;
   inferGroups: boolean;
+  docUrl?: string;
 }
 
 /**

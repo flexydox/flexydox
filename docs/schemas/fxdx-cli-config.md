@@ -73,7 +73,34 @@
     inferGroups: false
     ```
 
-  - **`url`** *(string, required)*: The URL of the API specification (OpenAPI 3.0 or GraphGL schema) to generate documentation for.It can be a local file path (absolute or relative to this configuration file) or a URL. For GraphQL schemas, the URL may point to the introspection query result or to the schema itself.
+  - **`url`** *(string, required)*: The URL of the API specification (OpenAPI 3.0 or GraphGL schema) to generate documentation for. It can be a local file path (absolute or relative to this configuration file) or a URL. For GraphQL schemas, the URL may point to the introspection query result or to the schema itself.
+
+    Examples:
+    ```yaml
+    url: https://api.my-site.dev/openapi.json
+    ```
+
+    ```yaml
+    url: ./openapi.json
+    ```
+
+    ```yaml
+    url: /home/openapi.json
+    ```
+
+    ```yaml
+    url: ./my-graphql-api.graphql
+    ```
+
+    ```yaml
+    url: https://api.my-site.dev/my-graphql-api
+    ```
+
+    ```yaml
+    url: https://api.my-site.dev/my-graphql-api.graphql
+    ```
+
+  - **`docUrl`** *(string)*: Optional url pointing to the documentation of the API. it will be displayed in the documentation.
 
     Examples:
     ```yaml

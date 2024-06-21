@@ -82,7 +82,21 @@
         },
         "url": {
           "type": "string",
-          "description": "The URL of the API specification (OpenAPI 3.0 or GraphGL schema) to generate documentation for.It can be a local file path (absolute or relative to this configuration file) or a URL. For GraphQL schemas, the URL may point to the introspection query result or to the schema itself.",
+          "description": "The URL of the API specification (OpenAPI 3.0 or GraphGL schema) to generate documentation for. It can be a local file path (absolute or relative to this configuration file) or a URL. For GraphQL schemas, the URL may point to the introspection query result or to the schema itself.",
+          "examples": [
+            {
+              "url": "https://api.my-site.dev/openapi.json"
+            },
+            { "url": "./openapi.json" },
+            { "url": "/home/openapi.json" },
+            { "url": "./my-graphql-api.graphql" },
+            { "url": "https://api.my-site.dev/my-graphql-api" },
+            { "url": "https://api.my-site.dev/my-graphql-api.graphql" }
+          ]
+        },
+        "docUrl": {
+          "type": "string",
+          "description": "Optional url pointing to the documentation of the API. it will be displayed in the documentation.",
           "examples": [
             {
               "url": "https://api.my-site.dev/openapi.json"

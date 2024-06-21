@@ -10,12 +10,22 @@ const ns = Astro.locals.namespaces.find((ns) => ns.id === namespaceId);
     display: grid;
     grid-template-columns: auto auto 1fr;
     gap: var(--size-s);
+    color: var(--c-text-inactive);
   }
   .ns > .name {
     font-weight: bold;
   }
   .ns > .link {
     grid-area: 2/1/2/4;
+    a,
+    a:visited {
+      color: var(--c-text-interactive-secondary);
+    }
+    label {
+      font-weight: bold;
+      display: inline-block;
+      width: 80px;
+    }
   }
 </style>
 {
@@ -24,13 +34,9 @@ const ns = Astro.locals.namespaces.find((ns) => ns.id === namespaceId);
       <div>API:</div>
       <div class="name">{ns.name}</div>
       <div>{ns.version && <>(version: {ns.version})</>}</div>
-
       <div class="link">
-        {ns.baseUrl && (
-          <a target="_blank" href={ns.baseUrl}>
-            {ns.baseUrl}
-          </a>
-        )}
+        {ns.docUrl && (<label>Doc:</label><a target="_blank" href={ns.docUrl}>{ns.docUrl}</a>)}
+        {ns.baseUrl && (<br /><label>Base Url:</label><a href={ns.baseUrl}>{ns.baseUrl}</a>)}
       </div>
     </div>
   )

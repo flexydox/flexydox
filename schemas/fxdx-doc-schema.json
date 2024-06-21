@@ -41,6 +41,10 @@
             "type": "string",
             "description": "The base URL of the namespace - API server base Url"
           },
+          "docUrl": {
+            "type": "string",
+            "description": "Optional URL to the documentation of the namespace (api)"
+          },
           "description": {
             "type": "string",
             "description": "A description of the namespace"

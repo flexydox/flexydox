@@ -63,6 +63,11 @@ export interface Namespace {
    * Namespace description
    */
   description?: string;
+
+  /**
+   * Namespace documentation URL
+   */
+  docUrl?: string;
 }
 
 /**
