@@ -7,15 +7,20 @@ The easiest way to get started is to use the `flexydox/flexydox` docker image.
 To generate documentation for our Chess API example, you can run the following commands in your terminal:
 
 ```bash
-# Docker compose
+# Docker compose example
+# https://github.com/flexydox
 cd ./examples
-docker-compose up chess # This run `chess` service from the ./examples/docker-compose.yml
+# This will run `chess` service 
+# from the ./examples/docker-compose.yml file
+docker-compose up chess 
 ```
 
 ```bash
-# Docker CLI
-# Mount the configuration file and the output folder to the container
-# and run the flexydox build command to generate the documentation
+# Docker CLI example
+# https://github.com/flexydox
+# Mount the configuration file 
+# and the output folder to the container and run 
+# the flexydox build command to generate the documentation
 cd ./examples
 docker run                        \
   --volume ./sites/chess:/config  \

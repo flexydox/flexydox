@@ -37,10 +37,13 @@ pnpm e2e
 ```bash
 flexydox -c ./fixtures/chess-game/flexydox.yaml build
 
-# it should generate the doc-schema.json and doc-config.json in the ./_docs folder.
+# it should generate the doc-schema.json 
+# and doc-config.json in the ./_docs folder.
 
 # Run the documentation site
-pnpm dev # It will run `dev` script from `packages/renderer/package.json` 
+pnpm dev 
+# It will run `dev` script 
+# from `packages/renderer/package.json` 
 # It will start the astro server at http://localhost:4321
 # Renderer needs to have FXDX_DOC_CONFIG_FILE env variable set 
 # to the path of the generated doc-config.json file.

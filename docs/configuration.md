@@ -5,9 +5,7 @@ Flexydox uses a yaml configuration file to define the generated documentation.
 
 ```yaml
 # Flexydox configuration file
-# yaml-language-server $schema points to the schema file for 
-# this configuration file, so you can use autocompletion and validation in your editor.
-# yaml-language-server: $schema=https://raw.githubusercontent.com/flexydox/flexydox/main/schemas/fxdx-cli-config.json
+
 # where to save the generated documentation
 outputFolder: /docs 
 # base url path prefix for the generated documentation
