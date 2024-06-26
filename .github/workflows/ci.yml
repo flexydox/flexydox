@@ -53,3 +53,12 @@ jobs:
 
       - name: E2E Tests
         run: pnpm turbo e2e
+
+      - name: Trigger public site deployment
+        if: github.event_name == 'push'
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.FXDX_GITHUB_TOKEN }}" \
+            https://api.github.com/repos/flexydox/flexydox.github.io/actions/workflows/WORKFLOW_ID/dispatches \
+            -d '{"ref":"main"}'
