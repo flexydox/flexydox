@@ -28,6 +28,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "20.11.28",
     "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "commitlint": "^19.3.0",
     "esbuild": "0.19.12",
     "lefthook": "^1.6.10",
