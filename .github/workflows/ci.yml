@@ -48,8 +48,18 @@ jobs:
       - name: Build CLI
         run: pnpm build-cli
 
-      - name: Unit Tests
-        run: pnpm turbo test
-
       - name: E2E Tests
-        run: pnpm turbo e2e
+        run: pnpm vitest --coverage.enabled true
+
+      - name: Report Coverage
+        if: always()
+        uses:  davelosert/vitest-coverage-report-action@v2
+
+      - name: Trigger public site deployment
+        if: github.event_name == 'push'
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.FXDX_GITHUB_TOKEN }}" \
+            https://api.github.com/repos/flexydox/flexydox.github.io/actions/workflows/WORKFLOW_ID/dispatches \
+            -d '{"ref":"main"}'
