@@ -115,4 +115,20 @@ jobs:
           tags: |
             flexydox/flexydox:latest
             flexydox/flexydox:${{steps.set_release_version.outputs.version}}
+      - name: Trigger generate example sites - private
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.FXDX_GITHUB_TOKEN }}" \
+            https://api.github.com/repos/flexydox/flexydox-examples-private/actions/workflows/96550402/dispatches \
+            -d '{"ref":"main"}'
+      - name: Trigger generate example sites
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.FXDX_GITHUB_TOKEN }}" \
+            https://api.github.com/repos/flexydox/flexydox/actions/workflows/100594442/dispatches \
+            -d '{"ref":"main"}'
 
