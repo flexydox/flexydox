@@ -29,7 +29,7 @@
     "@flexydox/logger": "workspace:*",
     "@floating-ui/dom": "^1.6.3",
     "@iconify/tools": "^4.0.2",
-    "astro": "^4.3.3",
+    "astro": "^4.16.19",
     "astro-icon": "^1.1.0",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
