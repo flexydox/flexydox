@@ -14,7 +14,7 @@
     "@astrojs/markdown-remark": "^5.0.0",
     "@flexydox/doc-schema": "workspace:*",
     "@floating-ui/dom": "^1.6.3",
-    "astro": "^4.3.3",
+    "astro": "^5.15.9",
     "astro-icon": "^1.1.0",
     "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
